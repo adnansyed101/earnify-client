@@ -20,12 +20,12 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
-  const [theme, setTheme] = useState("corporate");
+  const [theme, setTheme] = useState("acid");
 
   console.log(user);
 
   const toggleTheme = () => {
-    setTheme(theme === "corporate" ? "synthwave" : "corporate");
+    setTheme(theme === "acid" ? "synthwave" : "acid");
   };
 
   useEffect(() => {
