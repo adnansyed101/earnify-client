@@ -22,7 +22,7 @@ const AuthProvider = ({ children }) => {
   const googleProvider = new GoogleAuthProvider();
   const [theme, setTheme] = useState("corporate");
 
-  console.log("hello world");
+  console.log(user);
 
   const toggleTheme = () => {
     setTheme(theme === "corporate" ? "synthwave" : "corporate");
