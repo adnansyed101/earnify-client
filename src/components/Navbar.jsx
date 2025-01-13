@@ -17,28 +17,10 @@ const Navbar = () => {
         <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <NavLink to={"/allServices"}>Services</NavLink>
-      </li>
-    </>
-  );
-
-  const subMenu = (
-    <>
-      <li>
-        <NavLink to="/addService">Add Service</NavLink>
+        <NavLink to={"/dashboard"}>Dashboard</NavLink>
       </li>
       <li>
-        <NavLink to={`/services/created/${user?.email}`}>
-          Manage Services
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to={`/booked/user/${user?.email}`}>Booked Services</NavLink>
-      </li>
-      <li>
-        <NavLink to={`/booked/serviceToDo/${user?.email}`}>
-          Service To Do
-        </NavLink>
+        <NavLink to={"/dashboard"}>Available Coins</NavLink>
       </li>
     </>
   );
@@ -72,14 +54,19 @@ const Navbar = () => {
         </ul>
       </div>
     ) : (
-      <Link to="/signin">
-        <button className="btn btn-sm md:btn-md btn-primary">Sign In</button>
-      </Link>
+      <div className="flex flex-col md:flex-row gap-1">
+        <Link to="/signin" className="btn btn-xs md:btn-md btn-accent">
+          Sign In
+        </Link>
+        <Link to="/signup" className="btn btn-xs md:btn-md  btn-secondary">
+          Sign Up
+        </Link>
+      </div>
     );
 
   return (
     <header className="fixed top-2 z-50 w-full">
-      <div className="navbar justify-between py-0 w-11/12 mx-auto bg-base-300 rounded-lg">
+      <div className="navbar justify-between py-0 w-11/12 mx-auto bg-base-300 rounded-full">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -90,12 +77,6 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               {mainMenu}
-              {user && (
-                <li>
-                  <a>Dashboard</a>
-                  <ul className="p-2">{subMenu}</ul>
-                </li>
-              )}
             </ul>
           </div>
           <Link to="/" className="btn btn-ghost md:text-xl">
@@ -104,17 +85,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 gap-2">
-            {mainMenu}
-            {user && (
-              <li>
-                <details>
-                  <summary>Dashboard</summary>
-                  <ul className="p-2 w-52">{subMenu}</ul>
-                </details>
-              </li>
-            )}
-          </ul>
+          <ul className="menu menu-horizontal px-1 gap-2">{mainMenu}</ul>
         </div>
         <div className="navbar-end space-x-2">
           {logBtns}
