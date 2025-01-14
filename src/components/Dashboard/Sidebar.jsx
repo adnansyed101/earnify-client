@@ -1,22 +1,22 @@
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
     <ul className="menu px-4 pt-20">
       <li className="font-semibold text-lg">
-        <NavLink to="/dashboard">Home</NavLink>
+        <Link to="/dashboard">Home</Link>
       </li>
       <li className="font-semibold text-lg">
-        <NavLink to="/dashboard/addItems">Add New Tasks</NavLink>
+        <Link to="/dashboard/addTask">Add New Tasks</Link>
       </li>
       <li className="font-semibold text-lg">
-        <NavLink to="/dashboard/manageItems">My Task&apos;s</NavLink>
+        <Link to="/dashboard/myTasks">My Task&apos;s</Link>
       </li>
       <li className="font-semibold text-lg">
-        <NavLink to="/dashboard/bookings">Purchase Coin</NavLink>
+        <Link to="/dashboard/purchaseCoin">Purchase Coin</Link>
       </li>
       <li className="font-semibold text-lg">
-        <NavLink to="/dashboard/users">Payment History</NavLink>
+        <Link to="/dashboard/paymentHistory">Payment History</Link>
       </li>
     </ul>
   );
