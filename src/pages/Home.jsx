@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Banner from "../components/Hero/Banner";
 import BestWorkerSection from "../components/BestWorkerSection";
 import Newsletter from "../components/Newsletter";
+import TestimonialSection from "../components/TestimonialSection";
 
 const Home = () => {
   useEffect(() => {
@@ -12,6 +13,7 @@ const Home = () => {
     <>
       <Banner />
       <BestWorkerSection />
+      <TestimonialSection />
       <Newsletter />
     </>
   );
