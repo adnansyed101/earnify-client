@@ -4,12 +4,19 @@ import useAuth from "../hooks/useAuth";
 import { toast } from "react-toastify";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Loading from "../components/Loading";
+import { imageUpload } from "../api/utils";
 
 const SignUp = () => {
   const [showPwd, setShowPwd] = useState(false);
   const [showVerifyPwd, setShowVerifyPwd] = useState(false);
-  const { user, createNewUser, setUser, updateUserProfile, loading } =
-    useAuth();
+  const {
+    user,
+    createNewUser,
+    setUser,
+    updateUserProfile,
+    loading,
+    setLoading,
+  } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,15 +27,15 @@ const SignUp = () => {
   const handleShowPwd = () => setShowPwd(!showPwd);
   const handleShowVerifyPwd = () => setShowVerifyPwd(!showVerifyPwd);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
 
-    const photo = form.photoURL.value;
     const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
     const verifyPassword = form.verifyPassword.value;
+    const image = form.image.files[0];
 
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
 
@@ -42,19 +49,28 @@ const SignUp = () => {
       return;
     }
 
+    setLoading(true);
+
+    const photoURL = await imageUpload(image);
+
     createNewUser(email, password)
       .then((result) => {
         const user = result.user;
         setUser(user);
-        updateUserProfile({ displayName: name, photoURL: photo })
+        updateUserProfile({
+          displayName: name,
+          photoURL: photoURL,
+        })
           .then(() => {
             toast.success("Account Created Successfully.");
             navigate("/");
+            setLoading(false);
           })
           .catch((error) => {
             const errorCode = error.code;
             toast.error(errorCode);
             navigate("/signUp");
+            setLoading(false);
           });
       })
       .catch((error) => {
@@ -76,21 +92,21 @@ const SignUp = () => {
       <div className="w-full max-w-md p-8 space-y-6 rounded-lg shadow-md bg-base-200">
         <h2 className="text-2xl font-bold text-center">Create an Account</h2>
         <form className="space-y-4" onSubmit={handleSubmit}>
-          {/* Photo URl */}
+          {/* Photo */}
           <div>
             <label
-              htmlFor="photoURL"
-              className="block text-sm font-medium mb-1"
+              htmlFor="photo"
+              className="block text-sm font-medium mb-1 bg-acc"
             >
-              Photo URL
+              Select Image:
             </label>
             <input
-              type="url"
-              id="photoURL"
-              name="photoURL"
-              placeholder="Enter your photo URL"
-              className="input input-bordered input-primary w-full"
               required
+              type="file"
+              id="image"
+              name="image"
+              accept="image/*"
+              className="file-input file-input-bordered file-input-primary w-full"
             />
           </div>
           {/* User Name */}
@@ -176,7 +192,11 @@ const SignUp = () => {
             <label htmlFor="email" className="block text-sm font-medium  mb-1">
               Email Address
             </label>
-            <select defaultValue="" className="select select-bordered w-full" required>
+            <select
+              defaultValue=""
+              className="select select-bordered w-full"
+              required
+            >
               <option disabled value="">
                 Pick One Role
               </option>
