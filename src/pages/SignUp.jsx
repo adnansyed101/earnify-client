@@ -171,6 +171,19 @@ const SignUp = () => {
               )}
             </label>
           </div>
+          {/* Select Role */}
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium  mb-1">
+              Email Address
+            </label>
+            <select defaultValue="" className="select select-bordered w-full" required>
+              <option disabled value="">
+                Pick One Role
+              </option>
+              <option value="buyer">Buyer</option>
+              <option value="worker">Worker</option>
+            </select>
+          </div>
 
           <p className="mt-2 text-sm">
             Already have an Account?{" "}
