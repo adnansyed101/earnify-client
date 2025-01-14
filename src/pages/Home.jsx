@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Banner from "../components/Hero/Banner";
 import BestWorkerSection from "../components/BestWorkerSection";
+import Newsletter from "../components/Newsletter";
 
 const Home = () => {
   useEffect(() => {
@@ -11,6 +12,7 @@ const Home = () => {
     <>
       <Banner />
       <BestWorkerSection />
+      <Newsletter />
     </>
   );
 };
