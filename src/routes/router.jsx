@@ -6,6 +6,7 @@ import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import Dashboard from "../layout/Dashboard";
 import AddTaskForm from "../pages/Dashboard/Buyer/AddTaskForm";
+import MyTasks from "../pages/Dashboard/Buyer/MyTasks";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <BuyerHome /> },
       { path: "addTask", element: <AddTaskForm /> },
+      { path: "myTasks", element: <MyTasks /> },
     ],
   },
 ]);
