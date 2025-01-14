@@ -13,7 +13,7 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.title = "R&R | Sign Up";
+    document.title = "Earnify | Sign Up";
     window.scrollTo(0, 0);
   }, []);
 

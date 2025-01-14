@@ -30,7 +30,10 @@ const Footer = () => {
               >
                 <BsMessenger />
               </a>
-              <p className="flex gap-2"><IoMail className="text-2xl"/> Flux@gmail.com</p>
+              <p className="flex gap-2">
+                <IoMail className="text-2xl" />
+                Earnify@gmail.com
+              </p>
             </div>
           </div>
         </nav>
