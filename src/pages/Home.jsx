@@ -1,8 +1,17 @@
+import { useEffect } from "react";
+import Banner from "../components/Hero/Banner";
 
 const Home = () => {
-  return (
-    <div>Home</div>
-  )
-}
+  
+  useEffect(() => {
+    document.title = "Earnify | Home";
+  }, []);
 
-export default Home
+  return (
+    <>
+      <Banner />
+    </>
+  );
+};
+
+export default Home;
