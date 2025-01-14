@@ -3,7 +3,6 @@ import { FaBars, FaBell } from "react-icons/fa";
 import { useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
 import { BsCoin } from "react-icons/bs";
-import "react-modern-drawer/dist/index.css";
 
 const Navbar = () => {
   const { user, logOut, theme, toggleTheme } = useAuth();
