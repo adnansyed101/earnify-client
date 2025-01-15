@@ -7,11 +7,11 @@ import { format } from "date-fns";
 const TaskDetails = () => {
   const { id } = useParams();
 
-  const { data: job = {}, isLoading } = useQuery({
-    queryKey: ["job", id],
+  const { data: task = {}, isLoading } = useQuery({
+    queryKey: ["task", id],
     queryFn: async () => {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/job/${id}`
+        `${import.meta.env.VITE_API_URL}/task/${id}`
       );
       return data;
     },
@@ -29,28 +29,28 @@ const TaskDetails = () => {
           {/* Task Information */}
           <div>
             <img
-              src={job.data.imageURL}
-              alt={job.data.title}
+              src={task.data.imageURL}
+              alt={task.data.title}
               className="w-full h-64 object-cover rounded-lg mb-4"
             />
-            <h3 className="text-2xl font-bold">{job.data.title}</h3>
-            <p className="text-gray-600 mt-2">{job.data.taskDetail}</p>
+            <h3 className="text-2xl font-bold">{task.data.title}</h3>
+            <p className="text-gray-600 mt-2">{task.data.taskDetail}</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
               <p>
                 <span className="font-semibold">Required Workers: </span>
-                {job.data.requiredWorkers}
+                {task.data.requiredWorkers}
               </p>
               <p>
                 <span className="font-semibold">Payable Amount: </span>
-                {job.data.payableAmount}
+                {task.data.payableAmount}
               </p>
               <p>
                 <span className="font-semibold">Completion Date: </span>
-                {format(new Date(job.data.completionDate), "PP")}
+                {format(new Date(task.data.completionDate), "PP")}
               </p>
               <p>
                 <span className="font-semibold">Submission Info: </span>
-                {job.data.submissionInfo}
+                {task.data.submissionInfo}
               </p>
             </div>
           </div>
@@ -58,13 +58,13 @@ const TaskDetails = () => {
           {/* Buyer Information */}
           <div className="bg-gray-100 p-4 rounded-lg shadow-md flex items-center space-x-4">
             <img
-              src={job.data.buyer.image}
-              alt={job.data.buyer.name}
+              src={task.data.buyer.image}
+              alt={task.data.buyer.name}
               className="w-16 h-16 rounded-full object-cover"
             />
             <div>
-              <h4 className="text-lg font-bold">{job.data.buyer.name}</h4>
-              <p className="text-gray-600">{job.data.buyer.email}</p>
+              <h4 className="text-lg font-bold">{task.data.buyer.name}</h4>
+              <p className="text-gray-600">{task.data.buyer.email}</p>
             </div>
           </div>
 

@@ -24,15 +24,15 @@ const AddTaskForm = () => {
 
     const imageURL = await imageUpload(image);
 
-    // buyer job information
+    // buyer Task information
     const buyer = {
       name: user?.displayName,
       image: user?.photoURL,
       email: user?.email,
     };
 
-    // Create job object
-    const jobData = {
+    // Create Task object
+    const taskData = {
       title,
       taskDetail,
       requiredWorkers,
@@ -43,14 +43,9 @@ const AddTaskForm = () => {
       buyer,
     };
 
-    console.table(jobData);
-
     try {
-      const { data } = await axios.post("http://localhost:5000/job", jobData);
-
+      await axios.post("http://localhost:5000/task", taskData);
       toast.success("Data added successfully.");
-
-      console.log(data);
     } catch (err) {
       console.log(err);
     }
