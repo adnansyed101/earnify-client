@@ -3,7 +3,7 @@ import axios from "axios";
 import Loading from "../components/Loading";
 import { format } from "date-fns";
 
-const AllJobs = () => {
+const AllTasks = () => {
   const { data: jobs, isLoading } = useQuery({
     queryKey: ["jobs"],
     queryFn: async () => {
@@ -19,7 +19,7 @@ const AllJobs = () => {
   return (
     <section className="bg-gray-100 pb-10 pt-20 min-h-[calc(100vh-20px)]">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-8">All Jobs</h2>
+        <h2 className="text-3xl font-bold text-center mb-8">All Tasks</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {jobs && jobs.data.length > 0 ? (
             jobs.data.map((job) => (
@@ -33,7 +33,9 @@ const AllJobs = () => {
                   className="h-48 w-full object-cover"
                 />
                 <div className="p-4">
-                  <h3 className="text-xl text-neutral font-semibold mb-2">{job.title}</h3>
+                  <h3 className="text-xl text-neutral font-semibold mb-2">
+                    {job.title}
+                  </h3>
                   <p className=" text-neutral">{job.taskDetail}</p>
                   <p className="mb-4 text-neutral">
                     Completion Date:{" "}
@@ -44,14 +46,14 @@ const AllJobs = () => {
                       $ {job.payableAmount}
                     </span>
                     <button className="btn btn-primary btn-sm text-neutral">
-                      Apply Now
+                      Details
                     </button>
                   </div>
                 </div>
               </div>
             ))
           ) : (
-            <h1>No jobs here</h1>
+            <h1>No Tasks Available</h1>
           )}
         </div>
       </div>
@@ -59,4 +61,4 @@ const AllJobs = () => {
   );
 };
 
-export default AllJobs;
+export default AllTasks;
