@@ -39,7 +39,6 @@ const AuthProvider = ({ children }) => {
           {
             name: currentUser?.displayName,
             image: currentUser?.photoURL,
-            role: "worker",
             email: currentUser?.email,
           }
         );
