@@ -8,13 +8,13 @@ const WorkerMenu = () => {
           <Link to="/dashboard">Home</Link>
         </li>
         <li className="font-semibold text-lg">
-          <Link to="/dashboard/addTask">Task List</Link>
+          <Link to="/dashboard/tasklist">Task List</Link>
         </li>
         <li className="font-semibold text-lg">
-          <Link to="/dashboard/myTasks">My Submission</Link>
+          <Link to="/dashboard/mysubmission">My Submission</Link>
         </li>
         <li className="font-semibold text-lg">
-          <Link to="/dashboard/purchaseCoin">Withdrawals</Link>
+          <Link to="/dashboard/withdrawals">Withdrawals</Link>
         </li>
         
       </>
