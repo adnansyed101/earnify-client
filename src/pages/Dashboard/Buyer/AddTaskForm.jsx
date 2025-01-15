@@ -1,38 +1,59 @@
 import { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { imageUpload } from "../../../api/utils";
+import useAuth from "../../../hooks/useAuth";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const AddTaskForm = () => {
-  const [formData, setFormData] = useState({
-    taskTitle: "",
-    taskDetail: "",
-    requiredWorkers: "",
-    payableAmount: "",
-    completionDate: "",
-    submissionInfo: "",
-    taskImageUrl: "",
-  });
+  const { user } = useAuth();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  const [completionDate, setCompletionDate] = useState(new Date());
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Task Added:", formData);
-    alert("Task has been added successfully!");
-    // Reset the form
-    setFormData({
-      taskTitle: "",
-      taskDetail: "",
-      requiredWorkers: "",
-      payableAmount: "",
-      completionDate: "",
-      submissionInfo: "",
-      taskImageUrl: "",
-    });
+
+    const form = e.target;
+    const title = form.title.value;
+    const taskDetail = form.taskDetail.value;
+    const requiredWorkers = parseFloat(form.requiredWorkers.value);
+    const payableAmount = parseFloat(form.payableAmount.value);
+    const submissionInfo = form.submissionInfo.value;
+    const image = form.image.files[0];
+
+    const imageURL = await imageUpload(image);
+
+    // buyer job information
+    const buyer = {
+      name: user?.displayName,
+      image: user?.photoURL,
+      email: user?.email,
+    };
+
+    // Create job object
+    const jobData = {
+      title,
+      taskDetail,
+      requiredWorkers,
+      payableAmount,
+      completionDate,
+      submissionInfo,
+      imageURL,
+      buyer,
+    };
+
+    console.table(jobData);
+
+    try {
+      const { data } = await axios.post("http://localhost:5000/job", jobData);
+
+      toast.success("Data added successfully.");
+
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -43,92 +64,81 @@ const AddTaskForm = () => {
           onSubmit={handleSubmit}
           className="bg-white shadow-lg rounded-lg p-6 space-y-4"
         >
+          {/* Task Title */}
           <div className="form-control">
             <label className="label font-medium">Task Title</label>
             <input
               type="text"
-              name="taskTitle"
-              value={formData.taskTitle}
-              onChange={handleChange}
+              name="title"
               placeholder="Enter task title"
               className="input input-bordered w-full"
               required
             />
           </div>
-
+          {/* Task Detail */}
           <div className="form-control">
             <label className="label font-medium">Task Detail</label>
             <textarea
               name="taskDetail"
-              value={formData.taskDetail}
-              onChange={handleChange}
               placeholder="Provide detailed task description"
               className="textarea textarea-bordered w-full"
               required
             ></textarea>
           </div>
-
+          {/* Required Workers */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="form-control">
               <label className="label font-medium">Required Workers</label>
               <input
                 type="number"
                 name="requiredWorkers"
-                value={formData.requiredWorkers}
-                onChange={handleChange}
                 placeholder="Enter number of workers"
                 className="input input-bordered w-full"
                 required
               />
             </div>
-
+            {/* Payable Amount */}
             <div className="form-control">
               <label className="label font-medium">Payable Amount</label>
               <input
                 type="number"
                 name="payableAmount"
-                value={formData.payableAmount}
-                onChange={handleChange}
                 placeholder="Enter payable amount"
                 className="input input-bordered w-full"
                 required
               />
             </div>
           </div>
-
+          {/* Completion Date */}
           <div className="form-control">
             <label className="label font-medium">Completion Date</label>
-            <input
-              type="date"
-              name="completionDate"
-              value={formData.completionDate}
-              onChange={handleChange}
+            <DatePicker
+              selected={completionDate}
+              onChange={(date) => setCompletionDate(date)}
+              minDate={new Date()}
               className="input input-bordered w-full"
-              required
             />
           </div>
-
+          {/* Submission Info */}
           <div className="form-control">
             <label className="label font-medium">Submission Info</label>
             <textarea
               name="submissionInfo"
-              value={formData.submissionInfo}
-              onChange={handleChange}
               placeholder="Provide instructions for submission"
               className="textarea textarea-bordered w-full"
               required
             ></textarea>
           </div>
-
+          {/* Task Image */}
           <div className="form-control">
-            <label className="label font-medium">Task Image URL</label>
+            <label className="label font-medium">Task Image</label>
             <input
-              type="url"
-              name="taskImageUrl"
-              value={formData.taskImageUrl}
-              onChange={handleChange}
-              placeholder="Enter image URL for the task"
-              className="input input-bordered w-full"
+              required
+              type="file"
+              id="image"
+              name="image"
+              accept="image/*"
+              className="file-input file-input-bordered w-full"
             />
           </div>
 
