@@ -1,30 +1,25 @@
-const submissions = [
-  {
-    id: 1,
-    taskTitle: "Data Entry for Marketing Survey",
-    submissionDetail: "Submitted CSV file with 500 entries.",
-    submissionDate: "2025-01-10",
-    status: "Approved",
-  },
-  {
-    id: 2,
-    taskTitle: "Social Media Post Design",
-    submissionDetail: "Uploaded 3 post designs in PNG format.",
-    submissionDate: "2025-01-12",
-    status: "Pending",
-  },
-  {
-    id: 3,
-    taskTitle: "Product Review Writing",
-    submissionDetail: "Submitted 2 product reviews in Word format.",
-    submissionDate: "2025-01-13",
-    status: "Rejected",
-  },
-];
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import Loading from "../../../components/Loading";
+import { format } from "date-fns";
 
 const MySubmissions = () => {
+  const { data: submissions, isLoading } = useQuery({
+    queryKey: ["tasks"],
+    queryFn: async () => {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_URL}/submission`
+      );
+      return data;
+    },
+  });
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
-    <section className="bg-gray-100 py-10">
+    <section className="bg-gray-100 py-10 mt-20 rounded-lg">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-8">My Submissions</h2>
         <div className="overflow-x-auto">
@@ -38,11 +33,13 @@ const MySubmissions = () => {
               </tr>
             </thead>
             <tbody>
-              {submissions.map((submission) => (
-                <tr key={submission.id} className="hover:bg-gray-100">
+              {submissions.data.map((submission) => (
+                <tr key={submission._id} className="hover:bg-gray-100">
                   <td className="p-4">{submission.taskTitle}</td>
-                  <td className="p-4">{submission.submissionDetail}</td>
-                  <td className="p-4">{submission.submissionDate}</td>
+                  <td className="p-4">{submission.submissionDetails}</td>
+                  <td className="p-4">
+                    {format(new Date(submission.currentDate), "PP")}
+                  </td>
                   <td className="p-4">
                     <span
                       className={`badge ${
