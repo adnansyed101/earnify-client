@@ -10,6 +10,7 @@ import MyTasks from "../pages/Dashboard/Buyer/MyTasks";
 import TaskList from "../pages/Dashboard/Worker/TaskList";
 import TaskDetails from "../pages/Dashboard/Worker/TaskDetails";
 import MySubmissions from "../pages/Dashboard/Worker/MySubmission";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
     children: [
       { index: true, element: <BuyerHome /> },
       { path: "addTask", element: <AddTaskForm /> },
