@@ -1,8 +1,10 @@
+import useGetUser from "../../hooks/useGetUser";
 import BuyerMenu from "./Menu/BuyerMenu";
 import WorkerMenu from "./Menu/WorkerMenu";
 
 const Sidebar = () => {
-  const role = "Worker";
+  const { userDB } = useGetUser();
+  const role = userDB.role;
 
   return (
     <ul className="menu px-4 pt-20">
