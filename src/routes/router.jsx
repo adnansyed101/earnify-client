@@ -9,6 +9,7 @@ import AddTaskForm from "../pages/Dashboard/Buyer/AddTaskForm";
 import MyTasks from "../pages/Dashboard/Buyer/MyTasks";
 import TaskList from "../pages/Dashboard/Worker/TaskList";
 import TaskDetails from "../pages/Dashboard/Worker/TaskDetails";
+import MySubmissions from "../pages/Dashboard/Worker/MySubmission";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
       { path: "myTasks", element: <MyTasks /> },
       { path: "taskList", element: <TaskList /> },
       { path: "taskDetails/:id", element: <TaskDetails /> },
+      { path: "mysubmission", element: <MySubmissions /> },
     ],
   },
 ]);
