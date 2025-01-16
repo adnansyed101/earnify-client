@@ -5,8 +5,10 @@ import { toast } from "react-toastify";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Loading from "../components/Loading";
 import { imageUpload } from "../api/utils";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const SignUp = () => {
+  const axiosPublic = useAxiosPublic();
   const [showPwd, setShowPwd] = useState(false);
   const [showVerifyPwd, setShowVerifyPwd] = useState(false);
   const {
@@ -35,6 +37,7 @@ const SignUp = () => {
     const email = form.email.value;
     const password = form.password.value;
     const verifyPassword = form.verifyPassword.value;
+    const role = form.role.value;
     const image = form.image.files[0];
 
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
@@ -62,6 +65,12 @@ const SignUp = () => {
           photoURL: photoURL,
         })
           .then(() => {
+            axiosPublic.post(`/user/${email}`, {
+              name: user.displayName,
+              image: photoURL,
+              email: email,
+              role: role,
+            });
             toast.success("Account Created Successfully.");
             navigate("/");
             setLoading(false);
@@ -190,18 +199,19 @@ const SignUp = () => {
           {/* Select Role */}
           <div>
             <label htmlFor="email" className="block text-sm font-medium  mb-1">
-              Email Address
+              Pick a Role
             </label>
             <select
               defaultValue=""
               className="select select-bordered w-full"
+              name="role"
               required
             >
               <option disabled value="">
                 Pick One Role
               </option>
-              <option value="buyer">Buyer</option>
               <option value="worker">Worker</option>
+              <option value="buyer">Buyer</option>
             </select>
           </div>
 
