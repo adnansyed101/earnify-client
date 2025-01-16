@@ -1,28 +1,23 @@
-const myTasks = [
-  {
-    id: 1,
-    taskTitle: "Data Entry for Marketing Survey",
-    requiredWorkers: 5,
-    payableAmount: "$15.00",
-    completionDate: "2025-01-20",
-  },
-  {
-    id: 2,
-    taskTitle: "Social Media Post Design",
-    requiredWorkers: 3,
-    payableAmount: "$20.00",
-    completionDate: "2025-01-25",
-  },
-  {
-    id: 3,
-    taskTitle: "Product Review Writing",
-    requiredWorkers: 2,
-    payableAmount: "$10.00",
-    completionDate: "2025-01-18",
-  },
-];
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../../../components/Loading";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import useAuth from "../../../hooks/useAuth";
+import { format } from "date-fns";
 
 const MyTasks = () => {
+  const axiosPublic = useAxiosPublic();
+  const { user } = useAuth();
+
+  const { data: tasks = {}, isLoading } = useQuery({
+    queryKey: ["tasks", user?.email],
+    queryFn: async () => {
+      const { data } = await axiosPublic.get(`/task/user/${user?.email}`);
+      return data;
+    },
+  });
+
+  console.log(tasks);
+
   const handleUpdate = (taskId) => {
     alert(`Update Task ID: ${taskId}`);
     // Implement update logic here
@@ -37,6 +32,10 @@ const MyTasks = () => {
       // Implement delete logic here
     }
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <section className="bg-gray-100 py-10 mt-20">
@@ -54,12 +53,14 @@ const MyTasks = () => {
               </tr>
             </thead>
             <tbody>
-              {myTasks.map((task) => (
+              {tasks.data.map((task) => (
                 <tr key={task.id} className="hover:bg-gray-100">
-                  <td className="p-4">{task.taskTitle}</td>
+                  <td className="p-4">{task.title}</td>
                   <td className="p-4">{task.requiredWorkers}</td>
                   <td className="p-4">{task.payableAmount}</td>
-                  <td className="p-4">{task.completionDate}</td>
+                  <td className="p-4">
+                    {format(new Date(task.completionDate), "PP")}
+                  </td>
                   <td className="p-4 space-x-2">
                     <button
                       onClick={() => handleUpdate(task.id)}
