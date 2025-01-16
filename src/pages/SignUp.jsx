@@ -79,13 +79,15 @@ const SignUp = () => {
           .catch((error) => {
             const errorCode = error.code;
             toast.error(errorCode);
-            navigate("/signUp");
             setLoading(false);
+            navigate("/signUp");
           });
       })
       .catch((error) => {
         const errorCode = error.code;
         toast.error(errorCode);
+        setLoading(false);
+        navigate("/signUp");
       });
   };
 
