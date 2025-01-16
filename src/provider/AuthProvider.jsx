@@ -14,7 +14,6 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 import AuthContext from "./AuthContext";
-import axios from "axios";
 
 const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
@@ -30,24 +29,9 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      if (currentUser?.email) {
-        setUser(currentUser);
-
-        await axios.post(
-          `${import.meta.env.VITE_API_URL}/user/${currentUser?.email}`,
-          {
-            name: currentUser?.displayName,
-            image: currentUser?.photoURL,
-            email: currentUser?.email,
-          }
-        );
-
-        setLoading(false);
-      } else {
-        setUser({});
-        setLoading(false);
-      }
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
     });
     return () => unsubscribe();
   }, []);
