@@ -34,6 +34,7 @@ const AddTaskForm = () => {
       completionDate,
       submissionInfo,
       imageURL,
+      buyerEmail: userDB.email,
       buyer: userDB._id,
     };
 
@@ -41,7 +42,7 @@ const AddTaskForm = () => {
       await axiosPublic.post("/task", taskData);
       toast.success("Data added successfully.");
     } catch (err) {
-      console.log(err);
+      toast.err(err.message);
     }
   };
 

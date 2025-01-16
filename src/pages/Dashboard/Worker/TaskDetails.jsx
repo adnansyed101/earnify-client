@@ -52,8 +52,7 @@ const TaskDetails = () => {
       await axios.post("http://localhost:5000/submission", submissionData);
       toast.success("Submission is successfull");
     } catch (err) {
-      console.log(err);
-      toast.success(err.message);
+      toast.err(err.message);
     }
   };
 
