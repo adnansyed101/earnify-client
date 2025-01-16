@@ -2,12 +2,13 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { imageUpload } from "../../../api/utils";
-import useAuth from "../../../hooks/useAuth";
-import axios from "axios";
 import { toast } from "react-toastify";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import useGetUser from "../../../hooks/useGetUser";
 
 const AddTaskForm = () => {
-  const { user } = useAuth();
+  const axiosPublic = useAxiosPublic();
+  const { userDB } = useGetUser();
 
   const [completionDate, setCompletionDate] = useState(new Date());
 
@@ -24,13 +25,6 @@ const AddTaskForm = () => {
 
     const imageURL = await imageUpload(image);
 
-    // buyer Task information
-    const buyer = {
-      name: user?.displayName,
-      image: user?.photoURL,
-      email: user?.email,
-    };
-
     // Create Task object
     const taskData = {
       title,
@@ -40,11 +34,11 @@ const AddTaskForm = () => {
       completionDate,
       submissionInfo,
       imageURL,
-      buyer,
+      buyer: userDB._id,
     };
 
     try {
-      await axios.post("http://localhost:5000/task", taskData);
+      await axiosPublic.post("/task", taskData);
       toast.success("Data added successfully.");
     } catch (err) {
       console.log(err);
