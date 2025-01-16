@@ -3,9 +3,11 @@ import { FaBars } from "react-icons/fa";
 import { useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import { BsCoin } from "react-icons/bs";
+import useGetUser from "../hooks/useGetUser";
 
 const Navbar = () => {
   const { user, logOut, theme, toggleTheme } = useAuth();
+  const { userDB } = useGetUser();
 
   useEffect(() => {
     document.querySelector("html").setAttribute("data-theme", theme);
@@ -49,7 +51,7 @@ const Navbar = () => {
           tabIndex={0}
           className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
         >
-          <li className="text-center mb-2">{user?.displayName}</li>
+          <li className="text-center mb-2">{user?.displayName} ({userDB.role})</li>
           <li className="mb-2">
             <button onClick={toggleTheme} className="btn btn-primary btn-sm">
               {theme === "acid" ? "light" : "Dark"}
