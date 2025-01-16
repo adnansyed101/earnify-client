@@ -70,6 +70,7 @@ const SignUp = () => {
               image: photoURL,
               email: email,
               role: role,
+              coin: role === "Worker" ? 10 : 50,
             });
             toast.success("Account Created Successfully.");
             navigate("/");
@@ -210,8 +211,8 @@ const SignUp = () => {
               <option disabled value="">
                 Pick One Role
               </option>
-              <option value="worker">Worker</option>
-              <option value="buyer">Buyer</option>
+              <option value="Worker">Worker</option>
+              <option value="Buyer">Buyer</option>
             </select>
           </div>
 

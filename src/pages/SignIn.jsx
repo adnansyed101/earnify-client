@@ -4,10 +4,13 @@ import { useEffect } from "react";
 import Loading from "../components/Loading";
 import { toast } from "react-toastify";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const SignIn = () => {
   const { user, login, setUser, createUserWithGoogle, loading, setLoading } =
     useAuth();
+
+  const axiosPublic = useAxiosPublic();
 
   const navigate = useNavigate();
 
@@ -41,6 +44,13 @@ const SignIn = () => {
       .then((res) => {
         const user = res.user;
         setUser(user);
+        axiosPublic.post(`/user/${user.email}`, {
+          name: user.displayName,
+          image: user.photoURL,
+          email: user.email,
+          role: "Worker",
+          coin: 10,
+        });
         navigate("/");
         toast.success("Login Succesfull.");
       })
