@@ -3,9 +3,12 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import Loading from "../../../components/Loading";
 import { format } from "date-fns";
+import { toast } from "react-toastify";
+import useAuth from "../../../hooks/useAuth";
 
 const TaskDetails = () => {
   const { id } = useParams();
+  const { user } = useAuth();
 
   const { data: task = {}, isLoading } = useQuery({
     queryKey: ["task", id],
@@ -20,6 +23,39 @@ const TaskDetails = () => {
   if (isLoading) {
     return <Loading />;
   }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const submissionDetail = form.submissionDetail.value;
+
+    // Create Submission object
+    const submissionData = {
+      taskId: task.data._id,
+      taskTitle: task.data.title,
+      payableAmount: task.data.payableAmount,
+      submissionDetails: submissionDetail,
+      currentDate: new Date(),
+      status: "pending",
+      worker: {
+        name: user?.displayName,
+        email: user?.email,
+      },
+      buyer: {
+        name: task.data.buyer.name,
+        email: task.data.buyer.email,
+      },
+    };
+
+    try {
+      await axios.post("http://localhost:5000/submission", submissionData);
+      toast.success("Submission is successfull");
+    } catch (err) {
+      console.log(err);
+      toast.success(err.message);
+    }
+  };
 
   return (
     <section className="bg-gray-100 py-10">
@@ -71,10 +107,11 @@ const TaskDetails = () => {
           {/* Submission Form */}
           <div>
             <h3 className="text-xl font-bold mb-4">Submit Your Work</h3>
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSubmit}>
               <div className="form-control">
                 <label className="label font-medium">Submission Detail</label>
                 <textarea
+                  name="submissionDetail"
                   placeholder="Describe your submission here"
                   className="textarea textarea-bordered w-full"
                   required
