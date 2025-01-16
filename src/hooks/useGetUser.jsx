@@ -4,16 +4,18 @@ import useAxiosPublic from "./useAxiosPublic";
 
 const useGetUser = () => {
   const axiosPublic = useAxiosPublic();
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
 
-  const { data: userDB } = useQuery({
-    queryKey: ["users"],
+  const { data: userDB = {}, isLoading } = useQuery({
+    queryKey: ["user", user?.email],
+    enabled: !loading && !!user?.email,
     queryFn: async () => {
       const { data } = await axiosPublic.get(`/user?email=${user?.email}`);
       return data;
     },
   });
-  return { userDB: userDB.data[0] };
+
+  return { userDB: userDB.data, isLoading };
 };
 
 export default useGetUser;
