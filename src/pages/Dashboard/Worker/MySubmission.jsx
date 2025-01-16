@@ -5,7 +5,7 @@ import { format } from "date-fns";
 
 const MySubmissions = () => {
   const { data: submissions, isLoading } = useQuery({
-    queryKey: ["tasks"],
+    queryKey: ["submissions"],
     queryFn: async () => {
       const { data } = await axios.get(
         `${import.meta.env.VITE_API_URL}/submission`
