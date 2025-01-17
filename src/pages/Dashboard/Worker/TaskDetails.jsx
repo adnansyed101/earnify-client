@@ -1,60 +1,53 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import Loading from "../../../components/Loading";
 import { format } from "date-fns";
 import { toast } from "react-toastify";
 import useAuth from "../../../hooks/useAuth";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import useGetUser from "../../../hooks/useGetUser";
 
 const TaskDetails = () => {
   const { id } = useParams();
   const { user } = useAuth();
+  const axiosPublic = useAxiosPublic();
+  const { userDB } = useGetUser();
 
   const { data: task = {}, isLoading } = useQuery({
     queryKey: ["task", id],
     queryFn: async () => {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/task/${id}`
-      );
+      const { data } = await axiosPublic.get(`/task/${id}`);
       return data;
     },
   });
 
-  if (isLoading) {
-    return <Loading />;
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const form = e.target;
-    const submissionDetail = form.submissionDetail.value;
+    const submissionDetail = e.target.submissionDetail.value;
 
     // Create Submission object
     const submissionData = {
-      taskId: task.data._id,
-      taskTitle: task.data.title,
-      payableAmount: task.data.payableAmount,
-      submissionDetails: submissionDetail,
+      task: task.data._id,
+      buyerEmail: task.data.buyerEmail,
+      workerEmail: user?.email,
+      submissionDetail: submissionDetail,
       currentDate: new Date(),
       status: "pending",
-      worker: {
-        name: user?.displayName,
-        email: user?.email,
-      },
-      buyer: {
-        name: task.data.buyer.name,
-        email: task.data.buyer.email,
-      },
+      worker: userDB?._id,
+      buyer: task.data.buyer._id,
     };
 
     try {
-      await axios.post("http://localhost:5000/submission", submissionData);
+      await axiosPublic.post("/submission", submissionData);
       toast.success("Submission is successfull");
     } catch (err) {
       toast.err(err.message);
     }
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <section className="bg-gray-100 py-10">
