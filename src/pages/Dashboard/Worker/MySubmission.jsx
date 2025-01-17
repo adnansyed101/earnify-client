@@ -1,15 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import Loading from "../../../components/Loading";
 import { format } from "date-fns";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const MySubmissions = () => {
+  const axiosPublic = useAxiosPublic();
+
   const { data: submissions, isLoading } = useQuery({
     queryKey: ["submissions"],
     queryFn: async () => {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/submission`
-      );
+      const { data } = await axiosPublic.get("/submission");
       return data;
     },
   });
@@ -27,7 +27,7 @@ const MySubmissions = () => {
             <thead>
               <tr>
                 <th className="p-4">Task Title</th>
-                <th className="p-4">Submission Detail</th>
+                <th className="p-4">Buyer Email</th>
                 <th className="p-4">Submission Date</th>
                 <th className="p-4">Status</th>
               </tr>
@@ -35,17 +35,17 @@ const MySubmissions = () => {
             <tbody>
               {submissions.data.map((submission) => (
                 <tr key={submission._id} className="hover:bg-gray-100">
-                  <td className="p-4">{submission.taskTitle}</td>
-                  <td className="p-4">{submission.submissionDetails}</td>
+                  <td className="p-4">{submission.task.title}</td>
+                  <td className="p-4">{submission.buyerEmail}</td>
                   <td className="p-4">
                     {format(new Date(submission.currentDate), "PP")}
                   </td>
                   <td className="p-4">
                     <span
                       className={`badge ${
-                        submission.status === "Approved"
+                        submission.status === "approved"
                           ? "badge-success"
-                          : submission.status === "Pending"
+                          : submission.status === "pending"
                           ? "badge-warning"
                           : "badge-error"
                       }`}
