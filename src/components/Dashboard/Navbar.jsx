@@ -17,7 +17,7 @@ const Navbar = () => {
     user && user?.email ? (
       <>
         <button className="btn btn-ghost px-0 md:px-4">
-          1000
+          {userDB?.coin}
           <BsCoin />
         </button>
         <div className="dropdown dropdown-end">
