@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import Banner from "../components/Hero/Banner";
-import BestWorkerSection from "../components/BestWorkerSection";
-import Newsletter from "../components/Newsletter";
-import TestimonialSection from "../components/TestimonialSection";
+import Banner from "../components/Home/Hero/Banner";
+import BestWorkerSection from "../components/Home/BestWorkerSection";
+import Newsletter from "../components/Home/Newsletter";
+import TestimonialSection from "../components/Home/TestimonialSection";
 
 const Home = () => {
   useEffect(() => {
