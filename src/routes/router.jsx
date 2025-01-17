@@ -13,6 +13,7 @@ import MySubmissions from "../pages/Dashboard/Worker/MySubmission";
 import PrivateRoute from "./PrivateRoute";
 import UpdateTaskForm from "../pages/Dashboard/Buyer/UpdateTaskForm";
 import PurchaseCoin from "../pages/Dashboard/Buyer/PurchaseCoin";
+import PaymentHistory from "../pages/Dashboard/Buyer/PaymentHistory";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,7 @@ const router = createBrowserRouter([
       { path: "taskDetails/:id", element: <TaskDetails /> },
       { path: "mysubmission", element: <MySubmissions /> },
       { path: "purchaseCoin", element: <PurchaseCoin /> },
+      { path: "paymentHistory", element: <PaymentHistory /> },
     ],
   },
 ]);
