@@ -16,8 +16,6 @@ const MyTasks = () => {
     },
   });
 
-  console.log(tasks);
-
   const handleUpdate = (taskId) => {
     alert(`Update Task ID: ${taskId}`);
     // Implement update logic here
@@ -54,7 +52,7 @@ const MyTasks = () => {
             </thead>
             <tbody>
               {tasks.data.map((task) => (
-                <tr key={task.id} className="hover:bg-gray-100">
+                <tr key={task._id} className="hover:bg-gray-100">
                   <td className="p-4">{task.title}</td>
                   <td className="p-4">{task.requiredWorkers}</td>
                   <td className="p-4">{task.payableAmount}</td>
