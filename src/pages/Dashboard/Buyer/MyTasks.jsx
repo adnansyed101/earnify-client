@@ -4,12 +4,17 @@ import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useAuth from "../../../hooks/useAuth";
 import { format } from "date-fns";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const MyTasks = () => {
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
 
-  const { data: tasks = {}, isLoading } = useQuery({
+  const {
+    data: tasks = {},
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["tasks", user?.email],
     queryFn: async () => {
       const { data } = await axiosPublic.get(`/task/user/${user?.email}`);
@@ -17,14 +22,18 @@ const MyTasks = () => {
     },
   });
 
-
-  const handleDelete = (taskId) => {
+  const handleDelete = async (taskId) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this task?"
     );
     if (confirmDelete) {
-      alert(`Deleted Task ID: ${taskId}`);
-      // Implement delete logic here
+      try {
+        await axiosPublic.delete(`/task/delete/${taskId}`);
+        refetch();
+        toast.warn("Task Deleted");
+      } catch (err) {
+        toast.error(err.message);
+      }
     }
   };
 
@@ -64,7 +73,7 @@ const MyTasks = () => {
                       Update
                     </Link>
                     <button
-                      onClick={() => handleDelete(task.id)}
+                      onClick={() => handleDelete(task._id)}
                       className="btn btn-error btn-sm"
                     >
                       Delete
