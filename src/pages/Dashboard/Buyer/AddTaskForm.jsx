@@ -5,11 +5,12 @@ import { imageUpload } from "../../../api/utils";
 import { toast } from "react-toastify";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useGetUser from "../../../hooks/useGetUser";
+import { useNavigate } from "react-router-dom";
 
 const AddTaskForm = () => {
   const axiosPublic = useAxiosPublic();
-  const { userDB } = useGetUser();
-
+  const { userDB, refetch } = useGetUser();
+  const navigate = useNavigate();
   const [completionDate, setCompletionDate] = useState(new Date());
 
   const handleSubmit = async (e) => {
@@ -20,9 +21,16 @@ const AddTaskForm = () => {
     const taskDetail = form.taskDetail.value;
     const requiredWorkers = parseFloat(form.requiredWorkers.value);
     const payableAmount = parseFloat(form.payableAmount.value);
+    const totalPayableAmount = requiredWorkers * payableAmount;
     const submissionInfo = form.submissionInfo.value;
-    const image = form.image.files[0];
 
+    if (totalPayableAmount > userDB?.coin) {
+      toast.error("Not Enough Coins. Purchase Coins");
+      navigate("/purchaseCoin");
+      return;
+    }
+
+    const image = form.image.files[0];
     const imageURL = await imageUpload(image);
 
     // Create Task object
@@ -40,6 +48,10 @@ const AddTaskForm = () => {
 
     try {
       await axiosPublic.post("/task", taskData);
+      await axiosPublic.patch(`/user/updatecoin/${userDB?._id}`, {
+        coin: userDB?.coin - totalPayableAmount,
+      });
+      refetch();
       toast.success("Data added successfully.");
     } catch (err) {
       toast.err(err.message);
