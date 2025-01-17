@@ -11,6 +11,7 @@ import TaskList from "../pages/Dashboard/Worker/TaskList";
 import TaskDetails from "../pages/Dashboard/Worker/TaskDetails";
 import MySubmissions from "../pages/Dashboard/Worker/MySubmission";
 import PrivateRoute from "./PrivateRoute";
+import UpdateTaskForm from "../pages/Dashboard/Buyer/UpdateTaskForm";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +34,8 @@ const router = createBrowserRouter([
       { index: true, element: <BuyerHome /> },
       { path: "addTask", element: <AddTaskForm /> },
       { path: "myTasks", element: <MyTasks /> },
-      { path: "taskList", element: <TaskList /> },
+      { path: "tasklist", element: <TaskList /> },
+      { path: "task/update/:id", element: <UpdateTaskForm /> },
       { path: "taskDetails/:id", element: <TaskDetails /> },
       { path: "mysubmission", element: <MySubmissions /> },
     ],
