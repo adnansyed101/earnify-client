@@ -3,6 +3,7 @@ import Loading from "../../../components/Loading";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useAuth from "../../../hooks/useAuth";
 import { format } from "date-fns";
+import { Link } from "react-router-dom";
 
 const MyTasks = () => {
   const axiosPublic = useAxiosPublic();
@@ -16,10 +17,6 @@ const MyTasks = () => {
     },
   });
 
-  const handleUpdate = (taskId) => {
-    alert(`Update Task ID: ${taskId}`);
-    // Implement update logic here
-  };
 
   const handleDelete = (taskId) => {
     const confirmDelete = window.confirm(
@@ -60,12 +57,12 @@ const MyTasks = () => {
                     {format(new Date(task.completionDate), "PP")}
                   </td>
                   <td className="p-4 space-x-2">
-                    <button
-                      onClick={() => handleUpdate(task.id)}
+                    <Link
+                      to={`/dashboard/task/update/${task._id}`}
                       className="btn btn-primary btn-sm"
                     >
                       Update
-                    </button>
+                    </Link>
                     <button
                       onClick={() => handleDelete(task.id)}
                       className="btn btn-error btn-sm"
