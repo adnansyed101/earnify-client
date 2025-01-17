@@ -13,8 +13,19 @@ const PurchaseCoin = () => {
   const { userDB, refetch } = useGetUser();
   const axiosPublic = useAxiosPublic();
 
-  const handleBuyNow = async (coin) => {
+  const handleBuyNow = async (coin, price) => {
+    const payment = {
+      purchaseDate: new Date(),
+      coinsPurchased: coin,
+      amountPaid: price,
+      transID: `TXN${Math.random()
+        .toString(36)
+        .substring(2, 5 + 2)}`,
+      buyerEmail: userDB?.email,
+    };
+    
     try {
+      await axiosPublic.post(`/payment?email=${userDB?.email}`, payment);
       await axiosPublic.patch(`/user/updatecoin/${userDB?._id}`, {
         coin: userDB?.coin + coin,
       });
@@ -23,7 +34,6 @@ const PurchaseCoin = () => {
     } catch (err) {
       toast.err(err.message);
     }
-    // Replace this alert with actual PurchaseCoin integration logic
   };
 
   return (
@@ -43,7 +53,9 @@ const PurchaseCoin = () => {
                 $ {packageData.price}
               </p>
               <button
-                onClick={() => handleBuyNow(packageData.coin)}
+                onClick={() =>
+                  handleBuyNow(packageData.coin, packageData.price)
+                }
                 className="btn btn-primary w-full"
               >
                 Buy Now
