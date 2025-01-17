@@ -1,36 +1,51 @@
-import { useState } from "react";
-
-const taskData = {
-  title: "Data Entry for Marketing Survey",
-  taskDetail:
-    "Enter data for a marketing survey. Accuracy and attention to detail are crucial.",
-  requiredWorkers: 5,
-  payableAmount: "$15.00",
-  completionDate: "2025-01-20",
-  submissionInfo: "Submit a CSV file containing the entered data.",
-  imageURL: "https://via.placeholder.com/150",
-};
+import { useQuery } from "@tanstack/react-query";
+import { useNavigate, useParams } from "react-router-dom";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import Loading from "../../../components/Loading";
+import DatePicker from "react-datepicker";
+import { toast } from "react-toastify";
 
 const UpdateTaskForm = () => {
-  const [formData, setFormData] = useState({
-    title: taskData.title,
-    taskDetail: taskData.taskDetail,
-    submissionInfo: taskData.submissionInfo,
+  const { id } = useParams();
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
+
+  const { data: task = {}, isLoading } = useQuery({
+    queryKey: ["task"],
+    queryFn: async () => {
+      const { data } = await axiosPublic.get(`/task/${id}`);
+      return data;
+    },
   });
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const title = form.title.value;
+    const taskDetail = form.taskDetail.value;
+    const submissionInfo = form.submissionInfo.value;
+
+    try {
+      await axiosPublic.patch(`/task/update/${id}`, {
+        title,
+        taskDetail,
+        submissionInfo,
+      });
+      toast.success("Task Updated");
+      navigate("/dashboard/myTasks");
+    } catch (err) {
+      console.log(err);
+      toast.error(err.message);
+    }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert(`Task updated successfully!\n\n${JSON.stringify(formData, null, 2)}`);
-    // Replace with actual API call to update the task
-  };
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
-    <section className="bg-gray-100 py-10">
+    <section className="bg-gray-100 py-10 mt-20">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-8">Update Task</h2>
         <form
@@ -42,8 +57,7 @@ const UpdateTaskForm = () => {
             <input
               type="text"
               name="title"
-              value={formData.title}
-              onChange={handleInputChange}
+              defaultValue={task.data.title}
               className="input input-bordered w-full"
               required
             />
@@ -53,8 +67,7 @@ const UpdateTaskForm = () => {
             <label className="label font-medium">Task Detail</label>
             <textarea
               name="taskDetail"
-              value={formData.taskDetail}
-              onChange={handleInputChange}
+              defaultValue={task.data.taskDetail}
               className="textarea textarea-bordered w-full"
               required
             ></textarea>
@@ -64,7 +77,7 @@ const UpdateTaskForm = () => {
             <label className="label font-medium">Required Workers</label>
             <input
               type="number"
-              value={taskData.requiredWorkers}
+              defaultValue={task.data.requiredWorkers}
               className="input input-bordered w-full"
               disabled
             />
@@ -74,7 +87,7 @@ const UpdateTaskForm = () => {
             <label className="label font-medium">Payable Amount</label>
             <input
               type="text"
-              value={taskData.payableAmount}
+              defaultValue={task.data.payableAmount}
               className="input input-bordered w-full"
               disabled
             />
@@ -82,9 +95,8 @@ const UpdateTaskForm = () => {
 
           <div className="form-control">
             <label className="label font-medium">Completion Date</label>
-            <input
-              type="date"
-              value={taskData.completionDate}
+            <DatePicker
+              selected={task.data.completionDate}
               className="input input-bordered w-full"
               disabled
             />
@@ -94,8 +106,7 @@ const UpdateTaskForm = () => {
             <label className="label font-medium">Submission Info</label>
             <textarea
               name="submissionInfo"
-              value={formData.submissionInfo}
-              onChange={handleInputChange}
+              defaultValue={task.data.submissionInfo}
               className="textarea textarea-bordered w-full"
               required
             ></textarea>
@@ -105,7 +116,7 @@ const UpdateTaskForm = () => {
             <label className="label font-medium">Task Image URL</label>
             <input
               type="url"
-              value={taskData.imageURL}
+              defaultValue={task.data.imageURL}
               className="input input-bordered w-full"
               disabled
             />
