@@ -2,14 +2,18 @@ import { useQuery } from "@tanstack/react-query";
 import Loading from "../../../components/Loading";
 import { format } from "date-fns";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import useAuth from "../../../hooks/useAuth";
 
 const MySubmissions = () => {
   const axiosPublic = useAxiosPublic();
+  const { user } = useAuth();
 
   const { data: submissions, isLoading } = useQuery({
     queryKey: ["submissions"],
     queryFn: async () => {
-      const { data } = await axiosPublic.get("/submission");
+      const { data } = await axiosPublic.get(
+        `/submission?email=${user?.email}`
+      );
       return data;
     },
   });
