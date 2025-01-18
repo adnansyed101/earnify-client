@@ -5,6 +5,7 @@ import Loading from "../../../components/Loading";
 import useAuth from "../../../hooks/useAuth";
 import { useState } from "react";
 import Modal from "../../../components/Modal";
+import { toast } from "react-toastify";
 
 const BuyerHome = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,12 +24,18 @@ const BuyerHome = () => {
     setIsOpen(true);
   };
 
-  const handleApprove = (taskId) => {
-    alert(`Approved Task ID: ${taskId}`);
+  const handleApprove = async (submissionID) => {
+    try {
+      await axiosPublic.patch(`/submission/update/status/${submissionID}`, {
+        status: "accepted",
+      });
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
 
-  const handleReject = (taskId) => {
-    alert(`Rejected Task ID: ${taskId}`);
+  const handleReject = async (submissionID, taskID, requiredWorker) => {
+    
   };
 
   if (isLoading) {
@@ -78,13 +85,19 @@ const BuyerHome = () => {
                       {submission.status === "pending" ? (
                         <>
                           <button
-                            onClick={() => handleApprove(submission.id)}
+                            onClick={() => handleApprove(submission._id)}
                             className="btn btn-success btn-sm"
                           >
                             Approve
                           </button>
                           <button
-                            onClick={() => handleReject(submission.id)}
+                            onClick={() =>
+                              handleReject(
+                                submission._id,
+                                submission.task._id,
+                                submission.task.requiredWorkers
+                              )
+                            }
                             className="btn btn-error btn-sm"
                           >
                             Reject
