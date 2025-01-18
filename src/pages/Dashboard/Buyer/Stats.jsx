@@ -1,6 +1,36 @@
 import { FaBriefcase, FaClock, FaDollarSign } from "react-icons/fa";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../../../components/Loading";
+import useAuth from "../../../hooks/useAuth";
 
 const Stats = () => {
+  const axiosPublic = useAxiosPublic();
+  const { user } = useAuth();
+  const { data: overview = {}, isLoading } = useQuery({
+    queryKey: ["overview"],
+    queryFn: async () => {
+      const { data } = await axiosPublic.get(
+        `/task/overview?email=${user.email}`
+      );
+      return data;
+    },
+  });
+
+  const { data: totalPayments = {}, isLoading: loadingPayments } = useQuery({
+    queryKey: ["totalPayments"],
+    queryFn: async () => {
+      const { data } = await axiosPublic.get(
+        `/payment/totalPayment?email=${user.email}`
+      );
+      return data;
+    },
+  });
+
+  if (isLoading || loadingPayments) {
+    return <Loading />;
+  }
+
   return (
     <div className="stats shadow mb-4">
       <div className="stat">
@@ -8,17 +38,17 @@ const Stats = () => {
           <FaBriefcase className="inline-block h-8 w-8 stroke-current" />
         </div>
         <div className="stat-title">Total Tasks</div>
-        <div className="stat-value">20</div>
-        <div className="stat-desc">Jan 1st - Feb 1st</div>
+        <div className="stat-value">{overview.data[0].countOfTasks}</div>
       </div>
 
       <div className="stat">
         <div className="stat-figure text-secondary">
           <FaClock className="inline-block h-8 w-8 stroke-current" />
         </div>
-        <div className="stat-title">Pendin Tasks</div>
-        <div className="stat-value">20</div>
-        <div className="stat-desc">↗︎ 400 (22%)</div>
+        <div className="stat-title">Pending Tasks</div>
+        <div className="stat-value">
+          {overview.data[0].totalRequiredWorkers}
+        </div>
       </div>
 
       <div className="stat">
@@ -26,8 +56,7 @@ const Stats = () => {
           <FaDollarSign className="inline-block h-8 w-8 stroke-current" />
         </div>
         <div className="stat-title">Total Payments</div>
-        <div className="stat-value">1,200</div>
-        <div className="stat-desc">↘︎ 90 (14%)</div>
+        <div className="stat-value">{totalPayments.data[0].totalPaid}</div>
       </div>
     </div>
   );
