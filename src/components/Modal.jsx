@@ -9,8 +9,6 @@ import {
 import { format } from "date-fns";
 
 const Modal = ({ isOpen, setIsOpen, submission }) => {
-  console.log(submission);
-
   return (
     <Dialog
       open={isOpen}
