@@ -68,25 +68,33 @@ const BuyerHome = () => {
                       >
                         View Submission
                       </button>
-                    </td>
-                    <td className="p-4 space-x-2">
-                      <button
-                        onClick={() => handleApprove(submission.id)}
-                        className="btn btn-success btn-sm"
-                      >
-                        Approve
-                      </button>
-                      <button
-                        onClick={() => handleReject(submission.id)}
-                        className="btn btn-error btn-sm"
-                      >
-                        Reject
-                      </button>
                       <Modal
                         isOpen={isOpen}
                         setIsOpen={setIsOpen}
                         submission={submission}
                       />
+                    </td>
+                    <td className="p-4 space-x-2">
+                      {submission.status === "pending" ? (
+                        <>
+                          <button
+                            onClick={() => handleApprove(submission.id)}
+                            className="btn btn-success btn-sm"
+                          >
+                            Approve
+                          </button>
+                          <button
+                            onClick={() => handleReject(submission.id)}
+                            className="btn btn-error btn-sm"
+                          >
+                            Reject
+                          </button>
+                        </>
+                      ) : submission.status === "accepted" ? (
+                        <div className="badge badge-success">Accepted</div>
+                      ) : (
+                        <div className="badge badge-error">Rejected</div>
+                      )}
                     </td>
                   </tr>
                 ))}
