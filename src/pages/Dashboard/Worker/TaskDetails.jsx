@@ -13,7 +13,11 @@ const TaskDetails = () => {
   const axiosPublic = useAxiosPublic();
   const { userDB } = useGetUser();
 
-  const { data: task = {}, isLoading } = useQuery({
+  const {
+    data: task = {},
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["task", id],
     queryFn: async () => {
       const { data } = await axiosPublic.get(`/task/${id}`);
@@ -38,10 +42,16 @@ const TaskDetails = () => {
     };
 
     try {
+      // Add a submission to submission collection.
       await axiosPublic.post("/submission", submissionData);
+      // Update required number of workers from task collection.
+      await axiosPublic.patch(`/task/update/requiredWorker/${task.data._id}`, {
+        requiredWorkers: task.data.requiredWorkers - 1,
+      });
+      refetch();
       toast.success("Submission is successfull");
     } catch (err) {
-      toast.err(err.message);
+      toast.error(err.message);
     }
   };
 
