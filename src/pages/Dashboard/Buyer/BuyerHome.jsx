@@ -3,23 +3,24 @@ import Stats from "./Stats";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Loading from "../../../components/Loading";
 import useAuth from "../../../hooks/useAuth";
+import { useState } from "react";
+import Modal from "../../../components/Modal";
 
 const BuyerHome = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
 
   const { data: submissions = {}, isLoading } = useQuery({
     queryKey: ["submission"],
     queryFn: async () => {
-      const { data } = await axiosPublic.get(
-        `/submission?email=${user.email}`
-      );
+      const { data } = await axiosPublic.get(`/submission?email=${user.email}`);
       return data;
     },
   });
 
-  const handleViewSubmission = (taskId) => {
-    alert(`Viewing submission for Task ID: ${taskId}`);
+  const handleViewSubmission = () => {
+    setIsOpen(true);
   };
 
   const handleApprove = (taskId) => {
@@ -62,7 +63,7 @@ const BuyerHome = () => {
                     <td className="p-4">{submission.task.payableAmount}</td>
                     <td className="p-4">
                       <button
-                        onClick={() => handleViewSubmission(submission.id)}
+                        onClick={() => handleViewSubmission(submission._id)}
                         className="btn btn-primary btn-sm"
                       >
                         View Submission
@@ -81,6 +82,11 @@ const BuyerHome = () => {
                       >
                         Reject
                       </button>
+                      <Modal
+                        isOpen={isOpen}
+                        setIsOpen={setIsOpen}
+                        submission={submission}
+                      />
                     </td>
                   </tr>
                 ))}
