@@ -47,7 +47,7 @@ const MySubmissions = () => {
                   <td className="p-4">
                     <span
                       className={`badge ${
-                        submission.status === "approved"
+                        submission.status === "accepted"
                           ? "badge-success"
                           : submission.status === "pending"
                           ? "badge-warning"
