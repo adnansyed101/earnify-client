@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import Stats from "./Stats";
+import BuyerStats from "./BuyerStats";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Loading from "../../../components/Loading";
 import useAuth from "../../../hooks/useAuth";
@@ -19,7 +19,9 @@ const BuyerHome = () => {
   } = useQuery({
     queryKey: ["buyerSubmission"],
     queryFn: async () => {
-      const { data } = await axiosPublic.get(`/submission/buyer?email=${user.email}`);
+      const { data } = await axiosPublic.get(
+        `/submission/buyer?email=${user.email}`
+      );
       return data;
     },
   });
@@ -71,7 +73,7 @@ const BuyerHome = () => {
   return (
     <div className="mt-12">
       <h1 className="text-2xl font-bold mb-2">Overview</h1>
-      <Stats />
+      <BuyerStats />
       <section className="bg-gray-100 py-10">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">
