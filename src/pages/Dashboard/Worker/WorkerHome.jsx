@@ -12,7 +12,7 @@ const WorkerHome = () => {
     queryKey: ["workerSubmission"],
     queryFn: async () => {
       const { data } = await axiosPublic.get(
-        `/submission/overview?email=${user.email}`
+        `/overview/worker?email=${user.email}`
       );
       return data;
     },
