@@ -20,7 +20,7 @@ const BuyerHome = () => {
     queryKey: ["buyerSubmission"],
     queryFn: async () => {
       const { data } = await axiosPublic.get(
-        `/submission/buyer?email=${user.email}`
+        `/overview/buyer?email=${user.email}`
       );
       return data;
     },
@@ -73,7 +73,11 @@ const BuyerHome = () => {
   return (
     <div className="mt-12">
       <h1 className="text-2xl font-bold mb-2">Overview</h1>
-      <BuyerStats />
+      <BuyerStats
+        totalTasks={submissions.data?.overview[0]?.countOfTasks}
+        pendingTasks={submissions.data?.overview[0]?.totalRequiredWorkers}
+        totalPayments={submissions.data?.totalPayments[0]?.totalPaid}
+      />
       <section className="bg-gray-100 py-10">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">
@@ -91,7 +95,7 @@ const BuyerHome = () => {
                 </tr>
               </thead>
               <tbody>
-                {submissions.data.map((submission) => (
+                {submissions.data.submissions.map((submission) => (
                   <tr key={submission._id} className="hover:bg-gray-100">
                     <td className="p-4">{submission.worker.name}</td>
                     <td className="p-4">{submission.task.title}</td>
