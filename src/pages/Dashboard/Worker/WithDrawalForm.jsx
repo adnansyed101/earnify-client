@@ -28,7 +28,7 @@ const WithdrawalForm = () => {
 
     const withdrawal = {
       withdrawalCoin: coins,
-      withdrawalAmount: (coins / 20).toFixed(2),
+      withdrawalAmount: parseFloat((coins / 20).toFixed(2)),
       paymentSystem,
       withdrawDate: new Date(),
       status: "pending",
