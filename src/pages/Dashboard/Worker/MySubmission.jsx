@@ -9,10 +9,10 @@ const MySubmissions = () => {
   const { user } = useAuth();
 
   const { data: submissions, isLoading } = useQuery({
-    queryKey: ["submissions"],
+    queryKey: ["workerSubmissions"],
     queryFn: async () => {
       const { data } = await axiosPublic.get(
-        `/submission?email=${user?.email}`
+        `/submission/worker?email=${user?.email}`
       );
       return data;
     },

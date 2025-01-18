@@ -17,9 +17,9 @@ const BuyerHome = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["submission"],
+    queryKey: ["buyerSubmission"],
     queryFn: async () => {
-      const { data } = await axiosPublic.get(`/submission?email=${user.email}`);
+      const { data } = await axiosPublic.get(`/submission/buyer?email=${user.email}`);
       return data;
     },
   });
