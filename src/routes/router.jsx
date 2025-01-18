@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../layout/Main";
 import Home from "../pages/Home";
-import BuyerHome from "../pages/Dashboard/Buyer/BuyerHome";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import Dashboard from "../layout/Dashboard";
@@ -14,6 +13,7 @@ import PrivateRoute from "./PrivateRoute";
 import UpdateTaskForm from "../pages/Dashboard/Buyer/UpdateTaskForm";
 import PurchaseCoin from "../pages/Dashboard/Buyer/PurchaseCoin";
 import PaymentHistory from "../pages/Dashboard/Buyer/PaymentHistory";
+import DashboardHome from "../pages/DashboardHome/DashboardHome";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
-      { index: true, element: <BuyerHome /> },
+      { index: true, element: <DashboardHome /> },
       { path: "addTask", element: <AddTaskForm /> },
       { path: "myTasks", element: <MyTasks /> },
       { path: "tasklist", element: <TaskList /> },
