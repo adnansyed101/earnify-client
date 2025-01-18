@@ -12,7 +12,11 @@ const BuyerHome = () => {
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
 
-  const { data: submissions = {}, isLoading } = useQuery({
+  const {
+    data: submissions = {},
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["submission"],
     queryFn: async () => {
       const { data } = await axiosPublic.get(`/submission?email=${user.email}`);
@@ -29,6 +33,7 @@ const BuyerHome = () => {
       await axiosPublic.patch(`/submission/update/status/${submissionID}`, {
         status: "accepted",
       });
+      refetch();
     } catch (err) {
       toast.error(err.message);
     }
@@ -43,6 +48,7 @@ const BuyerHome = () => {
       await axiosPublic.patch(`/task/update/requiredWorker/${taskID}`, {
         requiredWorkers: requiredWorker + 1,
       });
+      refetch();
     } catch (err) {
       toast.error(err.message);
     }
