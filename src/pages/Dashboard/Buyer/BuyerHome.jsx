@@ -34,8 +34,18 @@ const BuyerHome = () => {
     }
   };
 
+  // Update Status and also increase the task required worker by 1.
   const handleReject = async (submissionID, taskID, requiredWorker) => {
-    
+    try {
+      await axiosPublic.patch(`/submission/update/status/${submissionID}`, {
+        status: "rejected",
+      });
+      await axiosPublic.patch(`/task/update/requiredWorker/${taskID}`, {
+        requiredWorkers: requiredWorker + 1,
+      });
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
 
   if (isLoading) {
