@@ -14,6 +14,7 @@ import UpdateTaskForm from "../pages/Dashboard/Buyer/UpdateTaskForm";
 import PurchaseCoin from "../pages/Dashboard/Buyer/PurchaseCoin";
 import PaymentHistory from "../pages/Dashboard/Buyer/PaymentHistory";
 import DashboardHome from "../pages/DashboardHome/DashboardHome";
+import WithdrawalForm from "../pages/Dashboard/Worker/WithDrawalForm";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,7 @@ const router = createBrowserRouter([
       { path: "mysubmission", element: <MySubmissions /> },
       { path: "purchaseCoin", element: <PurchaseCoin /> },
       { path: "paymentHistory", element: <PaymentHistory /> },
+      { path: "withdrawals", element: <WithdrawalForm /> },
     ],
   },
 ]);
