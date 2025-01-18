@@ -28,8 +28,18 @@ const BuyerHome = () => {
     setIsOpen(true);
   };
 
-  const handleApprove = async (submissionID) => {
+  const handleApprove = async (
+    submissionID,
+    workerID,
+    coins,
+    payableAmount
+  ) => {
     try {
+      // Update Workers coin
+      await axiosPublic.patch(`/user/updatecoin/${workerID}`, {
+        coin: coins + payableAmount,
+      });
+      // Update status of submission.
       await axiosPublic.patch(`/submission/update/status/${submissionID}`, {
         status: "accepted",
       });
@@ -71,7 +81,7 @@ const BuyerHome = () => {
             <table className="table w-full bg-white shadow-md rounded-lg">
               <thead>
                 <tr>
-                  <th className="p-4">Worker Email</th>
+                  <th className="p-4">Worker Name</th>
                   <th className="p-4">Task Title</th>
                   <th className="p-4">Payable Amount</th>
                   <th className="p-4">View Submission</th>
@@ -81,7 +91,7 @@ const BuyerHome = () => {
               <tbody>
                 {submissions.data.map((submission) => (
                   <tr key={submission._id} className="hover:bg-gray-100">
-                    <td className="p-4">{submission.workerEmail}</td>
+                    <td className="p-4">{submission.worker.name}</td>
                     <td className="p-4">{submission.task.title}</td>
                     <td className="p-4">{submission.task.payableAmount}</td>
                     <td className="p-4">
@@ -101,7 +111,14 @@ const BuyerHome = () => {
                       {submission.status === "pending" ? (
                         <>
                           <button
-                            onClick={() => handleApprove(submission._id)}
+                            onClick={() =>
+                              handleApprove(
+                                submission._id,
+                                submission.worker._id,
+                                submission.worker.coin,
+                                submission.task.payableAmount
+                              )
+                            }
                             className="btn btn-success btn-sm"
                           >
                             Approve
