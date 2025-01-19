@@ -54,9 +54,7 @@ const AdminHome = () => {
   if (isLoading) {
     return <Loading />;
   }
-
-  console.log(adminOverview);
-
+  
   return (
     <div className="mt-12">
       <h1 className="text-2xl font-bold mb-2">Overview</h1>
