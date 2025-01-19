@@ -17,6 +17,8 @@ import DashboardHome from "../pages/DashboardHome/DashboardHome";
 import WithdrawalForm from "../pages/Dashboard/Worker/WithDrawalForm";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
 import Error from "../pages/Error";
+import BuyerRoute from "./BuyerRoute";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -37,16 +39,61 @@ const router = createBrowserRouter([
     ),
     children: [
       { index: true, element: <DashboardHome /> },
-      { path: "addTask", element: <AddTaskForm /> },
-      { path: "myTasks", element: <MyTasks /> },
+      // Worker Routes
       { path: "tasklist", element: <TaskList /> },
-      { path: "task/update/:id", element: <UpdateTaskForm /> },
-      { path: "taskDetails/:id", element: <TaskDetails /> },
       { path: "mysubmission", element: <MySubmissions /> },
-      { path: "purchaseCoin", element: <PurchaseCoin /> },
-      { path: "paymentHistory", element: <PaymentHistory /> },
       { path: "withdrawals", element: <WithdrawalForm /> },
-      { path: "manageusers", element: <ManageUsers /> },
+      { path: "taskDetails/:id", element: <TaskDetails /> },
+      // Buyer Routes
+      {
+        path: "addTask",
+        element: (
+          <BuyerRoute>
+            <AddTaskForm />
+          </BuyerRoute>
+        ),
+      },
+      {
+        path: "myTasks",
+        element: (
+          <BuyerRoute>
+            <MyTasks />
+          </BuyerRoute>
+        ),
+      },
+      {
+        path: "task/update/:id",
+        element: (
+          <BuyerRoute>
+            <UpdateTaskForm />
+          </BuyerRoute>
+        ),
+      },
+      {
+        path: "purchaseCoin",
+        element: (
+          <BuyerRoute>
+            <PurchaseCoin />
+          </BuyerRoute>
+        ),
+      },
+      // Admin Routes
+      {
+        path: "paymentHistory",
+        element: (
+          <AdminRoute>
+            <PaymentHistory />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manageusers",
+        element: (
+          <AdminRoute>
+            <ManageUsers />
+          </AdminRoute>
+        ),
+      },
     ],
   },
   {
