@@ -26,9 +26,9 @@ const WorkerHome = () => {
     <div className="mt-12">
       <h1 className="text-2xl font-bold mb-2">Overview</h1>
       <Stats
-        submissionCount={submissions.data.submissionCount}
-        pendingSubmission={submissions.data.pendingSubmissionsCount}
-        totalEarning={submissions.data.totalEarning.totalPayableAmount}
+        submissionCount={submissions.data?.submissionCount || 0}
+        pendingSubmission={submissions.data?.pendingSubmissionsCount || 0}
+        totalEarning={submissions.data.totalEarning?.totalPayableAmount || 0}
       />
       <section className="bg-gray-100 py-10">
         <div className="container mx-auto px-4">
