@@ -16,6 +16,7 @@ import PaymentHistory from "../pages/Dashboard/Buyer/PaymentHistory";
 import DashboardHome from "../pages/DashboardHome/DashboardHome";
 import WithdrawalForm from "../pages/Dashboard/Worker/WithDrawalForm";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
+import Error from "../pages/Error";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       { path: "withdrawals", element: <WithdrawalForm /> },
       { path: "manageusers", element: <ManageUsers /> },
     ],
+  },
+  {
+    path: "*",
+    element: <Error />,
   },
 ]);
 
