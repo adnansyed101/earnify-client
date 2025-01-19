@@ -45,7 +45,7 @@ const WithdrawalForm = () => {
   };
 
   return (
-    <section className="bg-gray-100 py-10">
+    <section className="bg-gray-100 py-10 mt-20">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-8">Withdraw Coins</h2>
         <div className="bg-white shadow-md rounded-lg p-6 space-y-6">

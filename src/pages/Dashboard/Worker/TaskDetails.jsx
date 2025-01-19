@@ -60,7 +60,7 @@ const TaskDetails = () => {
   }
 
   return (
-    <section className="bg-gray-100 py-10">
+    <section className="bg-gray-100 py-10 mt-20">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-8">Task Details</h2>
         <div className="bg-white shadow-lg rounded-lg p-6 space-y-6">
@@ -119,7 +119,11 @@ const TaskDetails = () => {
                   required
                 ></textarea>
               </div>
-              <button type="submit" className="btn btn-success">
+              <button
+                type="submit"
+                className="btn btn-success"
+                disabled={task.data.requiredWorkers === 0}
+              >
                 Submit
               </button>
             </form>

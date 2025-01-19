@@ -17,9 +17,11 @@ const TaskList = () => {
     return <Loading />;
   }
   return (
-    <section className="bg-gray-100 py-10">
+    <section className="bg-gray-100 py-10 mt-20">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-8">Available Tasks</h2>
+        <h2 className="text-3xl font-bold text-center mb-8">
+          {tasks.data.length > 0 ? "Available Tasks" : "No Tasks Availavble"}
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {tasks.data.map((task) => (
             <div
