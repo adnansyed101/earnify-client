@@ -18,12 +18,12 @@ const WithdrawalForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (userDB?.coin < 200) {
-      return toast.error("Cannot withdraw less than 200 coins");
+    if (coins < 200) {
+      return toast.error("Withdrawing less than 200 coins.");
     }
 
     if (coins > userDB?.coin) {
-      return toast.error("You Do not have enough coins");
+      return toast.error("Do not have enough coins.");
     }
 
     const withdrawal = {
@@ -37,8 +37,7 @@ const WithdrawalForm = () => {
     };
 
     try {
-      const { data } = await axiosPublic.post("/withdrawal", withdrawal);
-      console.log(data);
+      await axiosPublic.post("/withdrawal", withdrawal);
       toast.success("Withdrawal Request Sent");
     } catch (err) {
       toast.error(err.message);
@@ -74,6 +73,9 @@ const WithdrawalForm = () => {
                 className="input input-bordered w-full"
                 required
               />
+              <p className="text-sm mt-2 text-secondary">
+                *Cannot withdraw less than 200 coins.
+              </p>
             </div>
 
             {/* Withdraw Amount */}
