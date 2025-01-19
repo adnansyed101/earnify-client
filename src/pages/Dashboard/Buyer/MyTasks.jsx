@@ -5,10 +5,12 @@ import useAuth from "../../../hooks/useAuth";
 import { format } from "date-fns";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import useGetUser from "../../../hooks/useGetUser";
 
 const MyTasks = () => {
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
+  const { refetch: userRefetch } = useGetUser();
 
   const {
     data: tasks = {},
@@ -22,14 +24,20 @@ const MyTasks = () => {
     },
   });
 
-  const handleDelete = async (taskId) => {
+  const handleDelete = async (task) => {
+    const refillAmount = task.requiredWorkers * task.payableAmount;
+
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this task?"
     );
     if (confirmDelete) {
       try {
-        await axiosPublic.delete(`/task/delete/${taskId}`);
+        await axiosPublic.delete(`/task/delete/${task._id}`);
+        await axiosPublic.patch(`/user/updatecoin/${task.buyer._id}`, {
+          coin: task.buyer.coin + refillAmount,
+        });
         refetch();
+        userRefetch();
         toast.warn("Task Deleted");
       } catch (err) {
         toast.error(err.message);
@@ -40,6 +48,8 @@ const MyTasks = () => {
   if (isLoading) {
     return <Loading />;
   }
+
+  console.log(tasks);
 
   return (
     <section className="bg-gray-100 py-10 mt-20">
@@ -73,7 +83,7 @@ const MyTasks = () => {
                       Update
                     </Link>
                     <button
-                      onClick={() => handleDelete(task._id)}
+                      onClick={() => handleDelete(task)}
                       className="btn btn-error btn-sm"
                     >
                       Delete
