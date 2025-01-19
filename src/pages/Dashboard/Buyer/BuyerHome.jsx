@@ -74,9 +74,9 @@ const BuyerHome = () => {
     <div className="mt-12">
       <h1 className="text-2xl font-bold mb-2">Overview</h1>
       <BuyerStats
-        totalTasks={submissions.data?.overview[0]?.countOfTasks}
-        pendingTasks={submissions.data?.overview[0]?.totalRequiredWorkers}
-        totalPayments={submissions.data?.totalPayments[0]?.totalPaid}
+        totalTasks={submissions.data?.overview[0]?.countOfTasks || 0}
+        pendingTasks={submissions.data?.overview[0]?.totalRequiredWorkers || 0}
+        totalPayments={submissions.data?.totalPayments[0]?.totalPaid || 0}
       />
       <section className="bg-gray-100 py-10">
         <div className="container mx-auto px-4">
