@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Loading from "../../components/Loading";
 import useGetUser from "../../hooks/useGetUser";
 import AdminHome from "../Dashboard/Admin/AdminHome";
@@ -6,6 +7,10 @@ import WorkerHome from "../Dashboard/Worker/WorkerHome";
 
 const DashboardHome = () => {
   const { userDB, isLoading } = useGetUser();
+
+  useEffect(() => {
+    document.title = "Earnify | Dashboard Home";
+  }, []);
 
   if (isLoading) return <Loading />;
 
