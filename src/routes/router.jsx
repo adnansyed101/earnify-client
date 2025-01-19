@@ -19,6 +19,7 @@ import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
 import Error from "../pages/Error";
 import BuyerRoute from "./BuyerRoute";
 import AdminRoute from "./AdminRoute";
+import WorkerRoute from "./WorkerRoute";
 
 const router = createBrowserRouter([
   {
@@ -40,10 +41,38 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <DashboardHome /> },
       // Worker Routes
-      { path: "tasklist", element: <TaskList /> },
-      { path: "mysubmission", element: <MySubmissions /> },
-      { path: "withdrawals", element: <WithdrawalForm /> },
-      { path: "taskDetails/:id", element: <TaskDetails /> },
+      {
+        path: "tasklist",
+        element: (
+          <WorkerRoute>
+            <TaskList />
+          </WorkerRoute>
+        ),
+      },
+      {
+        path: "mysubmission",
+        element: (
+          <WorkerRoute>
+            <MySubmissions />
+          </WorkerRoute>
+        ),
+      },
+      {
+        path: "withdrawals",
+        element: (
+          <WorkerRoute>
+            <WithdrawalForm />
+          </WorkerRoute>
+        ),
+      },
+      {
+        path: "taskDetails/:id",
+        element: (
+          <WorkerRoute>
+            <TaskDetails />
+          </WorkerRoute>
+        ),
+      },
       // Buyer Routes
       {
         path: "addTask",
@@ -77,15 +106,15 @@ const router = createBrowserRouter([
           </BuyerRoute>
         ),
       },
-      // Admin Routes
       {
         path: "paymentHistory",
         element: (
-          <AdminRoute>
+          <BuyerRoute>
             <PaymentHistory />
-          </AdminRoute>
+          </BuyerRoute>
         ),
       },
+      // Admin Routes
       {
         path: "manageusers",
         element: (
