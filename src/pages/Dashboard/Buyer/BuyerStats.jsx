@@ -9,7 +9,7 @@ const BuyerStats = ({ totalTasks, pendingTasks, totalPayments }) => {
           <FaBriefcase className="inline-block h-8 w-8 stroke-current" />
         </div>
         <div className="stat-title">Total Tasks</div>
-        <div className="stat-value">{totalTasks || 0}</div>
+        <div className="stat-value">{totalTasks}</div>
       </div>
 
       <div className="stat">
@@ -17,7 +17,7 @@ const BuyerStats = ({ totalTasks, pendingTasks, totalPayments }) => {
           <FaClock className="inline-block h-8 w-8 stroke-current" />
         </div>
         <div className="stat-title">Pending Tasks</div>
-        <div className="stat-value">{pendingTasks || 0}</div>
+        <div className="stat-value">{pendingTasks}</div>
       </div>
 
       <div className="stat">
@@ -25,7 +25,7 @@ const BuyerStats = ({ totalTasks, pendingTasks, totalPayments }) => {
           <FaDollarSign className="inline-block h-8 w-8 stroke-current" />
         </div>
         <div className="stat-title">Total Payments</div>
-        <div className="stat-value">{totalPayments || 0}</div>
+        <div className="stat-value">{totalPayments}</div>
       </div>
     </div>
   );
