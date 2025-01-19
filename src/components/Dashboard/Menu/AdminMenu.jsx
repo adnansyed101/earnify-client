@@ -7,10 +7,10 @@ const AdminMenu = () => {
         <Link to="/dashboard">Home</Link>
       </li>
       <li className="font-semibold text-lg">
-        <Link to="/dashboard/addTask">Manage Users</Link>
+        <Link to="/dashboard/manageusers">Manage Users</Link>
       </li>
       <li className="font-semibold text-lg">
-        <Link to="/dashboard/myTasks">Manage Task</Link>
+        <Link to="/dashboard/managetasks">Manage Task</Link>
       </li>
     </>
   );
