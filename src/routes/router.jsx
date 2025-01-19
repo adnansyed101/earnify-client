@@ -20,6 +20,7 @@ import Error from "../pages/Error";
 import BuyerRoute from "./BuyerRoute";
 import AdminRoute from "./AdminRoute";
 import WorkerRoute from "./WorkerRoute";
+import ManageTasks from "../pages/Dashboard/Admin/ManageTasks";
 
 const router = createBrowserRouter([
   {
@@ -120,6 +121,14 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <ManageUsers />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "managetasks",
+        element: (
+          <AdminRoute>
+            <ManageTasks />
           </AdminRoute>
         ),
       },
