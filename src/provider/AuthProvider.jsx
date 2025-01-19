@@ -22,8 +22,6 @@ const AuthProvider = ({ children }) => {
   const googleProvider = new GoogleAuthProvider();
   const [theme, setTheme] = useState("acid");
 
-  console.log(user);
-
   const toggleTheme = () => {
     setTheme(theme === "acid" ? "synthwave" : "acid");
   };
