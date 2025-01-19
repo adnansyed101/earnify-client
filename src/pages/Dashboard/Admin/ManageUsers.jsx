@@ -10,32 +10,41 @@ const ManageUsers = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["adminOverview"],
+    queryKey: ["allUsers"],
     queryFn: async () => {
       const { data } = await axiosPublic.get("/user/alluser");
       return data;
     },
   });
 
-  const handleRoleChange = async (userId, newRole) => {
+  const handleRoleChange = async (userId, newRole, currentRole) => {
+    if (newRole === currentRole) {
+      return;
+    }
+
     try {
-      const { data } = await axiosPublic.patch(`/user/updaterole/${userId}`, {
+      await axiosPublic.patch(`/user/updaterole/${userId}`, {
         role: newRole,
       });
-      console.log(data);
-      refetch()
+      refetch();
       toast.success("Updated users role");
     } catch (err) {
       toast.error(err.message);
     }
   };
 
-  const handleRemoveUser = (userId) => {
+  const handleRemoveUser = async (userId) => {
     const confirmed = window.confirm(
       "Are you sure you want to remove this user?"
     );
     if (confirmed) {
-      console.log("hello world");
+      try {
+        await axiosPublic.delete(`/user/deleteuser/${userId}`);
+        refetch();
+        toast.success("Deleted user and All User Tasks");
+      } catch (err) {
+        toast.error(err.message);
+      }
     }
   };
 
@@ -75,7 +84,7 @@ const ManageUsers = () => {
                     <select
                       value={user.role}
                       onChange={(e) =>
-                        handleRoleChange(user._id, e.target.value)
+                        handleRoleChange(user._id, e.target.value, user.role)
                       }
                       className="select select-bordered w-28"
                       disabled={user.role === "Admin"}
@@ -88,8 +97,9 @@ const ManageUsers = () => {
                   <td className="p-4">{user.coin}</td>
                   <td className="p-4">
                     <button
-                      onClick={() => handleRemoveUser(user.id)}
+                      onClick={() => handleRemoveUser(user._id)}
                       className="btn btn-error btn-sm"
+                      disabled={user.role === "Admin"}
                     >
                       Remove
                     </button>
