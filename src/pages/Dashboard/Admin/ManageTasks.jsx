@@ -2,11 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Loading from "../../../components/Loading";
 import { format } from "date-fns";
+import { toast } from "react-toastify";
 
 const ManageTasks = () => {
   const axiosPublic = useAxiosPublic();
 
-  const { data: allTasks = {}, isLoading } = useQuery({
+  const { data: allTasks = {}, isLoading, refetch } = useQuery({
     queryKey: ["allTasks"],
     queryFn: async () => {
       const { data } = await axiosPublic.get(`/task`);
@@ -14,12 +15,24 @@ const ManageTasks = () => {
     },
   });
 
-  const handleDeleteTask = (taskId) => {
-    const confirmed = window.confirm(
+  const handleDeleteTask = async (task) => {
+    const refillAmount = task.requiredWorkers * task.payableAmount;
+
+    const confirmDelete = window.confirm(
       "Are you sure you want to delete this task?"
     );
-    if (confirmed) {
-      console.log("Deleted " + taskId);
+    
+    if (confirmDelete) {
+      try {
+        await axiosPublic.delete(`/task/delete/${task._id}`);
+        await axiosPublic.patch(`/user/updatecoin/${task.buyer._id}`, {
+          coin: task.buyer.coin + refillAmount,
+        });
+        refetch();
+        toast.warn("Task Deleted");
+      } catch (err) {
+        toast.error(err.message);
+      }
     }
   };
 
@@ -45,7 +58,7 @@ const ManageTasks = () => {
             </thead>
             <tbody>
               {allTasks.data.map((task) => (
-                <tr key={task.id} className="hover:bg-gray-100">
+                <tr key={task._id} className="hover:bg-gray-100">
                   <td className="p-4">{task.title}</td>
                   <td className="p-4">{task.taskDetail}</td>
                   <td className="p-4 text-center">{task.requiredWorkers}</td>
@@ -55,7 +68,7 @@ const ManageTasks = () => {
                   </td>
                   <td className="p-4">
                     <button
-                      onClick={() => handleDeleteTask(task.id)}
+                      onClick={() => handleDeleteTask(task)}
                       className="btn btn-error btn-sm"
                     >
                       Delete
