@@ -26,7 +26,7 @@ const AddTaskForm = () => {
 
     if (totalPayableAmount > userDB?.coin) {
       toast.error("Not Enough Coins. Purchase Coins");
-      navigate("/purchaseCoin");
+      navigate("/dashboard/purchaseCoin");
       return;
     }
 
@@ -52,6 +52,7 @@ const AddTaskForm = () => {
         coin: userDB?.coin - totalPayableAmount,
       });
       refetch();
+      navigate("/dashboard/myTasks");
       toast.success("Data added successfully.");
     } catch (err) {
       toast.err(err.message);
