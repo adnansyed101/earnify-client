@@ -24,6 +24,11 @@ const Navbar = () => {
           </li>
         </>
       )}
+      <li>
+        <a href="https://github.com/adnansyed101" target="_blank" to="/">
+          Join as Developer
+        </a>
+      </li>
     </>
   );
 
