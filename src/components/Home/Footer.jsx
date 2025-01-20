@@ -1,5 +1,5 @@
 import { BsCoin, BsGithub, BsMessenger } from "react-icons/bs";
-import { IoMail } from "react-icons/io5";
+import { FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -30,10 +30,13 @@ const Footer = () => {
               >
                 <BsMessenger />
               </a>
-              <p className="flex gap-2">
-                <IoMail className="text-2xl" />
-                Earnify@gmail.com
-              </p>
+              <a
+                href="https://www.linkedin.com/in/adnansyed101/"
+                target="_blank"
+                className="text-2xl"
+              >
+                <FaLinkedin />
+              </a>
             </div>
           </div>
         </nav>
