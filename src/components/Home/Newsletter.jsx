@@ -1,27 +1,32 @@
 const Newsletter = () => {
   return (
-    <div className="newsletter">
-      <div className="hero-content text-center">
-        <div>
-          <h1 className="text-xl md:text-5xl font-bold">
-            Subscribe to our Newsletter
-          </h1>
-          <p className="text-lg py-6">
-            Get the latest updates and news right in your inbox
+    <section className="py-10 bg-gray-100">
+      <div className="container mx-auto px-4">
+        <div className="bg-white shadow-md rounded-lg p-6 text-center">
+          <h2 className="text-3xl font-bold mb-4">
+            Subscribe to Our Newsletter
+          </h2>
+          <p className="text-gray-600 mb-6">
+            Stay updated with the latest tasks, earning opportunities, and
+            platform updates.
           </p>
-          <form>
-            <fieldset className="flex flex-col md:flex-row justify-center gap-2">
-              <input
-                type="text"
-                placeholder="Enter your email"
-                className="input input-bordered mb-4 "
-              />
-              <button className="btn btn-primary">Subscribe</button>
-            </fieldset>
+          <form className="flex flex-col md:flex-row items-center justify-center gap-4">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="input input-bordered w-full md:w-2/3 lg:w-1/2"
+              required
+            />
+            <button type="submit" className="btn btn-primary">
+              Subscribe
+            </button>
           </form>
+          <p className="text-sm text-gray-500 mt-4">
+            We respect your privacy. Unsubscribe anytime.
+          </p>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
