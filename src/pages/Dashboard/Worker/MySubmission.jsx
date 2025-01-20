@@ -3,28 +3,58 @@ import Loading from "../../../components/Loading";
 import { format } from "date-fns";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useState } from "react";
 
 const MySubmissions = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
+  const itemsPerPage = 5;
+  const [count, setCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
 
   const { data: submissions, isLoading } = useQuery({
-    queryKey: ["workerSubmissions"],
+    queryKey: ["workerSubmissions", currentPage],
     queryFn: async () => {
       const { data } = await axiosSecure.get(
-        `/submission/worker?email=${user?.email}`
+        `/submission/worker?email=${user?.email}&page=${currentPage}&size=${itemsPerPage}`
       );
       return data;
     },
   });
 
-  if (isLoading) {
+  const { isLoading: loadingCount } = useQuery({
+    queryKey: ["workerSubmissionsCount"],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(
+        `/submission/worker/count?email=${user?.email}`
+      );
+      setCount(data.data);
+      return data;
+    },
+  });
+
+  const numberOfPages = Math.ceil(count / itemsPerPage);
+  const pages = [...Array(numberOfPages).keys()];
+
+  const handlePreviousPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < pages.length - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  if (isLoading || loadingCount) {
     return <Loading />;
   }
 
   return (
     <section className="py-10 mt-6 rounded-lg">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 mb-10">
         <h2 className="text-3xl font-bold text-center mb-8">My Submissions</h2>
         <div className="overflow-x-auto">
           <table className="table w-full bg-white shadow-md rounded-lg whitespace-nowrap">
@@ -62,6 +92,24 @@ const MySubmissions = () => {
             </tbody>
           </table>
         </div>
+      </div>
+      {/* Pagination */}
+      <div className="join flex items-center justify-center mb-4">
+        <button className="join-item btn" onClick={handlePreviousPage}>
+          «
+        </button>
+        {pages.map((page) => (
+          <button
+            key={page}
+            className={`join-item btn ${currentPage === page && "btn-active"}`}
+            onClick={() => setCurrentPage(page)}
+          >
+            {page + 1}
+          </button>
+        ))}
+        <button className="join-item btn" onClick={handleNextPage}>
+          »
+        </button>
       </div>
     </section>
   );
