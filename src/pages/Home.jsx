@@ -7,6 +7,7 @@ import TestimonialSection from "../components/Home/TestimonialSection";
 const Home = () => {
   useEffect(() => {
     document.title = "Earnify | Home";
+    window.scrollTo(0, 0);
   }, []);
 
   return (
