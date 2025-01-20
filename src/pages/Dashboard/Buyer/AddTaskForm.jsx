@@ -3,12 +3,12 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { imageUpload } from "../../../api/utils";
 import { toast } from "react-toastify";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useGetUser from "../../../hooks/useGetUser";
 import { useNavigate } from "react-router-dom";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const AddTaskForm = () => {
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const { userDB, refetch } = useGetUser();
   const navigate = useNavigate();
   const [completionDate, setCompletionDate] = useState(new Date());
@@ -47,8 +47,8 @@ const AddTaskForm = () => {
     };
 
     try {
-      await axiosPublic.post("/task", taskData);
-      await axiosPublic.patch(`/user/updatecoin/${userDB?._id}`, {
+      await axiosSecure.post("/task", taskData);
+      await axiosSecure.patch(`/user/updatecoin/${userDB?._id}`, {
         coin: userDB?.coin - totalPayableAmount,
       });
       refetch();

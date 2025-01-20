@@ -1,17 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useAuth from "../../../hooks/useAuth";
 import Loading from "../../../components/Loading";
 import { format } from "date-fns";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const PaymentHistory = () => {
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure()
   const { user } = useAuth();
 
   const { data: payments = {}, isLoading } = useQuery({
     queryKey: ["payments"],
     queryFn: async () => {
-      const { data } = await axiosPublic.get(`/payment?email=${user?.email}`);
+      const { data } = await axiosSecure.get(`/payment?email=${user?.email}`);
       return data;
     },
   });

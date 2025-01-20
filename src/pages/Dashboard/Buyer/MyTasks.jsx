@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../../components/Loading";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useAuth from "../../../hooks/useAuth";
 import { format } from "date-fns";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import useGetUser from "../../../hooks/useGetUser";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const MyTasks = () => {
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const { refetch: userRefetch } = useGetUser();
 
@@ -19,7 +19,7 @@ const MyTasks = () => {
   } = useQuery({
     queryKey: ["tasks", user?.email],
     queryFn: async () => {
-      const { data } = await axiosPublic.get(`/task/user/${user?.email}`);
+      const { data } = await axiosSecure.get(`/task/user/${user?.email}`);
       return data;
     },
   });
@@ -32,8 +32,8 @@ const MyTasks = () => {
     );
     if (confirmDelete) {
       try {
-        await axiosPublic.delete(`/task/delete/${task._id}`);
-        await axiosPublic.patch(`/user/updatecoin/${task.buyer._id}`, {
+        await axiosSecure.delete(`/task/delete/${task._id}`);
+        await axiosSecure.patch(`/user/updatecoin/${task.buyer._id}`, {
           coin: task.buyer.coin + refillAmount,
         });
         refetch();

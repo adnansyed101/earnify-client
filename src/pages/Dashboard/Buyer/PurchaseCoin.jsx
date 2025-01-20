@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useGetUser from "../../../hooks/useGetUser";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const coinPackages = [
   { id: 1, coin: 10, price: 1 },
@@ -11,7 +11,7 @@ const coinPackages = [
 
 const PurchaseCoin = () => {
   const { userDB, refetch } = useGetUser();
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
   const handleBuyNow = async (coin, price) => {
     const payment = {
@@ -25,8 +25,8 @@ const PurchaseCoin = () => {
     };
     
     try {
-      await axiosPublic.post(`/payment?email=${userDB?.email}`, payment);
-      await axiosPublic.patch(`/user/updatecoin/${userDB?._id}`, {
+      await axiosSecure.post(`/payment?email=${userDB?.email}`, payment);
+      await axiosSecure.patch(`/user/updatecoin/${userDB?._id}`, {
         coin: userDB?.coin + coin,
       });
       refetch();

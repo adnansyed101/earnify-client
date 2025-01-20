@@ -1,11 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import AdminStats from "./AdminStats";
 import Loading from "../../../components/Loading";
 import { toast } from "react-toastify";
+import useAuth from "../../../hooks/useAuth";
 
 const AdminHome = () => {
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
 
   const {
     data: adminOverview = {},
@@ -14,7 +16,9 @@ const AdminHome = () => {
   } = useQuery({
     queryKey: ["adminOverview"],
     queryFn: async () => {
-      const { data } = await axiosPublic.get("/overview/admin");
+      const { data } = await axiosSecure.get(
+        `/overview/admin?email=${user?.email}`
+      );
       return data;
     },
   });
@@ -26,10 +30,10 @@ const AdminHome = () => {
     withdrawalID
   ) => {
     try {
-      await axiosPublic.patch(`/user/updatecoin/${workerID}`, {
+      await axiosSecure.patch(`/user/updatecoin/${workerID}`, {
         coin: workerCoin - withdrawalCoin,
       });
-      await axiosPublic.patch(`/withdrawal/status/${withdrawalID}`, {
+      await axiosSecure.patch(`/withdrawal/status/${withdrawalID}`, {
         status: "accepted",
       });
       refetch();
@@ -41,7 +45,7 @@ const AdminHome = () => {
 
   const handleReject = async (withdrawalID) => {
     try {
-      await axiosPublic.patch(`/withdrawal/status/${withdrawalID}`, {
+      await axiosSecure.patch(`/withdrawal/status/${withdrawalID}`, {
         status: "rejected",
       });
       refetch();
@@ -87,7 +91,7 @@ const AdminHome = () => {
                     <td className="p-2 md:p-4">{payment.worker.name}</td>
                     <td className="p-2 md:p-4">{payment.withdrawalCoin}</td>
                     <td className="p-2 md:p-4">$ {payment.withdrawalAmount}</td>
-                    <td className="p-2 md:p-4 flex flex-wrap gap-2 justify-center">
+                    <td className="p-2 md:p-4 flex gap-2">
                       {payment.status === "pending" ? (
                         <>
                           <button

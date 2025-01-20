@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Loading from "../../../components/Loading";
 import { format } from "date-fns";
 import { toast } from "react-toastify";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const ManageTasks = () => {
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure()
 
   const {
     data: allTasks = {},
@@ -14,7 +14,7 @@ const ManageTasks = () => {
   } = useQuery({
     queryKey: ["allTasks"],
     queryFn: async () => {
-      const { data } = await axiosPublic.get(`/task`);
+      const { data } = await axiosSecure.get(`/task`);
       return data;
     },
   });
@@ -28,8 +28,8 @@ const ManageTasks = () => {
 
     if (confirmDelete) {
       try {
-        await axiosPublic.delete(`/task/delete/${task._id}`);
-        await axiosPublic.patch(`/user/updatecoin/${task.buyer._id}`, {
+        await axiosSecure.delete(`/task/delete/${task._id}`);
+        await axiosSecure.patch(`/user/updatecoin/${task.buyer._id}`, {
           coin: task.buyer.coin + refillAmount,
         });
         refetch();

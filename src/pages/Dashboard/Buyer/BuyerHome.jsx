@@ -1,15 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import BuyerStats from "./BuyerStats";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Loading from "../../../components/Loading";
 import useAuth from "../../../hooks/useAuth";
 import { useState } from "react";
 import Modal from "../../../components/Modal";
 import { toast } from "react-toastify";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const BuyerHome = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
   const {
@@ -19,7 +19,7 @@ const BuyerHome = () => {
   } = useQuery({
     queryKey: ["buyerSubmission"],
     queryFn: async () => {
-      const { data } = await axiosPublic.get(
+      const { data } = await axiosSecure.get(
         `/overview/buyer?email=${user.email}`
       );
       return data;
@@ -38,11 +38,11 @@ const BuyerHome = () => {
   ) => {
     try {
       // Update Workers coin
-      await axiosPublic.patch(`/user/updatecoin/${workerID}`, {
+      await axiosSecure.patch(`/user/updatecoin/${workerID}`, {
         coin: coins + payableAmount,
       });
       // Update status of submission.
-      await axiosPublic.patch(`/submission/update/status/${submissionID}`, {
+      await axiosSecure.patch(`/submission/update/status/${submissionID}`, {
         status: "accepted",
       });
       refetch();
@@ -54,10 +54,10 @@ const BuyerHome = () => {
   // Update Status and also increase the task required worker by 1.
   const handleReject = async (submissionID, taskID, requiredWorker) => {
     try {
-      await axiosPublic.patch(`/submission/update/status/${submissionID}`, {
+      await axiosSecure.patch(`/submission/update/status/${submissionID}`, {
         status: "rejected",
       });
-      await axiosPublic.patch(`/task/update/requiredWorker/${taskID}`, {
+      await axiosSecure.patch(`/task/update/requiredWorker/${taskID}`, {
         requiredWorkers: requiredWorker + 1,
       });
       refetch();
@@ -99,7 +99,9 @@ const BuyerHome = () => {
                   <tr key={submission._id} className="hover:bg-gray-100">
                     <td className="p-2 md:p-4">{submission.worker.name}</td>
                     <td className="p-2 md:p-4">{submission.task.title}</td>
-                    <td className="p-2 md:p-4">{submission.task.payableAmount}</td>
+                    <td className="p-2 md:p-4">
+                      {submission.task.payableAmount}
+                    </td>
                     <td className="p-2 md:p-4">
                       <button
                         onClick={() => handleViewSubmission(submission._id)}

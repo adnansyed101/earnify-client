@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useGetUser from "../../../hooks/useGetUser";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const WithdrawalForm = () => {
   const [coins, setCoins] = useState(0);
   const [paymentSystem, setPaymentSystem] = useState("");
   const [accountNumber, setAccountNumber] = useState("");
-  const axiosPublic = useAxiosPublic();
   const { userDB } = useGetUser();
+  const axiosSecure = useAxiosSecure();
 
   const handleCoinChange = (e) => {
     const value = parseInt(e.target.value) || 0;
@@ -37,7 +37,7 @@ const WithdrawalForm = () => {
     };
 
     try {
-      await axiosPublic.post("/withdrawal", withdrawal);
+      await axiosSecure.post("/withdrawal", withdrawal);
       toast.success("Withdrawal Request Sent");
     } catch (err) {
       toast.error(err.message);

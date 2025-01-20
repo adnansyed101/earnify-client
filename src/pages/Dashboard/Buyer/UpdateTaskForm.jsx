@@ -1,19 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Loading from "../../../components/Loading";
 import DatePicker from "react-datepicker";
 import { toast } from "react-toastify";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const UpdateTaskForm = () => {
   const { id } = useParams();
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
 
   const { data: task = {}, isLoading } = useQuery({
     queryKey: ["task"],
     queryFn: async () => {
-      const { data } = await axiosPublic.get(`/task/${id}`);
+      const { data } = await axiosSecure.get(`/task/${id}`);
       return data;
     },
   });
@@ -27,7 +27,7 @@ const UpdateTaskForm = () => {
     const submissionInfo = form.submissionInfo.value;
 
     try {
-      await axiosPublic.patch(`/task/update/${id}`, {
+      await axiosSecure.patch(`/task/update/${id}`, {
         title,
         taskDetail,
         submissionInfo,

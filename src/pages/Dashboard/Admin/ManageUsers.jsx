@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Loading from "../../../components/Loading";
 import { toast } from "react-toastify";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const ManageUsers = () => {
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
+
   const {
     data: users = {},
     isLoading,
@@ -12,7 +13,7 @@ const ManageUsers = () => {
   } = useQuery({
     queryKey: ["allUsers"],
     queryFn: async () => {
-      const { data } = await axiosPublic.get("/user/alluser");
+      const { data } = await axiosSecure.get("/user/alluser");
       return data;
     },
   });
@@ -23,7 +24,7 @@ const ManageUsers = () => {
     }
 
     try {
-      await axiosPublic.patch(`/user/updaterole/${userId}`, {
+      await axiosSecure.patch(`/user/updaterole/${userId}`, {
         role: newRole,
       });
       refetch();
@@ -39,7 +40,7 @@ const ManageUsers = () => {
     );
     if (confirmed) {
       try {
-        await axiosPublic.delete(`/user/deleteuser/${userId}`);
+        await axiosSecure.delete(`/user/deleteuser/${userId}`);
         refetch();
         toast.success("Deleted user and All User Tasks");
       } catch (err) {

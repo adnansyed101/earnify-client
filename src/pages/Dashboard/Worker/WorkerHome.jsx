@@ -1,17 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useAuth from "../../../hooks/useAuth";
 import Loading from "../../../components/Loading";
 import Stats from "./WorkerStats";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const WorkerHome = () => {
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
   const { data: submissions = {}, isLoading } = useQuery({
     queryKey: ["workerSubmission"],
     queryFn: async () => {
-      const { data } = await axiosPublic.get(
+      const { data } = await axiosSecure.get(
         `/overview/worker?email=${user.email}`
       );
       return data;

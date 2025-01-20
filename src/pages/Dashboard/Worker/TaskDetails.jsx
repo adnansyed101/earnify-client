@@ -4,14 +4,14 @@ import Loading from "../../../components/Loading";
 import { format } from "date-fns";
 import { toast } from "react-toastify";
 import useAuth from "../../../hooks/useAuth";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useGetUser from "../../../hooks/useGetUser";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const TaskDetails = () => {
   const { id } = useParams();
   const { user } = useAuth();
-  const axiosPublic = useAxiosPublic();
   const { userDB } = useGetUser();
+  const axiosSecure = useAxiosSecure();
 
   const {
     data: task = {},
@@ -20,7 +20,7 @@ const TaskDetails = () => {
   } = useQuery({
     queryKey: ["task", id],
     queryFn: async () => {
-      const { data } = await axiosPublic.get(`/task/${id}`);
+      const { data } = await axiosSecure.get(`/task/${id}`);
       return data;
     },
   });
@@ -43,9 +43,9 @@ const TaskDetails = () => {
 
     try {
       // Add a submission to submission collection.
-      await axiosPublic.post("/submission", submissionData);
+      await axiosSecure.post("/submission", submissionData);
       // Update required number of workers from task collection.
-      await axiosPublic.patch(`/task/update/requiredWorker/${task.data._id}`, {
+      await axiosSecure.patch(`/task/update/requiredWorker/${task.data._id}`, {
         requiredWorkers: task.data.requiredWorkers - 1,
       });
       refetch();
