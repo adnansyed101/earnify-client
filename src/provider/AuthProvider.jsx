@@ -17,10 +17,11 @@ import AuthContext from "./AuthContext";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
+
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState({});
-  const [loading, setLoading] = useState(false);
-  const googleProvider = new GoogleAuthProvider();
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [theme, setTheme] = useState("acid");
   const axiosPublic = useAxiosPublic();
 
@@ -39,7 +40,7 @@ const AuthProvider = ({ children }) => {
         );
       } else {
         setUser(currentUser);
-        axiosPublic.get("/jwt/logout", {
+        await axiosPublic.get("/jwt/logout", {
           withCredentials: true,
         });
       }
