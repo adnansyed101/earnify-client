@@ -30,35 +30,45 @@ const BuyerHome = () => {
     setIsOpen(true);
   };
 
-  const handleApprove = async (
-    submissionID,
-    workerID,
-    coins,
-    payableAmount
-  ) => {
+  const handleApprove = async (submission) => {
     try {
       // Update Workers coin
-      await axiosSecure.patch(`/user/updatecoin/${workerID}`, {
-        coin: coins + payableAmount,
+      await axiosSecure.patch(`/user/updatecoin/${submission.worker._id}`, {
+        coin: submission.worker.coin + submission.task.payableAmount,
       });
       // Update status of submission.
-      await axiosSecure.patch(`/submission/update/status/${submissionID}`, {
+      await axiosSecure.patch(`/submission/update/status/${submission._id}`, {
         status: "accepted",
+      });
+      // Create Notification
+      await axiosSecure.post("/notification", {
+        message: `Earned ${submission.task.payableAmount} from ${submission.buyer.name} for completing ${submission.task.title}`,
+        toEmail: submission.worker.email,
+        time: new Date(),
       });
       refetch();
     } catch (err) {
+      console.log(err);
       toast.error(err.message);
     }
   };
 
   // Update Status and also increase the task required worker by 1.
-  const handleReject = async (submissionID, taskID, requiredWorker) => {
+  const handleReject = async (submission) => {
     try {
-      await axiosSecure.patch(`/submission/update/status/${submissionID}`, {
+      await axiosSecure.patch(`/submission/update/status/${submission._id}`, {
         status: "rejected",
       });
-      await axiosSecure.patch(`/task/update/requiredWorker/${taskID}`, {
-        requiredWorkers: requiredWorker + 1,
+      await axiosSecure.patch(
+        `/task/update/requiredWorker/${submission.task._id}`,
+        {
+          requiredWorkers: submission.task.requiredWorkers + 1,
+        }
+      );
+      await axiosSecure.post("/notification", {
+        message: `${submission.task.title} was rejected.`,
+        toEmail: submission.worker.email,
+        time: new Date(),
       });
       refetch();
     } catch (err) {
@@ -119,26 +129,13 @@ const BuyerHome = () => {
                       {submission.status === "pending" ? (
                         <>
                           <button
-                            onClick={() =>
-                              handleApprove(
-                                submission._id,
-                                submission.worker._id,
-                                submission.worker.coin,
-                                submission.task.payableAmount
-                              )
-                            }
+                            onClick={() => handleApprove(submission)}
                             className="btn btn-success btn-sm"
                           >
                             Accept
                           </button>
                           <button
-                            onClick={() =>
-                              handleReject(
-                                submission._id,
-                                submission.task._id,
-                                submission.task.requiredWorkers
-                              )
-                            }
+                            onClick={() => handleReject(submission)}
                             className="btn btn-error btn-sm"
                           >
                             Reject
