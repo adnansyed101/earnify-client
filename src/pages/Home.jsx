@@ -4,6 +4,7 @@ import BestWorkerSection from "../components/Home/BestWorkerSection";
 import Newsletter from "../components/Home/Newsletter";
 import TestimonialSection from "../components/Home/TestimonialSection";
 import HowItWorks from "../components/Home/HowItWorks";
+import BenefitsOfJoining from "../components/Home/BenefitsOfJoining";
 
 const Home = () => {
   useEffect(() => {
@@ -16,6 +17,7 @@ const Home = () => {
       <Banner />
       <HowItWorks />
       <BestWorkerSection />
+      <BenefitsOfJoining />
       <TestimonialSection />
       <Newsletter />
     </>
