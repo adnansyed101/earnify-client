@@ -7,7 +7,8 @@ const testimonials = [
   {
     id: 1,
     name: "Alice Johnson",
-    image: "https://img.freepik.com/free-photo/photo-cheerful-curly-haired-woman-feels-like-winner-clenches-fists-makes-victory-gesture-exclaims-with-happiness-wears-yellow-jumper-achieves-goal-gets-triumph-poses-indoor-yes-i-did-it_273609-37571.jpg?semt=ais_hybrid",
+    image:
+      "https://img.freepik.com/free-photo/photo-cheerful-curly-haired-woman-feels-like-winner-clenches-fists-makes-victory-gesture-exclaims-with-happiness-wears-yellow-jumper-achieves-goal-gets-triumph-poses-indoor-yes-i-did-it_273609-37571.jpg?semt=ais_hybrid",
     role: "Freelancer",
     feedback:
       "This platform has completely transformed how I utilize my spare time. The tasks are simple, and the earnings are great!",
@@ -15,7 +16,8 @@ const testimonials = [
   {
     id: 2,
     name: "Bob Smith",
-    image: "https://cdn.tinybuddha.com/wp-content/uploads/2016/01/Happy-Guy.jpg",
+    image:
+      "https://cdn.tinybuddha.com/wp-content/uploads/2016/01/Happy-Guy.jpg",
     role: "Graphic Designer",
     feedback:
       "I love how flexible this platform is. I can work whenever I want and still make a decent income.",
@@ -23,7 +25,8 @@ const testimonials = [
   {
     id: 3,
     name: "Catherine Brown",
-    image: "https://blog.stocksnap.io/content/images/2022/02/smiling-woman_W6GFOSFAXA.jpg",
+    image:
+      "https://blog.stocksnap.io/content/images/2022/02/smiling-woman_W6GFOSFAXA.jpg",
     role: "Student",
     feedback:
       "As a student, this platform helps me earn extra pocket money without affecting my studies. Highly recommend it!",
@@ -34,10 +37,13 @@ const TestimonialSection = () => {
   return (
     <section className="bg-base-200 py-10">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-8">
-          What Our Users Say
-        </h2>
-        <Swiper navigation={true} modules={[Navigation]} loop={true} className="mySwiper">
+        <h2 className="text-3xl font-bold text-center mb-8">Testimonial</h2>
+        <Swiper
+          navigation={true}
+          modules={[Navigation]}
+          loop={true}
+          className="mySwiper"
+        >
           {testimonials.map((testimonial) => (
             <SwiperSlide key={testimonial.id}>
               <div className="card bg-neutral-content shadow-lg p-6 rounded-lg text-center">
