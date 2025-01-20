@@ -42,7 +42,7 @@ const BuyerHome = () => {
       });
       // Create Notification
       await axiosSecure.post("/notification", {
-        message: `Earned ${submission.task.payableAmount} from ${submission.buyer.name} for completing ${submission.task.title}`,
+        message: `Earned ${submission.task.payableAmount} from ${submission.buyerEmail} for completing ${submission.task.title}`,
         toEmail: submission.worker.email,
         time: new Date(),
       });
@@ -52,6 +52,8 @@ const BuyerHome = () => {
       toast.error(err.message);
     }
   };
+
+  console.log(submissions);
 
   // Update Status and also increase the task required worker by 1.
   const handleReject = async (submission) => {

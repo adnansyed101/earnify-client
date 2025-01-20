@@ -9,16 +9,35 @@ import WorkerMenu from "./Menu/WorkerMenu";
 import AdminMenu from "./Menu/AdminMenu";
 import useGetUser from "../../hooks/useGetUser";
 import NotificationModal from "./NotificationModal";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../Loading";
 
 const DashNavbar = () => {
   const { theme } = useAuth();
   const { userDB } = useGetUser();
   const role = userDB?.role;
   const [open, setOpen] = useState(false);
+  const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
 
   useEffect(() => {
     document.querySelector("html").setAttribute("data-theme", theme);
   }, [theme]);
+
+  const { data: userNotifications = {}, isLoading } = useQuery({
+    queryKey: ["userNotications"],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(
+        `/notification?email=${user?.email}`
+      );
+      return data;
+    },
+  });
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <header>
@@ -35,9 +54,11 @@ const DashNavbar = () => {
         <div className="navbar-end space-x-1">
           <NavbarButtons />
           <button className="btn btn-ghost btn-circle">
-            <div className="indicator" onClick={() => setOpen(!open)}>
+            <div className="indicator" onClick={() => setOpen((prev) => !prev)}>
               <FaBell className="h-5 w-5" />
-              <span className="badge badge-xs badge-primary indicator-item"></span>
+              <span className="badge badge-xs badge-primary indicator-item">
+                {userNotifications?.data?.length}
+              </span>
             </div>
           </button>
           <div className="dropdown dropdown-end lg:hidden">
@@ -59,7 +80,11 @@ const DashNavbar = () => {
           </div>
         </div>
       </div>
-      <NotificationModal isOpen={open} setIsOpen={setOpen} />
+      <NotificationModal
+        isOpen={open}
+        setIsOpen={setOpen}
+        notifications={userNotifications.data}
+      />
     </header>
   );
 };

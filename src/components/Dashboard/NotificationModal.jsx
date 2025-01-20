@@ -7,35 +7,7 @@ import {
 } from "@headlessui/react";
 import { format } from "date-fns";
 
-const notifications = [
-  {
-    id: 1,
-    date: "2025-01-13",
-    text: "Your submission for Task A has been approved!",
-  },
-  {
-    id: 2,
-    date: "2025-01-12",
-    text: "New task posted: Design a logo for XYZ Company.",
-  },
-  {
-    id: 3,
-    date: "2025-01-11",
-    text: "Your withdrawal request of $50 has been processed.",
-  },
-  {
-    id: 4,
-    date: "2025-01-10",
-    text: "Update: Task B's deadline has been extended.",
-  },
-  {
-    id: 5,
-    date: "2025-01-09",
-    text: "A new update is available on the platform.",
-  },
-];
-
-const NotificationModal = ({ isOpen, setIsOpen }) => {
+const NotificationModal = ({ isOpen, setIsOpen, notifications }) => {
   return (
     <Dialog
       open={isOpen}
@@ -57,9 +29,9 @@ const NotificationModal = ({ isOpen, setIsOpen }) => {
             </thead>
             <tbody>
               {notifications.map((notification) => (
-                <tr key={notification.id}>
-                  <td>{format(new Date(notification.date), "PP")}</td>
-                  <td>{notification.text}</td>
+                <tr key={notification._id}>
+                  <td>{format(new Date(notification.time), "PP")}</td>
+                  <td>{notification.message}</td>
                 </tr>
               ))}
             </tbody>
@@ -73,6 +45,7 @@ const NotificationModal = ({ isOpen, setIsOpen }) => {
 NotificationModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   setIsOpen: PropTypes.func.isRequired,
+  notifications: PropTypes.array.isRequired
 };
 
 export default NotificationModal;
