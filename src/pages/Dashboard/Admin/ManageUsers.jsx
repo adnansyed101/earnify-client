@@ -42,7 +42,7 @@ const ManageUsers = () => {
       try {
         await axiosSecure.delete(`/user/deleteuser/${userId}`);
         refetch();
-        toast.success("Deleted user and All User Tasks");
+        toast.success("Deleted user and task/submission.");
       } catch (err) {
         toast.error(err.message);
       }
