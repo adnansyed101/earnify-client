@@ -8,7 +8,7 @@ const Sidebar = () => {
   const role = userDB?.role;
 
   return (
-    <ul className="menu px-4 pt-20">
+    <ul className="menu pt-20">
       {role === "Buyer" && <BuyerMenu />}
       {role === "Worker" && <WorkerMenu />}
       {role === "Admin" && <AdminMenu />}
