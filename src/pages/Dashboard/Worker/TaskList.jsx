@@ -1,14 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import Loading from "../../../components/Loading";
 import { format } from "date-fns";
 import { Link } from "react-router-dom";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const TaskList = () => {
+  const axiosPublic = useAxiosPublic();
   const { data: tasks, isLoading } = useQuery({
     queryKey: ["tasks"],
     queryFn: async () => {
-      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/task`);
+      const { data } = await axiosPublic.get(`/task`);
       return data;
     },
   });
@@ -28,7 +29,9 @@ const TaskList = () => {
               key={task._id}
               className="card bg-white shadow-lg rounded-lg p-4 space-y-4"
             >
-              <h3 className="text-xl font-bold text-ellipsis overflow-hidden whitespace-nowrap">{task.title}</h3>
+              <h3 className="text-xl font-bold text-ellipsis overflow-hidden whitespace-nowrap">
+                {task.title}
+              </h3>
               <p>
                 <span className="font-semibold">Buyer: </span>
                 {task.buyer.name}
