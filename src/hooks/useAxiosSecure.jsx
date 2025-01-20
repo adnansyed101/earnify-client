@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const axiosSecure = axios.create({
-  baseURL: "https://earnify-fwck7sokx-adnans-projects-cdc3618d.vercel.app",
+  baseURL: "https://earnify-snowy.vercel.app",
   withCredentials: true,
 });
 

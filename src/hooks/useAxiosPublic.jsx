@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosPublic = axios.create({
-  baseURL: "https://earnify-fwck7sokx-adnans-projects-cdc3618d.vercel.app",
+  baseURL: "https://earnify-snowy.vercel.app",
 });
 
 const useAxiosPublic = () => {
