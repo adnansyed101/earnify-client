@@ -48,6 +48,12 @@ const TaskDetails = () => {
       await axiosSecure.patch(`/task/update/requiredWorker/${task.data._id}`, {
         requiredWorkers: task.data.requiredWorkers - 1,
       });
+      // Add to notifcation
+      await axiosSecure.post("/notification", {
+        message: `${task.data.title} was submitted by ${userDB.name}`,
+        toEmail: task.data.buyerEmail,
+        time: new Date(),
+      });
       refetch();
       toast.success("Submission is successfull");
     } catch (err) {
