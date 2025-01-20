@@ -23,18 +23,18 @@ const AdminHome = () => {
     },
   });
 
-  const handleApprove = async (
-    workerID,
-    workerCoin,
-    withdrawalCoin,
-    withdrawalID
-  ) => {
+  const handleApprove = async (payment) => {
     try {
-      await axiosSecure.patch(`/user/updatecoin/${workerID}`, {
-        coin: workerCoin - withdrawalCoin,
+      await axiosSecure.patch(`/user/updatecoin/${payment.worker._id}`, {
+        coin: payment.worker.coin - payment.withdrawalCoin,
       });
-      await axiosSecure.patch(`/withdrawal/status/${withdrawalID}`, {
+      await axiosSecure.patch(`/withdrawal/status/${payment._id}`, {
         status: "accepted",
+      });
+      await axiosSecure.post("/notification", {
+        message: `Withdrawal of ${payment.withdrawalCoin} was accepted.`,
+        toEmail: payment.worker.email,
+        time: new Date(),
       });
       refetch();
       toast.success("Accepted Withdrawal.");
@@ -43,10 +43,15 @@ const AdminHome = () => {
     }
   };
 
-  const handleReject = async (withdrawalID) => {
+  const handleReject = async (payment) => {
     try {
-      await axiosSecure.patch(`/withdrawal/status/${withdrawalID}`, {
+      await axiosSecure.patch(`/withdrawal/status/${payment._id}`, {
         status: "rejected",
+      });
+      await axiosSecure.post("/notification", {
+        message: `Withdrawal of ${payment.withdrawalCoin} was rejected.`,
+        toEmail: payment.worker.email,
+        time: new Date(),
       });
       refetch();
       toast.success("Withdrawal Rejected");
@@ -96,19 +101,12 @@ const AdminHome = () => {
                         <>
                           <button
                             className="btn btn-success btn-sm"
-                            onClick={() =>
-                              handleApprove(
-                                payment.worker._id,
-                                payment.worker.coin,
-                                payment.withdrawalCoin,
-                                payment._id
-                              )
-                            }
+                            onClick={() => handleApprove(payment)}
                           >
                             Accept
                           </button>
                           <button
-                            onClick={() => handleReject(payment._id)}
+                            onClick={() => handleReject(payment)}
                             className="btn btn-error btn-sm"
                           >
                             Reject
