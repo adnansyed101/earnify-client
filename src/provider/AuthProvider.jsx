@@ -19,7 +19,7 @@ import useAxiosPublic from "../hooks/useAxiosPublic";
 const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const googleProvider = new GoogleAuthProvider();
   const [theme, setTheme] = useState("acid");
   const axiosPublic = useAxiosPublic();
