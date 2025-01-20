@@ -48,12 +48,12 @@ const BuyerHome = () => {
       });
       refetch();
     } catch (err) {
-      console.log(err);
+    
       toast.error(err.message);
     }
   };
 
-  console.log(submissions);
+
 
   // Update Status and also increase the task required worker by 1.
   const handleReject = async (submission) => {

@@ -35,7 +35,6 @@ const UpdateTaskForm = () => {
       toast.success("Task Updated");
       navigate("/dashboard/myTasks");
     } catch (err) {
-      console.log(err);
       toast.error(err.message);
     }
   };
@@ -47,7 +46,9 @@ const UpdateTaskForm = () => {
   return (
     <section className="py-10 mt-6">
       <div className="container mx-auto px-2 md:px-4">
-        <h2 className="text-xl md:text-3xl font-bold text-center mb-8">Update Task</h2>
+        <h2 className="text-xl md:text-3xl font-bold text-center mb-8">
+          Update Task
+        </h2>
         <form
           onSubmit={handleSubmit}
           className="bg-white shadow-md rounded-lg p-3 md:p-6 space-y-6"

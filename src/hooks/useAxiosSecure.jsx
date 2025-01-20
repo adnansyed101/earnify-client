@@ -17,7 +17,6 @@ const useAxiosSecure = () => {
       (res) => res,
       (error) => {
         if (error.response.status === 401 || error.response.status === 403) {
-          console.log(error);
           logOut();
           setLoading(true);
           navigate("/signin");
