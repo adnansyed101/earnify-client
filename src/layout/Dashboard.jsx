@@ -2,11 +2,17 @@ import { Outlet } from "react-router-dom";
 import DashNavbar from "../components/Dashboard/DashNavbar";
 import Sidebar from "../components/Dashboard/Sidebar";
 import Footer from "../components/Home/Footer";
+import { useEffect } from "react";
 
 const Dashboard = () => {
+  useEffect(() => {
+    document.title = "Earnify | Dashboard Home";
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
-      <DashNavbar  />
+      <DashNavbar />
       <div className="md:flex">
         {/* dashboard side bar */}
         <div className="min-w-56 min-h-screen bg-accent hidden lg:block">
@@ -17,7 +23,7 @@ const Dashboard = () => {
           <Outlet />
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };
