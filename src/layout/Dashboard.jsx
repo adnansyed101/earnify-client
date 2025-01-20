@@ -1,21 +1,23 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "../components/Dashboard/Navbar";
+import DashNavbar from "../components/Dashboard/DashNavbar";
 import Sidebar from "../components/Dashboard/Sidebar";
+import Footer from "../components/Home/Footer";
 
 const Dashboard = () => {
   return (
     <>
-      <Navbar />
-      <div className="flex">
+      <DashNavbar  />
+      <div className="md:flex">
         {/* dashboard side bar */}
-        <div className="w-64 min-h-screen bg-accent">
+        <div className="min-w-50 min-h-screen bg-accent hidden lg:block">
           <Sidebar />
         </div>
         {/* dashboard content */}
-        <div className="flex-1 p-8">
+        <div className="flex-1 p-2 md:p-4">
           <Outlet />
         </div>
       </div>
+      <Footer/>
     </>
   );
 };
