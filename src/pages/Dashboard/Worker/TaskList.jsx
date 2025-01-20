@@ -17,18 +17,18 @@ const TaskList = () => {
     return <Loading />;
   }
   return (
-    <section className="bg-gray-100 py-10 mt-20">
+    <section className="py-10 mt-6">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-8">
           {tasks.data.length > 0 ? "Available Tasks" : "No Tasks Availavble"}
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {tasks.data.map((task) => (
             <div
               key={task._id}
               className="card bg-white shadow-lg rounded-lg p-4 space-y-4"
             >
-              <h3 className="text-xl font-bold">{task.title}</h3>
+              <h3 className="text-xl font-bold text-ellipsis overflow-hidden whitespace-nowrap">{task.title}</h3>
               <p>
                 <span className="font-semibold">Buyer: </span>
                 {task.buyer.name}

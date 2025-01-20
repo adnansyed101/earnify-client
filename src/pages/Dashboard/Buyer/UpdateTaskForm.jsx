@@ -45,12 +45,12 @@ const UpdateTaskForm = () => {
   }
 
   return (
-    <section className="bg-gray-100 py-10 mt-20">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-8">Update Task</h2>
+    <section className="py-10 mt-6">
+      <div className="container mx-auto px-2 md:px-4">
+        <h2 className="text-xl md:text-3xl font-bold text-center mb-8">Update Task</h2>
         <form
           onSubmit={handleSubmit}
-          className="bg-white shadow-md rounded-lg p-6 space-y-6"
+          className="bg-white shadow-md rounded-lg p-3 md:p-6 space-y-6"
         >
           <div className="form-control">
             <label className="label font-medium">Title</label>

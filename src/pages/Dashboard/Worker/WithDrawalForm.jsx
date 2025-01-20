@@ -45,8 +45,8 @@ const WithdrawalForm = () => {
   };
 
   return (
-    <section className="bg-gray-100 py-10 mt-20">
-      <div className="container mx-auto px-4">
+    <section className="py-10 mt-6">
+      <div className="container mx-auto">
         <h2 className="text-3xl font-bold text-center mb-8">Withdraw Coins</h2>
         <div className="bg-white shadow-md rounded-lg p-6 space-y-6">
           {/* Current Coin and Dollar Balance */}

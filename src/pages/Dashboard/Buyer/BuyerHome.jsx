@@ -71,36 +71,36 @@ const BuyerHome = () => {
   }
 
   return (
-    <div className="mt-12">
+    <div className="mt-16">
       <h1 className="text-2xl font-bold mb-2">Overview</h1>
       <BuyerStats
         totalTasks={submissions.data?.overview[0]?.countOfTasks || 0}
         pendingTasks={submissions.data?.overview[0]?.totalRequiredWorkers || 0}
         totalPayments={submissions.data?.totalPayments[0]?.totalPaid || 0}
       />
-      <section className="bg-gray-100 py-10">
-        <div className="container mx-auto px-4">
+      <section className="py-10">
+        <div className="container mx-auto md:px-4">
           <h2 className="text-3xl font-bold text-center mb-8">
             Tasks to Review
           </h2>
           <div className="overflow-x-auto">
-            <table className="table w-full bg-white shadow-md rounded-lg">
+            <table className="table w-full bg-white shadow-md rounded-lg whitespace-nowrap text-center">
               <thead>
                 <tr>
-                  <th className="p-4">Worker Name</th>
-                  <th className="p-4">Task Title</th>
-                  <th className="p-4">Payable Amount</th>
-                  <th className="p-4">View Submission</th>
-                  <th className="p-4">Actions</th>
+                  <th className="p-2 md:p-4">Worker Name</th>
+                  <th className="p-2 md:p-4">Task Title</th>
+                  <th className="p-2 md:p-4">Payable Amount</th>
+                  <th className="p-2 md:p-4">View Submission</th>
+                  <th className="p-2 md:p-4">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {submissions.data.submissions.map((submission) => (
                   <tr key={submission._id} className="hover:bg-gray-100">
-                    <td className="p-4">{submission.worker.name}</td>
-                    <td className="p-4">{submission.task.title}</td>
-                    <td className="p-4">{submission.task.payableAmount}</td>
-                    <td className="p-4">
+                    <td className="p-2 md:p-4">{submission.worker.name}</td>
+                    <td className="p-2 md:p-4">{submission.task.title}</td>
+                    <td className="p-2 md:p-4">{submission.task.payableAmount}</td>
+                    <td className="p-2 md:p-4">
                       <button
                         onClick={() => handleViewSubmission(submission._id)}
                         className="btn btn-primary btn-sm"
@@ -113,7 +113,7 @@ const BuyerHome = () => {
                         submission={submission}
                       />
                     </td>
-                    <td className="p-4 space-x-2">
+                    <td className="p-4 flex gap-2">
                       {submission.status === "pending" ? (
                         <>
                           <button
@@ -127,7 +127,7 @@ const BuyerHome = () => {
                             }
                             className="btn btn-success btn-sm"
                           >
-                            Approve
+                            Accept
                           </button>
                           <button
                             onClick={() =>

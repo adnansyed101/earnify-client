@@ -49,33 +49,31 @@ const MyTasks = () => {
     return <Loading />;
   }
 
-  console.log(tasks);
-
   return (
-    <section className="bg-gray-100 py-10 mt-20">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-8">My Tasks</h2>
+    <section className="py-10 mt-6">
+      <div className="container mx-auto">
+        <h2 className="text-3xl font-bold text-center mb-4">My Tasks</h2>
         <div className="overflow-x-auto">
           <table className="table w-full bg-white shadow-md rounded-lg">
             <thead>
               <tr>
-                <th className="p-4">Task Title</th>
-                <th className="p-4">Required Workers</th>
-                <th className="p-4">Payable Amount</th>
-                <th className="p-4">Completion Date</th>
-                <th className="p-4">Actions</th>
+                <th className="p-2 md:p-4">Task Title</th>
+                <th className="p-2 md:p-4">Required Workers</th>
+                <th className="p-2 md:p-4">Payable Amount</th>
+                <th className="p-2 md:p-4">Completion Date</th>
+                <th className="p-2 md:p-4 text-center">Actions</th>
               </tr>
             </thead>
             <tbody>
               {tasks.data.map((task) => (
                 <tr key={task._id} className="hover:bg-gray-100">
-                  <td className="p-4">{task.title}</td>
-                  <td className="p-4">{task.requiredWorkers}</td>
-                  <td className="p-4">{task.payableAmount}</td>
-                  <td className="p-4">
+                  <td className="p-2 md:p-4 whitespace-nowrap">{task.title}</td>
+                  <td className="p-2 md:p-4">{task.requiredWorkers}</td>
+                  <td className="p-2 md:p-4">{task.payableAmount}</td>
+                  <td className="p-2 md:p-4">
                     {format(new Date(task.completionDate), "PP")}
                   </td>
-                  <td className="p-4 space-x-2">
+                  <td className="p-4 flex gap-2">
                     <Link
                       to={`/dashboard/task/update/${task._id}`}
                       className="btn btn-primary btn-sm"

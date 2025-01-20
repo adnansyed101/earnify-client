@@ -53,34 +53,34 @@ const ManageUsers = () => {
   }
 
   return (
-    <section className="bg-gray-100 py-10">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-8">Manage Users</h2>
+    <section className="py-10 mt-6">
+      <div className="container mx-auto">
+        <h2 className="text-xl md:text-3xl font-bold text-center mb-4">Manage Users</h2>
         <div className="overflow-x-auto">
           <table className="table w-full bg-white shadow-md rounded-lg">
             <thead>
               <tr>
-                <th className="p-4">Photo</th>
-                <th className="p-4">Name</th>
-                <th className="p-4">Email</th>
-                <th className="p-4">Role</th>
-                <th className="p-4">Coins</th>
-                <th className="p-4">Actions</th>
+                <th className="p-2 md:p-4">Photo</th>
+                <th className="p-2 md:p-4">Name</th>
+                <th className="p-2 md:p-4">Email</th>
+                <th className="p-2 md:p-4">Role</th>
+                <th className="p-2 md:p-4">Coins</th>
+                <th className="p-2 md:p-4">Actions</th>
               </tr>
             </thead>
             <tbody>
               {users.data.map((user) => (
                 <tr key={user._id} className="hover:bg-gray-100">
-                  <td className="p-4">
+                  <td className="p-2 md:p-4">
                     <div className="avatar">
                       <div className="w-12 rounded-full">
                         <img src={user.image} alt={user.name} />
                       </div>
                     </div>
                   </td>
-                  <td className="p-4">{user.name}</td>
-                  <td className="p-4">{user.email}</td>
-                  <td className="p-4">
+                  <td className="p-2 md:p-4">{user.name}</td>
+                  <td className="p-2 md:p-4">{user.email}</td>
+                  <td className="p-2 md:p-4">
                     <select
                       value={user.role}
                       onChange={(e) =>

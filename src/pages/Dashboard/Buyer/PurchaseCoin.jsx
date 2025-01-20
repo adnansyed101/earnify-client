@@ -37,10 +37,10 @@ const PurchaseCoin = () => {
   };
 
   return (
-    <section className="bg-gray-100 py-10 mt-20">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-8">Buy Coins</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+    <section className="py-10 mt-6">
+      <div className="container mx-auto">
+        <h2 className="text-3xl font-bold text-center mb-4">Buy Coins</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {coinPackages.map((packageData) => (
             <div
               key={packageData.id}

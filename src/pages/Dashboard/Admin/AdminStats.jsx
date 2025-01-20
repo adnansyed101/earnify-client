@@ -10,7 +10,7 @@ const AdminStats = ({
   totalPayment,
 }) => {
   return (
-    <div className="stats shadow mb-4">
+    <div className="stats stats-vertical md:stats-horizontal shadow mb-4">
       <div className="stat">
         <div className="stat-figure text-secondary">
           <FaBriefcase className="inline-block h-8 w-8 stroke-current" />
