@@ -9,7 +9,7 @@ const Dashboard = () => {
       <DashNavbar  />
       <div className="md:flex">
         {/* dashboard side bar */}
-        <div className="min-w-50 min-h-screen bg-accent hidden lg:block">
+        <div className="min-w-56 min-h-screen bg-accent hidden lg:block">
           <Sidebar />
         </div>
         {/* dashboard content */}
