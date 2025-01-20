@@ -54,7 +54,7 @@ const DashNavbar = () => {
         <div className="navbar-end space-x-1">
           <NavbarButtons />
           <button className="btn btn-ghost btn-circle">
-            <div className="indicator" onClick={() => setOpen((prev) => !prev)}>
+            <div className="indicator" onClick={() => setOpen(true)}>
               <FaBell className="h-5 w-5" />
               <span className="badge badge-xs badge-primary indicator-item">
                 {userNotifications?.data?.length}
