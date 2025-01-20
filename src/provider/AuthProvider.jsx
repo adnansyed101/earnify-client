@@ -14,6 +14,7 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 import AuthContext from "./AuthContext";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
@@ -21,18 +22,31 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
   const [theme, setTheme] = useState("acid");
+  const axiosPublic = useAxiosPublic();
 
   const toggleTheme = () => {
     setTheme(theme === "acid" ? "synthwave" : "acid");
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser?.email) {
+        setUser(currentUser);
+        await axiosPublic.post(
+          "/jwt",
+          { email: currentUser?.email },
+          { withCredentials: true }
+        );
+      } else {
+        setUser(currentUser);
+        axiosPublic.get("/jwt/logout", {
+          withCredentials: true,
+        });
+      }
       setLoading(false);
     });
     return () => unsubscribe();
-  }, []);
+  }, [axiosPublic]);
 
   const createUserWithGoogle = () => {
     return signInWithPopup(auth, googleProvider);
