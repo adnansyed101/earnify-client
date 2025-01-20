@@ -15,12 +15,14 @@ const useAxiosSecure = () => {
   useEffect(() => {
     axiosSecure.interceptors.response.use(
       (res) => res,
-      async (error) => {
+      (error) => {
         if (error.response.status === 401 || error.response.status === 403) {
+          console.log(error);
           logOut();
-          setLoading(false);
+          setLoading(true);
           navigate("/signin");
         }
+        return Promise.reject(error);
       }
     );
   }, [logOut, navigate, setLoading]);
