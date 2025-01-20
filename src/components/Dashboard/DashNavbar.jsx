@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { FaBars, FaBell } from "react-icons/fa";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { BsCoin } from "react-icons/bs";
 import NavbarButtons from "../NavbarButtons";
@@ -8,11 +8,13 @@ import BuyerMenu from "./Menu/BuyerMenu";
 import WorkerMenu from "./Menu/WorkerMenu";
 import AdminMenu from "./Menu/AdminMenu";
 import useGetUser from "../../hooks/useGetUser";
+import NotificationModal from "./NotificationModal";
 
 const DashNavbar = () => {
   const { theme } = useAuth();
   const { userDB } = useGetUser();
   const role = userDB?.role;
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     document.querySelector("html").setAttribute("data-theme", theme);
@@ -33,7 +35,7 @@ const DashNavbar = () => {
         <div className="navbar-end space-x-1">
           <NavbarButtons />
           <button className="btn btn-ghost btn-circle">
-            <div className="indicator">
+            <div className="indicator" onClick={() => setOpen(!open)}>
               <FaBell className="h-5 w-5" />
               <span className="badge badge-xs badge-primary indicator-item"></span>
             </div>
@@ -57,6 +59,7 @@ const DashNavbar = () => {
           </div>
         </div>
       </div>
+      <NotificationModal isOpen={open} setIsOpen={setOpen} />
     </header>
   );
 };
