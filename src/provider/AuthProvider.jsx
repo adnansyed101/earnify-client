@@ -69,7 +69,9 @@ const AuthProvider = ({ children }) => {
 
   const logOut = () => {
     setLoading(true);
-    toast.warn("Logged out.");
+    toast.warn("Logged out.", {
+      toastId: "logout",
+    });
     return signOut(auth);
   };
 
