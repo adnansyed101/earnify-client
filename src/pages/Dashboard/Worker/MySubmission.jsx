@@ -56,61 +56,69 @@ const MySubmissions = () => {
     <section className="py-10 mt-6 rounded-lg">
       <div className="container mx-auto px-4 mb-10">
         <h2 className="text-3xl font-bold text-center mb-8">My Submissions</h2>
-        <div className="overflow-x-auto">
-          <table className="table w-full bg-white shadow-md rounded-lg whitespace-nowrap">
-            <thead>
-              <tr>
-                <th className="p-2 md:p-4">Task Title</th>
-                <th className="p-2 md:p-4">Buyer Email</th>
-                <th className="p-2 md:p-4">Submission Date</th>
-                <th className="p-2 md:p-4">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {submissions.data.map((submission) => (
-                <tr key={submission._id} className="hover:bg-gray-100">
-                  <td className="p-2 md:p-4">{submission.task.title}</td>
-                  <td className="p-2 md:p-4">{submission.buyerEmail}</td>
-                  <td className="p-2 md:p-4">
-                    {format(new Date(submission.currentDate), "PP")}
-                  </td>
-                  <td className="p-2 md:p-4">
-                    <span
-                      className={`badge ${
-                        submission.status === "accepted"
-                          ? "badge-success"
-                          : submission.status === "pending"
-                          ? "badge-warning"
-                          : "badge-error"
-                      }`}
-                    >
-                      {submission.status}
-                    </span>
-                  </td>
+        {submissions.length > 0 ? (
+          <div className="overflow-x-auto">
+            <table className="table w-full bg-white shadow-md rounded-lg whitespace-nowrap">
+              <thead>
+                <tr>
+                  <th className="p-2 md:p-4">Task Title</th>
+                  <th className="p-2 md:p-4">Buyer Email</th>
+                  <th className="p-2 md:p-4">Submission Date</th>
+                  <th className="p-2 md:p-4">Status</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {submissions.data.map((submission) => (
+                  <tr key={submission._id} className="hover:bg-gray-100">
+                    <td className="p-2 md:p-4">{submission.task.title}</td>
+                    <td className="p-2 md:p-4">{submission.buyerEmail}</td>
+                    <td className="p-2 md:p-4">
+                      {format(new Date(submission.currentDate), "PP")}
+                    </td>
+                    <td className="p-2 md:p-4">
+                      <span
+                        className={`badge ${
+                          submission.status === "accepted"
+                            ? "badge-success"
+                            : submission.status === "pending"
+                            ? "badge-warning"
+                            : "badge-error"
+                        }`}
+                      >
+                        {submission.status}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <h3 className="text-xl">No submissions maded yet.</h3>
+        )}
       </div>
       {/* Pagination */}
-      <div className="join flex items-center justify-center mb-4">
-        <button className="join-item btn" onClick={handlePreviousPage}>
-          «
-        </button>
-        {pages.map((page) => (
-          <button
-            key={page}
-            className={`join-item btn ${currentPage === page && "btn-active"}`}
-            onClick={() => setCurrentPage(page)}
-          >
-            {page + 1}
+      {submissions.length > 0 && (
+        <div className="join flex items-center justify-center mb-4">
+          <button className="join-item btn" onClick={handlePreviousPage}>
+            «
           </button>
-        ))}
-        <button className="join-item btn" onClick={handleNextPage}>
-          »
-        </button>
-      </div>
+          {pages.map((page) => (
+            <button
+              key={page}
+              className={`join-item btn ${
+                currentPage === page && "btn-active"
+              }`}
+              onClick={() => setCurrentPage(page)}
+            >
+              {page + 1}
+            </button>
+          ))}
+          <button className="join-item btn" onClick={handleNextPage}>
+            »
+          </button>
+        </div>
+      )}
     </section>
   );
 };
