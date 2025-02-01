@@ -5,7 +5,7 @@ import { format } from "date-fns";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const PaymentHistory = () => {
-  const axiosSecure = useAxiosSecure()
+  const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
   const { data: payments = {}, isLoading } = useQuery({
@@ -25,7 +25,7 @@ const PaymentHistory = () => {
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-4">Payment History</h2>
         <div className="overflow-x-auto">
-          <table className="table w-full bg-white shadow-md rounded-lg whitespace-nowrap">
+          <table className="table w-full bg-base-200 shadow-md rounded-lg whitespace-nowrap">
             <thead>
               <tr>
                 <th className="p-2 md:p-4">Date</th>

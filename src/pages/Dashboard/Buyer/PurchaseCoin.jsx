@@ -44,12 +44,12 @@ const PurchaseCoin = () => {
           {coinPackages.map((packageData) => (
             <div
               key={packageData.id}
-              className="card bg-white shadow-md rounded-lg p-6 text-center"
+              className="card bg-base-200 shadow-md rounded-lg p-6 text-center"
             >
               <h3 className="text-2xl font-bold mb-4">
                 {packageData.coin} Coins
               </h3>
-              <p className="text-xl font-medium text-gray-600 mb-6">
+              <p className="text-xl font-medium mb-6">
                 $ {packageData.price}
               </p>
               <button

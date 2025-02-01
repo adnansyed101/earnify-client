@@ -96,7 +96,7 @@ const BuyerHome = () => {
             Tasks to Review
           </h2>
           <div className="overflow-x-auto">
-            <table className="table w-full bg-white shadow-md rounded-lg whitespace-nowrap text-center">
+            <table className="table w-full bg-base-200 shadow-md rounded-lg whitespace-nowrap text-center">
               <thead>
                 <tr>
                   <th className="p-2 md:p-4">Worker Name</th>
@@ -108,7 +108,7 @@ const BuyerHome = () => {
               </thead>
               <tbody>
                 {submissions.data.submissions.map((submission) => (
-                  <tr key={submission._id} className="hover:bg-gray-100">
+                  <tr key={submission._id} className="hover:bg-base-300">
                     <td className="p-2 md:p-4">{submission.worker.name}</td>
                     <td className="p-2 md:p-4">{submission.task.title}</td>
                     <td className="p-2 md:p-4">

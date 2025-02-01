@@ -17,7 +17,7 @@ const MyTasks = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["tasks", user?.email],
+    queryKey: ["tasks"],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/task/user/${user?.email}`);
       return data;
@@ -54,7 +54,7 @@ const MyTasks = () => {
       <div className="container mx-auto">
         <h2 className="text-3xl font-bold text-center mb-4">My Tasks</h2>
         <div className="overflow-x-auto">
-          <table className="table w-full bg-white shadow-md rounded-lg">
+          <table className="table w-full bg-base-200 shadow-md rounded-lg">
             <thead>
               <tr>
                 <th className="p-2 md:p-4">Task Title</th>
@@ -66,7 +66,7 @@ const MyTasks = () => {
             </thead>
             <tbody>
               {tasks.data.map((task) => (
-                <tr key={task._id} className="hover:bg-gray-100">
+                <tr key={task._id} className="hover:bg-base-300">
                   <td className="p-2 md:p-4 whitespace-nowrap">{task.title}</td>
                   <td className="p-2 md:p-4">{task.requiredWorkers}</td>
                   <td className="p-2 md:p-4">{task.payableAmount}</td>
