@@ -33,4 +33,6 @@ The Micro Tasking and Earning Platform is designed to provide users with opportu
 - React Datepicker
 - Swiper
 
+### [Server Link](https://github.com/adnansyed101/earnify-server).
+
 ![Homepage](./public/homepage.PNG)
