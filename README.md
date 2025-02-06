@@ -24,7 +24,7 @@ The Micro Tasking and Earning Platform is designed to provide users with opportu
 - The admin can delete user and all submission or tasks by the user.
 - Show overview based on role.
 
-### Dependencies User:
+### Dependencies Used:
 ---
 - Axios
 - Date-fns
