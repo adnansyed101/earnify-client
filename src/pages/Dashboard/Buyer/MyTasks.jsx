@@ -73,7 +73,7 @@ const MyTasks = () => {
                   <td className="p-2 md:p-4">
                     {format(new Date(task.completionDate), "PP")}
                   </td>
-                  <td className="p-4 flex gap-2">
+                  <td className="p-4 flex justify-center gap-2">
                     <Link
                       to={`/dashboard/task/update/${task._id}`}
                       className="btn btn-primary btn-sm"
