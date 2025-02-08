@@ -69,7 +69,7 @@ const TaskDetails = () => {
     <section className="py-10 mt-6">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-8">Task Details</h2>
-        <div className="bg-white shadow-lg rounded-lg p-3 md:p-6 space-y-6">
+        <div className="bg-base-200 shadow-lg rounded-lg p-3 md:p-6 space-y-6">
           {/* Task Information */}
           <div>
             <img

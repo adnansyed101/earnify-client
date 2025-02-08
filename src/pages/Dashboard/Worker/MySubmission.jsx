@@ -58,7 +58,7 @@ const MySubmissions = () => {
         <h2 className="text-3xl font-bold text-center mb-8">My Submissions</h2>
         {submissions.length > 0 ? (
           <div className="overflow-x-auto">
-            <table className="table w-full bg-white shadow-md rounded-lg whitespace-nowrap">
+            <table className="table w-full bg-base-200 shadow-md rounded-lg whitespace-nowrap">
               <thead>
                 <tr>
                   <th className="p-2 md:p-4">Task Title</th>

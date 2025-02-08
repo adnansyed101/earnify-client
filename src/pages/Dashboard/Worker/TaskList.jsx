@@ -27,7 +27,7 @@ const TaskList = () => {
           {tasks.data.map((task) => (
             <div
               key={task._id}
-              className="card bg-white shadow-lg rounded-lg p-4 space-y-4"
+              className="card bg-base-200 shadow-lg rounded-lg p-4 space-y-4"
             >
               <h3 className="text-xl font-bold text-ellipsis overflow-hidden whitespace-nowrap">
                 {task.title}
