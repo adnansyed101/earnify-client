@@ -13,7 +13,7 @@ const MySubmissions = () => {
   const [currentPage, setCurrentPage] = useState(0);
 
   const { data: submissions, isLoading } = useQuery({
-    queryKey: ["workerSubmissions", currentPage],
+    queryKey: ["workerSubmissions"],
     queryFn: async () => {
       const { data } = await axiosSecure.get(
         `/submission/worker?email=${user?.email}&page=${currentPage}&size=${itemsPerPage}`
@@ -56,7 +56,7 @@ const MySubmissions = () => {
     <section className="py-10 mt-6 rounded-lg">
       <div className="container mx-auto px-4 mb-10">
         <h2 className="text-3xl font-bold text-center mb-8">My Submissions</h2>
-        {submissions.length > 0 ? (
+        {submissions.data.length > 0 ? (
           <div className="overflow-x-auto">
             <table className="table w-full bg-base-200 shadow-md rounded-lg whitespace-nowrap">
               <thead>
