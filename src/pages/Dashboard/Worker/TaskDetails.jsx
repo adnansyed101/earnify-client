@@ -29,6 +29,11 @@ const TaskDetails = () => {
     e.preventDefault();
     const submissionDetail = e.target.submissionDetail.value;
 
+    if (task.data.buyerEmail === user?.email) {
+      toast.error("Buyer cannot submit work");
+      return;
+    }
+
     // Create Submission object
     const submissionData = {
       task: task.data._id,
@@ -78,7 +83,7 @@ const TaskDetails = () => {
               className="w-full h-64 object-cover rounded-lg mb-4"
             />
             <h3 className="text-2xl font-bold">{task.data.title}</h3>
-            <p className="text-gray-600 mt-2">{task.data.taskDetail}</p>
+            <p className="font-light mt-2">{task.data.taskDetail}</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
               <p>
                 <span className="font-semibold">Required Workers: </span>
@@ -100,7 +105,7 @@ const TaskDetails = () => {
           </div>
 
           {/* Buyer Information */}
-          <div className="bg-gray-100 p-4 rounded-lg shadow-md flex items-center space-x-4">
+          <div className="bg-base-100 p-4 rounded-lg shadow-md flex items-center space-x-4">
             <img
               src={task.data.buyer.image}
               alt={task.data.buyer.name}
@@ -108,7 +113,7 @@ const TaskDetails = () => {
             />
             <div>
               <h4 className="text-lg font-bold">{task.data.buyer.name}</h4>
-              <p className="text-gray-600">{task.data.buyer.email}</p>
+              <p className="font-light">{task.data.buyer.email}</p>
             </div>
           </div>
 
