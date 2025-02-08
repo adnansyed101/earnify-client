@@ -36,7 +36,7 @@ const PaymentHistory = () => {
             </thead>
             <tbody>
               {payments.data.map((payment) => (
-                <tr key={payment._id} className="hover:bg-gray-100">
+                <tr key={payment._id} className="hover:bg-base-300">
                   <td className="p-2 md:p-4">
                     {format(new Date(payment.purchaseDate), "PP")}
                   </td>

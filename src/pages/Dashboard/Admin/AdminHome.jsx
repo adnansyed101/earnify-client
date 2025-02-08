@@ -81,7 +81,7 @@ const AdminHome = () => {
             Withdraw Request
           </h2>
           <div className="overflow-x-auto">
-            <table className="table table-xs bg-white shadow-md rounded-lg whitespace-nowrap">
+            <table className="table table-xs bg-base-200 shadow-md rounded-lg whitespace-nowrap">
               <thead>
                 <tr>
                   <th className="p-2 md:p-4">Worker Name</th>
@@ -92,7 +92,7 @@ const AdminHome = () => {
               </thead>
               <tbody>
                 {adminOverview.data.pendingPayments.map((payment) => (
-                  <tr key={payment._id} className="hover:bg-gray-100">
+                  <tr key={payment._id} className="hover:bg-base-300">
                     <td className="p-2 md:p-4">{payment.worker.name}</td>
                     <td className="p-2 md:p-4">{payment.withdrawalCoin}</td>
                     <td className="p-2 md:p-4">$ {payment.withdrawalAmount}</td>

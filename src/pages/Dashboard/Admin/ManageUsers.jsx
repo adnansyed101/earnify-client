@@ -58,7 +58,7 @@ const ManageUsers = () => {
       <div className="container mx-auto">
         <h2 className="text-xl md:text-3xl font-bold text-center mb-4">Manage Users</h2>
         <div className="overflow-x-auto">
-          <table className="table w-full bg-white shadow-md rounded-lg">
+          <table className="table w-full bg-base-200 shadow-md rounded-lg">
             <thead>
               <tr>
                 <th className="p-2 md:p-4">Photo</th>
@@ -71,7 +71,7 @@ const ManageUsers = () => {
             </thead>
             <tbody>
               {users.data.map((user) => (
-                <tr key={user._id} className="hover:bg-gray-100">
+                <tr key={user._id} className="hover:bg-base-300">
                   <td className="p-2 md:p-4">
                     <div className="avatar">
                       <div className="w-12 rounded-full">

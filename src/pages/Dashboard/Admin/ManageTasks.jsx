@@ -49,7 +49,7 @@ const ManageTasks = () => {
       <div className="container mx-auto">
         <h2 className="text-3xl font-bold text-center mb-8">Manage Tasks</h2>
         <div className="overflow-x-auto">
-          <table className="table w-full bg-white shadow-md rounded-lg">
+          <table className="table w-full bg-base-200 shadow-md rounded-lg">
             <thead>
               <tr>
                 <th className="p-2 md:p-4">Title</th>
@@ -62,7 +62,7 @@ const ManageTasks = () => {
             </thead>
             <tbody>
               {allTasks.data.map((task) => (
-                <tr key={task._id} className="hover:bg-gray-100">
+                <tr key={task._id} className="hover:bg-base-300">
                   <td className="p-2 md:p-4">{task.title}</td>
                   <td className="hidden md:block p-2 md:p-4">
                     {task.taskDetail}

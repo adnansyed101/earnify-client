@@ -47,7 +47,7 @@ const WorkerHome = () => {
               </thead>
               <tbody>
                 {submissions.data.acceptedSubmissions.map((submission) => (
-                  <tr key={submission._id} className="hover:bg-gray-100">
+                  <tr key={submission._id} className="hover:bg-base-300">
                     <td className="p-2 md:p-4">{submission.task.title}</td>
                     <td className="p-2 md:p-4">{submission.task.payableAmount}</td>
                     <td className="p-2 md:p-4">{submission.buyer.name}</td>

@@ -51,7 +51,7 @@ const UpdateTaskForm = () => {
         </h2>
         <form
           onSubmit={handleSubmit}
-          className="bg-white shadow-md rounded-lg p-3 md:p-6 space-y-6"
+          className="bg-base-200 shadow-md rounded-lg p-3 md:p-6 space-y-6"
         >
           <div className="form-control">
             <label className="label font-medium">Title</label>

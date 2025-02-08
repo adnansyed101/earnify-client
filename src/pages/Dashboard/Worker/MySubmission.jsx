@@ -69,7 +69,7 @@ const MySubmissions = () => {
               </thead>
               <tbody>
                 {submissions.data.map((submission) => (
-                  <tr key={submission._id} className="hover:bg-gray-100">
+                  <tr key={submission._id} className="hover:bg-base-300">
                     <td className="p-2 md:p-4">{submission.task.title}</td>
                     <td className="p-2 md:p-4">{submission.buyerEmail}</td>
                     <td className="p-2 md:p-4">
