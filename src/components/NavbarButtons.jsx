@@ -48,12 +48,9 @@ const NavbarButtons = () => {
       </div>
     </>
   ) : (
-    <div className="flex flex-col md:flex-row gap-1">
-      <Link to="/signin" className="btn btn-xs md:btn-md btn-accent">
+    <div className="mr-2">
+      <Link to="/signin" className="btn btn-accent">
         Sign In
-      </Link>
-      <Link to="/signup" className="btn btn-xs md:btn-md  btn-secondary">
-        Sign Up
       </Link>
     </div>
   );
