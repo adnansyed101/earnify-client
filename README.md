@@ -6,21 +6,33 @@ The Micro Tasking and Earning Platform is designed to provide users with opportu
 
 ---
 
-### Category - 19
-
+### Technologies Used
 ---
+- React
+- Express
+- MongoDB
+- Firebase
 
 ### Features of the website:
-
+---
 - Role Based Authorization.
 - Shows toast on any CRUD operation.
 - Uses firebase for authentication.
-- Navigation is based on role.
-- A fully responsive website.
+- Role based navigation
 - Shows Notification for the user.
 - Show status of activities based on accepted or rejected.
-- Able to purchase coin.
 - The admin can delete user and all submission or tasks by the user.
-- Show overview for different role.
+- Show overview based on role.
+
+### Dependencies Used:
+---
+- Axios
+- Date-fns
+- Headless Ui
+- Tanstack Query
+- React Datepicker
+- Swiper
+
+### [Server Link](https://github.com/adnansyed101/earnify-server).
 
 ![Homepage](./public/homepage.PNG)
