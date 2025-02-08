@@ -1,12 +1,12 @@
 const Newsletter = () => {
   return (
-    <section className="py-10 bg-gray-100">
+    <section className="py-10">
       <div className="container mx-auto px-4">
-        <div className="bg-white shadow-md rounded-lg p-6 text-center">
+        <div className="bg-base-300 shadow-md rounded-lg p-6 text-center">
           <h2 className="text-3xl font-bold mb-4">
             Subscribe to Our Newsletter
           </h2>
-          <p className="text-gray-600 mb-6">
+          <p className="font-light mb-6">
             Stay updated with the latest tasks, earning opportunities, and
             platform updates.
           </p>
@@ -21,7 +21,7 @@ const Newsletter = () => {
               Subscribe
             </button>
           </form>
-          <p className="text-sm text-gray-500 mt-4">
+          <p className="text-sm font-light mt-4">
             We respect your privacy. Unsubscribe anytime.
           </p>
         </div>

@@ -38,14 +38,14 @@ const BenefitsOfJoining = () => {
   ];
 
   return (
-    <section className="py-10 bg-gray-100">
+    <section className="py-10">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-8">
           Benefits of Joining
         </h2>
         <div className="grid lg:grid-cols-2 gap-8">
           {/* For Workers */}
-          <div className="bg-white shadow-md p-6 rounded-lg">
+          <div className="bg-base-200 shadow-md p-6 rounded-lg">
             <h3 className="text-2xl font-bold text-primary mb-4">
               For Workers
             </h3>
@@ -57,7 +57,7 @@ const BenefitsOfJoining = () => {
                   </div>
                   <div>
                     <h4 className="text-xl font-semibold">{benefit.title}</h4>
-                    <p className="text-gray-600">{benefit.description}</p>
+                    <p className="font-light">{benefit.description}</p>
                   </div>
                 </li>
               ))}
@@ -65,7 +65,7 @@ const BenefitsOfJoining = () => {
           </div>
 
           {/* For Buyers */}
-          <div className="bg-white shadow-md p-6 rounded-lg">
+          <div className="bg-base-200 shadow-md p-6 rounded-lg">
             <h3 className="text-2xl font-bold text-primary mb-4">For Buyers</h3>
             <ul>
               {buyerBenefits.map((benefit, index) => (
@@ -75,7 +75,7 @@ const BenefitsOfJoining = () => {
                   </div>
                   <div>
                     <h4 className="text-xl font-semibold">{benefit.title}</h4>
-                    <p className="text-gray-600">{benefit.description}</p>
+                    <p className="font-light">{benefit.description}</p>
                   </div>
                 </li>
               ))}
