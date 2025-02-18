@@ -18,11 +18,9 @@ const Navbar = () => {
         <NavLink to="/">Home</NavLink>
       </li>
       {user && user?.email && (
-        <>
-          <li>
-            <NavLink to={"/dashboard"}>Dashboard</NavLink>
-          </li>
-        </>
+        <li>
+          <NavLink to={"/dashboard"}>Dashboard</NavLink>
+        </li>
       )}
       <li>
         <a href="https://github.com/adnansyed101" target="_blank" to="/">
@@ -33,8 +31,8 @@ const Navbar = () => {
   );
 
   return (
-    <header className="fixed top-2 z-50 w-full">
-      <div className="navbar justify-between py-0 w-11/12 mx-auto bg-base-300 rounded-full">
+    <header className="fixed top-0 z-50 w-full bg-primary">
+      <div className="navbar justify-between mx-auto w-11/12">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost md:hidden">
