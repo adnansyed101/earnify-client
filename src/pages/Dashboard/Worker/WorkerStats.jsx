@@ -17,7 +17,7 @@ const WorkerStats = ({ submissionCount, pendingSubmission, totalEarning }) => {
         <div className="stat-figure text-secondary">
           <FaClock className="inline-block h-8 w-8 stroke-current" />
         </div>
-        <div className="stat-title">Pending Submission</div>
+        <div className="stat-title">Pending</div>
         <div className="stat-value">{pendingSubmission}</div>
       </div>
 
