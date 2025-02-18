@@ -1,4 +1,3 @@
-import { BsCoin } from "react-icons/bs";
 import useAuth from "../hooks/useAuth";
 import useGetUser from "../hooks/useGetUser";
 import { Link } from "react-router-dom";
@@ -9,10 +8,6 @@ const NavbarButtons = () => {
 
   return user && user?.email ? (
     <>
-      <button className="btn btn-ghost px-0 md:px-4">
-        {userDB?.coin}
-        <BsCoin />
-      </button>
       <div className="dropdown dropdown-end">
         <div
           tabIndex={0}
@@ -36,7 +31,7 @@ const NavbarButtons = () => {
           </li>
           <li className="mb-2">
             <button onClick={toggleTheme} className="btn btn-primary btn-sm">
-              {theme === "acid" ? "light" : "Dark"}
+              {theme === "acid" ? "light" : "dark"}
             </button>
           </li>
           <li>
@@ -48,11 +43,9 @@ const NavbarButtons = () => {
       </div>
     </>
   ) : (
-    <div className="mr-2">
-      <Link to="/signin" className="btn btn-accent">
-        Sign In
-      </Link>
-    </div>
+    <Link to="/signin mr-2" className="btn btn-accent">
+      Sign In
+    </Link>
   );
 };
 
