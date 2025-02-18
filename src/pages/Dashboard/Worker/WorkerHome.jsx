@@ -23,14 +23,16 @@ const WorkerHome = () => {
   }
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-2">Overview</h1>
-      <Stats
-        submissionCount={submissions.data?.submissionCount || 0}
-        pendingSubmission={submissions.data?.pendingSubmissionsCount || 0}
-        totalEarning={submissions.data.totalEarning?.totalPayableAmount || 0}
-      />
-      <section>
+    <section>
+      <div className="flex items-center justify-center flex-col">
+        <h1 className="md:text-2xl font-bold mb-2">Overview</h1>
+        <Stats
+          submissionCount={submissions.data?.submissionCount || 0}
+          pendingSubmission={submissions.data?.pendingSubmissionsCount || 0}
+          totalEarning={submissions.data.totalEarning?.totalPayableAmount || 0}
+        />
+      </div>
+      <div>
         <h2 className="text-3xl font-bold text-center mb-8">
           Approved Submissions
         </h2>
@@ -70,8 +72,8 @@ const WorkerHome = () => {
             </tbody>
           </table>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 
