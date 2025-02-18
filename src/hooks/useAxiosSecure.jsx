@@ -3,6 +3,8 @@ import useAuth from "./useAuth";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+// Server Link -- https://earnify-snowy.vercel.app
+
 const axiosSecure = axios.create({
   baseURL: "http://localhost:5000",
   withCredentials: true,
