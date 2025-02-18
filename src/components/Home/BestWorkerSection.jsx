@@ -20,7 +20,7 @@ const BestWorkerSection = () => {
   return (
     <>
       {bestWorkers.data.length > 0 && (
-        <section className="py-10">
+        <section className="py-10 bg-base-200">
           <div className="container mx-auto px-2">
             <h2 className="text-3xl font-bold text-center mb-8">
               Best Workers

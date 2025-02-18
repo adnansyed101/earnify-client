@@ -59,7 +59,7 @@ const MySubmissions = () => {
       </h2>
       {submissions.data.length > 0 ? (
         <div className="overflow-x-auto">
-          <table className="table w-full bg-base-200 shadow-md rounded-lg whitespace-nowrap">
+          <table className="table w-full bg-base-100 shadow-md rounded-lg whitespace-nowrap">
             <thead>
               <tr>
                 <th className="p-2 md:p-4">Task Title</th>

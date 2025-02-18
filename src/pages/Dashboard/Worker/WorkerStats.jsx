@@ -4,7 +4,7 @@ import { FaBriefcase, FaClock } from "react-icons/fa";
 
 const WorkerStats = ({ submissionCount, pendingSubmission, totalEarning }) => {
   return (
-    <div className="stats stats-vertical md:stats-horizontal shadow mb-4 bg-base-200">
+    <div className="stats stats-vertical md:stats-horizontal shadow mb-4 bg-base-100">
       <div className="stat">
         <div className="stat-figure text-secondary">
           <FaBriefcase className="inline-block h-8 w-8 stroke-current" />

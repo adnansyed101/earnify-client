@@ -50,48 +50,46 @@ const MyTasks = () => {
   }
 
   return (
-    <section className="py-10 mt-6">
-      <div className="container mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-4">My Tasks</h2>
-        <div className="overflow-x-auto">
-          <table className="table w-full bg-base-200 shadow-md rounded-lg">
-            <thead>
-              <tr>
-                <th className="p-2 md:p-4">Task Title</th>
-                <th className="p-2 md:p-4">Required Workers</th>
-                <th className="p-2 md:p-4">Payable Amount</th>
-                <th className="p-2 md:p-4">Completion Date</th>
-                <th className="p-2 md:p-4 text-center">Actions</th>
+    <section>
+      <h2 className="text-3xl font-bold text-center mb-4">My Tasks</h2>
+      <div className="overflow-x-auto">
+        <table className="table w-full bg-base-100 shadow-md rounded-lg whitespace-nowrap text-center">
+          <thead>
+            <tr>
+              <th className="p-2 md:p-4">Task Title</th>
+              <th className="p-2 md:p-4">Required Workers</th>
+              <th className="p-2 md:p-4">Payable Amount</th>
+              <th className="p-2 md:p-4">Completion Date</th>
+              <th className="p-2 md:p-4 text-center">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tasks.data.map((task) => (
+              <tr key={task._id} className="hover:bg-base-300">
+                <td className="p-2 md:p-4">{task.title}</td>
+                <td className="p-2 md:p-4">{task.requiredWorkers}</td>
+                <td className="p-2 md:p-4">{task.payableAmount}</td>
+                <td className="p-2 md:p-4">
+                  {format(new Date(task.completionDate), "PP")}
+                </td>
+                <td className="p-4 flex justify-center gap-2">
+                  <Link
+                    to={`/dashboard/task/update/${task._id}`}
+                    className="btn btn-primary btn-sm"
+                  >
+                    Update
+                  </Link>
+                  <button
+                    onClick={() => handleDelete(task)}
+                    className="btn btn-error btn-sm"
+                  >
+                    Delete
+                  </button>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {tasks.data.map((task) => (
-                <tr key={task._id} className="hover:bg-base-300">
-                  <td className="p-2 md:p-4 whitespace-nowrap">{task.title}</td>
-                  <td className="p-2 md:p-4">{task.requiredWorkers}</td>
-                  <td className="p-2 md:p-4">{task.payableAmount}</td>
-                  <td className="p-2 md:p-4">
-                    {format(new Date(task.completionDate), "PP")}
-                  </td>
-                  <td className="p-4 flex justify-center gap-2">
-                    <Link
-                      to={`/dashboard/task/update/${task._id}`}
-                      className="btn btn-primary btn-sm"
-                    >
-                      Update
-                    </Link>
-                    <button
-                      onClick={() => handleDelete(task)}
-                      className="btn btn-error btn-sm"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
       </div>
     </section>
   );

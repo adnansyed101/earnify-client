@@ -48,12 +48,9 @@ const BuyerHome = () => {
       });
       refetch();
     } catch (err) {
-    
       toast.error(err.message);
     }
   };
-
-
 
   // Update Status and also increase the task required worker by 1.
   const handleReject = async (submission) => {
@@ -83,20 +80,24 @@ const BuyerHome = () => {
   }
 
   return (
-    <div className="mt-16">
-      <h1 className="text-2xl font-bold mb-2">Overview</h1>
-      <BuyerStats
-        totalTasks={submissions.data?.overview[0]?.countOfTasks || 0}
-        pendingTasks={submissions.data?.overview[0]?.totalRequiredWorkers || 0}
-        totalPayments={submissions.data?.totalPayments[0]?.totalPaid || 0}
-      />
-      <section className="py-10">
-        <div className="container mx-auto md:px-4">
+    <section>
+      <div className="flex items-center justify-center flex-col">
+        <h1 className="text-2xl font-bold mb-2">Overview</h1>
+        <BuyerStats
+          totalTasks={submissions.data?.overview[0]?.countOfTasks || 0}
+          pendingTasks={
+            submissions.data?.overview[0]?.totalRequiredWorkers || 0
+          }
+          totalPayments={submissions.data?.totalPayments[0]?.totalPaid || 0}
+        />
+      </div>
+      <div>
+        <div>
           <h2 className="text-3xl font-bold text-center mb-8">
             Tasks to Review
           </h2>
           <div className="overflow-x-auto">
-            <table className="table w-full bg-base-200 shadow-md rounded-lg whitespace-nowrap text-center">
+            <table className="table w-full bg-base-100 shadow-md rounded-lg whitespace-nowrap text-center">
               <thead>
                 <tr>
                   <th className="p-2 md:p-4">Worker Name</th>
@@ -127,7 +128,7 @@ const BuyerHome = () => {
                         submission={submission}
                       />
                     </td>
-                    <td className="p-4 flex gap-2">
+                    <td className="p-2 md:p-4 flex gap-2 justify-center">
                       {submission.status === "pending" ? (
                         <>
                           <button
@@ -155,8 +156,8 @@ const BuyerHome = () => {
             </table>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 

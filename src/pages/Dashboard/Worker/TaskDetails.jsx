@@ -73,7 +73,7 @@ const TaskDetails = () => {
   return (
     <section>
       <h2 className="text-3xl font-bold text-center mb-8">Task Details</h2>
-      <div className="bg-base-200 shadow-lg rounded-lg p-3 md:p-6 space-y-6">
+      <div className="bg-base-100 shadow-lg rounded-lg p-3 md:p-6 space-y-6">
         {/* Task Information */}
         <div>
           <figure>
@@ -120,7 +120,6 @@ const TaskDetails = () => {
 
         {/* Submission Form */}
         <div>
-          <h3 className="text-xl font-bold mb-4">Submit Your Work</h3>
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div className="form-control">
               <label className="label font-medium">Submission Detail</label>

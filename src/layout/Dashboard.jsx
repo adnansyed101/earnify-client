@@ -22,7 +22,7 @@ const Dashboard = () => {
       {/* Dashboard Content */}
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content p-2 md:p-10">
+        <div className="drawer-content p-2 md:p-6 bg-base-200">
           {/* Page content here */}
           <Outlet />
         </div>

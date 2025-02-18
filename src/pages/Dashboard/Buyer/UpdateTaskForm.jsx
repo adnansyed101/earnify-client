@@ -44,36 +44,46 @@ const UpdateTaskForm = () => {
   }
 
   return (
-    <section className="py-10 mt-6">
-      <div className="container mx-auto px-2 md:px-4">
-        <h2 className="text-xl md:text-3xl font-bold text-center mb-8">
-          Update Task
-        </h2>
-        <form
-          onSubmit={handleSubmit}
-          className="bg-base-200 shadow-md rounded-lg p-3 md:p-6 space-y-6"
-        >
-          <div className="form-control">
-            <label className="label font-medium">Title</label>
-            <input
-              type="text"
-              name="title"
-              defaultValue={task.data.title}
-              className="input input-bordered w-full"
-              required
-            />
-          </div>
+    <section className="">
+      <h2 className="text-xl md:text-3xl font-bold text-center mb-8">
+        Update Task
+      </h2>
+      <form
+        onSubmit={handleSubmit}
+        className="bg-base-100  shadow-md rounded-lg p-3 md:p-6 space-y-6"
+      >
+        <div className="form-control">
+          <label className="label font-medium">Title</label>
+          <input
+            type="text"
+            name="title"
+            defaultValue={task.data.title}
+            className="input input-bordered w-full"
+            required
+          />
+        </div>
 
-          <div className="form-control">
-            <label className="label font-medium">Task Detail</label>
-            <textarea
-              name="taskDetail"
-              defaultValue={task.data.taskDetail}
-              className="textarea textarea-bordered w-full"
-              required
-            ></textarea>
-          </div>
+        <div className="form-control">
+          <label className="label font-medium">Task Detail</label>
+          <textarea
+            name="taskDetail"
+            defaultValue={task.data.taskDetail}
+            className="textarea textarea-bordered w-full"
+            required
+          ></textarea>
+        </div>
 
+        <div className="form-control">
+          <label className="label font-medium">Submission Info</label>
+          <textarea
+            name="submissionInfo"
+            defaultValue={task.data.submissionInfo}
+            className="textarea textarea-bordered w-full"
+            required
+          ></textarea>
+        </div>
+
+        <div className="grid grid-cols-2 gap-2">
           <div className="form-control">
             <label className="label font-medium">Required Workers</label>
             <input
@@ -104,16 +114,6 @@ const UpdateTaskForm = () => {
           </div>
 
           <div className="form-control">
-            <label className="label font-medium">Submission Info</label>
-            <textarea
-              name="submissionInfo"
-              defaultValue={task.data.submissionInfo}
-              className="textarea textarea-bordered w-full"
-              required
-            ></textarea>
-          </div>
-
-          <div className="form-control">
             <label className="label font-medium">Task Image URL</label>
             <input
               type="url"
@@ -122,12 +122,12 @@ const UpdateTaskForm = () => {
               disabled
             />
           </div>
+        </div>
 
-          <button type="submit" className="btn btn-primary w-full">
-            Update Task
-          </button>
-        </form>
-      </div>
+        <button type="submit" className="btn btn-primary w-full">
+          Update Task
+        </button>
+      </form>
     </section>
   );
 };

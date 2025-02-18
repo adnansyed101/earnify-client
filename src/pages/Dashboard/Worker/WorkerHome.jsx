@@ -25,7 +25,7 @@ const WorkerHome = () => {
   return (
     <section>
       <div className="flex items-center justify-center flex-col">
-        <h1 className="md:text-2xl font-bold mb-2">Overview</h1>
+        <h1 className="text-2xl font-bold mb-2">Overview</h1>
         <Stats
           submissionCount={submissions.data?.submissionCount || 0}
           pendingSubmission={submissions.data?.pendingSubmissionsCount || 0}
@@ -33,11 +33,11 @@ const WorkerHome = () => {
         />
       </div>
       <div>
-        <h2 className="text-3xl font-bold text-center mb-8">
+        <h2 className="text-3xl font-bold text-center mb-4">
           Approved Submissions
         </h2>
         <div className="overflow-x-auto">
-          <table className="table w-full bg-base-200 shadow-md rounded-lg whitespace-nowrap">
+          <table className="table w-full bg-base-100 shadow-md rounded-lg whitespace-nowrap">
             <thead>
               <tr>
                 <th className="p-2 md:p-4">Task Title</th>

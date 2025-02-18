@@ -60,12 +60,14 @@ const AddTaskForm = () => {
   };
 
   return (
-    <section className="py-10 mt-6">
-      <div className="container mx-auto">
-        <h2 className="text-xl md:text-3xl font-bold text-center mb-4">Add a New Task</h2>
+    <section>
+      <div>
+        <h2 className="text-xl md:text-3xl font-bold text-center mb-4">
+          Add a New Task
+        </h2>
         <form
           onSubmit={handleSubmit}
-          className="bg-base-200 shadow-lg rounded-lg p-4 md:p-6 space-y-4"
+          className="bg-base-100 shadow-lg rounded-lg p-4 md:p-6 space-y-4"
         >
           {/* Task Title */}
           <div className="form-control">
@@ -89,7 +91,7 @@ const AddTaskForm = () => {
             ></textarea>
           </div>
           {/* Required Workers */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="form-control">
               <label className="label font-medium">Required Workers</label>
               <input
@@ -111,17 +113,18 @@ const AddTaskForm = () => {
                 required
               />
             </div>
+            {/* Completion Date */}
+            <div className="form-control">
+              <label className="label font-medium">Completion Date</label>
+              <DatePicker
+                selected={completionDate}
+                onChange={(date) => setCompletionDate(date)}
+                minDate={new Date()}
+                className="input input-bordered w-full"
+              />
+            </div>
           </div>
-          {/* Completion Date */}
-          <div className="form-control">
-            <label className="label font-medium">Completion Date</label>
-            <DatePicker
-              selected={completionDate}
-              onChange={(date) => setCompletionDate(date)}
-              minDate={new Date()}
-              className="input input-bordered w-full"
-            />
-          </div>
+
           {/* Submission Info */}
           <div className="form-control">
             <label className="label font-medium">Submission Info</label>

@@ -23,7 +23,7 @@ const PurchaseCoin = () => {
         .substring(2, 5 + 2)}`,
       buyerEmail: userDB?.email,
     };
-    
+
     try {
       await axiosSecure.post(`/payment?email=${userDB?.email}`, payment);
       await axiosSecure.patch(`/user/updatecoin/${userDB?._id}`, {
@@ -37,32 +37,26 @@ const PurchaseCoin = () => {
   };
 
   return (
-    <section className="py-10 mt-6">
-      <div className="container mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-4">Buy Coins</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {coinPackages.map((packageData) => (
-            <div
-              key={packageData.id}
-              className="card bg-base-200 shadow-md rounded-lg p-6 text-center"
+    <section>
+      <h2 className="text-3xl font-bold text-center mb-4">Buy Coins</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {coinPackages.map((packageData) => (
+          <div
+            key={packageData.id}
+            className="card bg-base-100 shadow-md rounded-lg p-6 text-center"
+          >
+            <h3 className="text-2xl font-bold mb-4">
+              {packageData.coin} Coins
+            </h3>
+            <p className="text-xl font-medium mb-6">$ {packageData.price}</p>
+            <button
+              onClick={() => handleBuyNow(packageData.coin, packageData.price)}
+              className="btn btn-primary w-full"
             >
-              <h3 className="text-2xl font-bold mb-4">
-                {packageData.coin} Coins
-              </h3>
-              <p className="text-xl font-medium mb-6">
-                $ {packageData.price}
-              </p>
-              <button
-                onClick={() =>
-                  handleBuyNow(packageData.coin, packageData.price)
-                }
-                className="btn btn-primary w-full"
-              >
-                Buy Now
-              </button>
-            </div>
-          ))}
-        </div>
+              Buy Now
+            </button>
+          </div>
+        ))}
       </div>
     </section>
   );
