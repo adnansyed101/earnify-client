@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import DashNavbar from "../components/Dashboard/DashNavbar";
-import Footer from "../components/Home/Footer";
+import Footer from "../components/Footer";
 import { useEffect } from "react";
 import useGetUser from "../hooks/useGetUser";
 import BuyerMenu from "../components/Dashboard/Menu/BuyerMenu";
@@ -22,7 +22,7 @@ const Dashboard = () => {
       {/* Dashboard Content */}
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content p-10">
+        <div className="drawer-content p-2 md:p-10">
           {/* Page content here */}
           <Outlet />
         </div>
@@ -40,7 +40,6 @@ const Dashboard = () => {
           </ul>
         </div>
       </div>
-
       <Footer />
     </>
   );
