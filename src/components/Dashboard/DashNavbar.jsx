@@ -61,7 +61,7 @@ const DashNavbar = () => {
               </span>
             </div>
           </button>
-          <label htmlFor="my-drawer-2" className="drawer-button">
+          <label htmlFor="my-drawer-2" className="drawer-button md:hidden">
             <FaBars />
           </label>
         </div>
