@@ -32,7 +32,7 @@ const Dashboard = () => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu bg-base-200 text-base-content min-h-full w-60 p-4">
+          <ul className="menu bg-base-200 text-base-content min-h-full w-60 p-4 gap-2">
             {/* Sidebar content here */}
             {role === "Buyer" && <BuyerMenu />}
             {role === "Worker" && <WorkerMenu />}
