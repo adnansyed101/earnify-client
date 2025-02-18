@@ -16,7 +16,6 @@ const Banner = () => {
       heading: "Complete Tasks. Earn Rewards.",
       subheading:
         "Unlock earning opportunities by completing simple, everyday tasks tailored to your skills.",
-      buttonText: "Start Earning",
     },
     {
       id: 2,
@@ -24,7 +23,6 @@ const Banner = () => {
       heading: "Your Time, Your Earnings.",
       subheading:
         "Join a platform that values your efforts and pays you for every task you complete.",
-      buttonText: "Join Now",
     },
     {
       id: 3,
@@ -32,7 +30,6 @@ const Banner = () => {
       heading: "Effortless Tasks. Real Money.",
       subheading:
         "Make the most of your free time with tasks designed to be easy, fun, and rewarding.",
-      buttonText: "Explore Tasks",
     },
   ];
 
