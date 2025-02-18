@@ -6,14 +6,15 @@ import WorkerHome from "../Dashboard/Worker/WorkerHome";
 
 const DashboardHome = () => {
   const { userDB, isLoading } = useGetUser();
+  const role = userDB?.role;
 
   if (isLoading) return <Loading />;
 
   return (
     <>
-      {userDB?.role === "Buyer" && <BuyerHome />}
-      {userDB?.role === "Worker" && <WorkerHome />}
-      {userDB?.role === "Admin" && <AdminHome />}
+      {role === "Buyer" && <BuyerHome />}
+      {role === "Worker" && <WorkerHome />}
+      {role === "Admin" && <AdminHome />}
     </>
   );
 };
