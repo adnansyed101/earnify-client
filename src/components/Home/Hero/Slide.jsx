@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
 const Slide = ({ content }) => {
-  const { imgURL, heading, subheading, buttonText } = content;
+  const { imgURL, heading, subheading } = content;
   return (
     <div
       className="hero text-white min-h-[calc(100vh-100px)]"
@@ -14,7 +14,6 @@ const Slide = ({ content }) => {
         <div className="max-w-xl">
           <h1 className="mb-5 text-2xl md:text-6xl font-bold">{heading}</h1>
           <p className="mb-5 text-sm md:text-base">{subheading}</p>
-          <button className="btn btn-primary">{buttonText}</button>
         </div>
       </div>
     </div>
