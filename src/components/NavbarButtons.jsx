@@ -43,7 +43,7 @@ const NavbarButtons = () => {
       </div>
     </>
   ) : (
-    <Link to="/signin mr-2" className="btn btn-accent">
+    <Link to="/signin" className="btn btn-accent">
       Sign In
     </Link>
   );
