@@ -92,69 +92,65 @@ const BuyerHome = () => {
         />
       </div>
       <div>
-        <div>
-          <h2 className="text-3xl font-bold text-center mb-8">
-            Tasks to Review
-          </h2>
-          <div className="overflow-x-auto">
-            <table className="table w-full bg-base-100 shadow-md rounded-lg whitespace-nowrap text-center">
-              <thead>
-                <tr>
-                  <th className="p-2 md:p-4">Worker Name</th>
-                  <th className="p-2 md:p-4">Task Title</th>
-                  <th className="p-2 md:p-4">Payable Amount</th>
-                  <th className="p-2 md:p-4">View Submission</th>
-                  <th className="p-2 md:p-4">Actions</th>
+        <h2 className="text-3xl font-bold text-center mb-8">Tasks to Review</h2>
+        <div className="overflow-x-auto">
+          <table className="table w-full bg-base-100 shadow-md rounded-lg whitespace-nowrap text-center">
+            <thead>
+              <tr>
+                <th className="p-2 md:p-4">Worker Name</th>
+                <th className="p-2 md:p-4">Task Title</th>
+                <th className="p-2 md:p-4">Payable Amount</th>
+                <th className="p-2 md:p-4">View Submission</th>
+                <th className="p-2 md:p-4">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {submissions.data.submissions.map((submission) => (
+                <tr key={submission._id} className="hover:bg-base-300">
+                  <td className="p-2 md:p-4">{submission.worker.name}</td>
+                  <td className="p-2 md:p-4">{submission.task.title}</td>
+                  <td className="p-2 md:p-4">
+                    {submission.task.payableAmount}
+                  </td>
+                  <td className="p-2 md:p-4">
+                    <button
+                      onClick={() => handleViewSubmission(submission._id)}
+                      className="btn btn-primary btn-sm"
+                    >
+                      View Submission
+                    </button>
+                    <Modal
+                      isOpen={isOpen}
+                      setIsOpen={setIsOpen}
+                      submission={submission}
+                    />
+                  </td>
+                  <td className="p-2 md:p-4 flex gap-2 justify-center">
+                    {submission.status === "pending" ? (
+                      <>
+                        <button
+                          onClick={() => handleApprove(submission)}
+                          className="btn btn-success btn-sm"
+                        >
+                          Accept
+                        </button>
+                        <button
+                          onClick={() => handleReject(submission)}
+                          className="btn btn-error btn-sm"
+                        >
+                          Reject
+                        </button>
+                      </>
+                    ) : submission.status === "accepted" ? (
+                      <div className="badge badge-success">Accepted</div>
+                    ) : (
+                      <div className="badge badge-error">Rejected</div>
+                    )}
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {submissions.data.submissions.map((submission) => (
-                  <tr key={submission._id} className="hover:bg-base-300">
-                    <td className="p-2 md:p-4">{submission.worker.name}</td>
-                    <td className="p-2 md:p-4">{submission.task.title}</td>
-                    <td className="p-2 md:p-4">
-                      {submission.task.payableAmount}
-                    </td>
-                    <td className="p-2 md:p-4">
-                      <button
-                        onClick={() => handleViewSubmission(submission._id)}
-                        className="btn btn-primary btn-sm"
-                      >
-                        View Submission
-                      </button>
-                      <Modal
-                        isOpen={isOpen}
-                        setIsOpen={setIsOpen}
-                        submission={submission}
-                      />
-                    </td>
-                    <td className="p-2 md:p-4 flex gap-2 justify-center">
-                      {submission.status === "pending" ? (
-                        <>
-                          <button
-                            onClick={() => handleApprove(submission)}
-                            className="btn btn-success btn-sm"
-                          >
-                            Accept
-                          </button>
-                          <button
-                            onClick={() => handleReject(submission)}
-                            className="btn btn-error btn-sm"
-                          >
-                            Reject
-                          </button>
-                        </>
-                      ) : submission.status === "accepted" ? (
-                        <div className="badge badge-success">Accepted</div>
-                      ) : (
-                        <div className="badge badge-error">Rejected</div>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </section>

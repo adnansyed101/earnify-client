@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const ManageTasks = () => {
-  const axiosSecure = useAxiosSecure()
+  const axiosSecure = useAxiosSecure();
 
   const {
     data: allTasks = {},
@@ -45,50 +45,48 @@ const ManageTasks = () => {
   }
 
   return (
-    <section className="py-10 mt-6">
-      <div className="container mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-8">Manage Tasks</h2>
-        <div className="overflow-x-auto">
-          <table className="table w-full bg-base-200 shadow-md rounded-lg">
-            <thead>
-              <tr>
-                <th className="p-2 md:p-4">Title</th>
-                <th className="hidden md:block p-2 md:p-4">Detail</th>
-                <th className="p-2 md:p-4">Required Workers</th>
-                <th className="p-2 md:p-4">Payable Amount</th>
-                <th className="p-2 md:p-4">Completion Date</th>
-                <th className="p-2 md:p-4">Actions</th>
+    <section>
+      <h2 className="text-3xl font-bold text-center mb-8">Manage Tasks</h2>
+      <div className="overflow-x-auto">
+        <table className="table w-full bg-base-100 shadow-md rounded-lg text-center">
+          <thead>
+            <tr>
+              <th className="p-2 md:p-4">Title</th>
+              <th className="hidden md:block p-2 md:p-4">Detail</th>
+              <th className="p-2 md:p-4">Required Workers</th>
+              <th className="p-2 md:p-4">Payable Amount</th>
+              <th className="p-2 md:p-4">Completion Date</th>
+              <th className="p-2 md:p-4">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {allTasks.data.map((task) => (
+              <tr key={task._id} className="hover:bg-base-300">
+                <td className="p-2 md:p-4">{task.title}</td>
+                <td className="hidden md:block p-2 md:p-4">
+                  {task.taskDetail}
+                </td>
+                <td className="p-2 md:p-4 text-center">
+                  {task.requiredWorkers}
+                </td>
+                <td className="p-2 md:p-4 text-center">
+                  ${task.payableAmount}
+                </td>
+                <td className="p-2 md:p-4 text-center">
+                  {format(new Date(task.completionDate), "PP")}
+                </td>
+                <td className="p-2 md:p-4">
+                  <button
+                    onClick={() => handleDeleteTask(task)}
+                    className="btn btn-error btn-sm"
+                  >
+                    Delete
+                  </button>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {allTasks.data.map((task) => (
-                <tr key={task._id} className="hover:bg-base-300">
-                  <td className="p-2 md:p-4">{task.title}</td>
-                  <td className="hidden md:block p-2 md:p-4">
-                    {task.taskDetail}
-                  </td>
-                  <td className="p-2 md:p-4 text-center">
-                    {task.requiredWorkers}
-                  </td>
-                  <td className="p-2 md:p-4 text-center">
-                    ${task.payableAmount}
-                  </td>
-                  <td className="p-2 md:p-4 text-center">
-                    {format(new Date(task.completionDate), "PP")}
-                  </td>
-                  <td className="p-2 md:p-4">
-                    <button
-                      onClick={() => handleDeleteTask(task)}
-                      className="btn btn-error btn-sm"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
       </div>
     </section>
   );
