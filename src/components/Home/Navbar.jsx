@@ -22,6 +22,9 @@ const Navbar = () => {
         </li>
       )}
       <li>
+        <NavLink to="/aboutus">About Us</NavLink>
+      </li>
+      <li>
         <a href="https://github.com/adnansyed101" target="_blank" to="/">
           Join as Developer
         </a>
