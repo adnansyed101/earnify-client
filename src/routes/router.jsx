@@ -21,6 +21,7 @@ import BuyerRoute from "./BuyerRoute";
 import AdminRoute from "./AdminRoute";
 import WorkerRoute from "./WorkerRoute";
 import ManageTasks from "../pages/Dashboard/Admin/ManageTasks";
+import AboutUs from "../pages/AboutUs";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       { path: "signin", element: <SignIn /> },
       { path: "signup", element: <SignUp /> },
     ],
+  },
+  {
+    path: "/aboutus",
+    element: <AboutUs />,
   },
   {
     path: "/dashboard",
