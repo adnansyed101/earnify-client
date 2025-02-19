@@ -39,16 +39,15 @@ const DashNavbar = () => {
     <header className="bg-secondary">
       <div className="navbar justify-between w-11/12 mx-auto">
         <div className="navbar-start">
-          <Link
-            to="/"
-            className="btn btn-ghost rounded-full px-2 md:px-4 md:text-xl"
-          >
-            <BsCoin />
+          <Link to="/" className="font-semibold text-lg">
             Earnify
           </Link>
         </div>
-        <div className="navbar-end space-x-1">
-          <button className="btn btn-ghost px-0 md:px-4">
+        <div className="navbar-end space-x-2">
+          <button
+            className="flex items-center justify-center gap-1 font-semibold text-lg"
+            disabled
+          >
             {userDB?.coin}
             <BsCoin />
           </button>

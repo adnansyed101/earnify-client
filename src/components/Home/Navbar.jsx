@@ -2,7 +2,6 @@ import { Link, NavLink } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import { useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
-import { BsCoin } from "react-icons/bs";
 import NavbarButtons from "../NavbarButtons";
 
 const Navbar = () => {
@@ -45,8 +44,7 @@ const Navbar = () => {
               {mainMenu}
             </ul>
           </div>
-          <Link to="/" className="btn btn-ghost md:text-xl">
-            <BsCoin />
+          <Link to="/" className="font-semibold text-lg">
             Earnify
           </Link>
         </div>
