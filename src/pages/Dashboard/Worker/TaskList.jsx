@@ -3,13 +3,16 @@ import Loading from "../../../components/Loading";
 import { format } from "date-fns";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useState } from "react";
 
 const TaskList = () => {
+  const [sort, setSort] = useState("");
+
   const axiosSecure = useAxiosSecure();
   const { data: tasks, isLoading } = useQuery({
-    queryKey: ["tasks"],
+    queryKey: ["tasks", sort],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(`/task`);
+      const { data } = await axiosSecure.get(`/task?sort=${sort}`);
       return data;
     },
   });
@@ -19,9 +22,23 @@ const TaskList = () => {
   }
   return (
     <section>
-      <h2 className="text-lg md:text-3xl font-bold text-center mb-4">
-        {tasks.data.length > 0 ? "Available Tasks" : "No Tasks Availavble"}
-      </h2>
+      <div className="flex flex-col md:flex-row justify-between items-center mb-4">
+        <h2 className="text-2xl font-bold md:text-center mb-4">
+          {tasks.data.length > 0 ? "Available Tasks" : "No Tasks Availavble"}
+        </h2>
+        <select
+          name="payableAmount"
+          id="payableAmount"
+          onChange={(e) => setSort(e.target.value)}
+          className="select select-bordered max-w-xs"
+          value={sort}
+        >
+          <option value="">Sort By Payable Amount</option>
+          <option value="dsc">High {">"} Low</option>
+          <option value="asc">Low {">"} High</option>
+        </select>
+      </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {tasks.data.map((task) => (
           <div
