@@ -25,8 +25,8 @@ const Home = () => {
       <SuccessStories />
       <LivePlatformStats />
       <Pricing />
-      <TestimonialSection />
       <CallToAction />
+      <TestimonialSection />
       <Newsletter />
     </>
   );
