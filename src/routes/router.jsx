@@ -22,6 +22,7 @@ import AdminRoute from "./AdminRoute";
 import WorkerRoute from "./WorkerRoute";
 import ManageTasks from "../pages/Dashboard/Admin/ManageTasks";
 import AboutUs from "../pages/AboutUs";
+import AllTasks from "../pages/AllTasks";
 
 const router = createBrowserRouter([
   {
@@ -31,11 +32,15 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "signin", element: <SignIn /> },
       { path: "signup", element: <SignUp /> },
+      {
+        path: "/aboutus",
+        element: <AboutUs />,
+      },
+      {
+        path: "/alltasks",
+        element: <AllTasks />,
+      },
     ],
-  },
-  {
-    path: "/aboutus",
-    element: <AboutUs />,
   },
   {
     path: "/dashboard",
@@ -73,11 +78,7 @@ const router = createBrowserRouter([
       },
       {
         path: "taskDetails/:id",
-        element: (
-          <WorkerRoute>
-            <TaskDetails />
-          </WorkerRoute>
-        ),
+        element: <TaskDetails />,
       },
       // Buyer Routes
       {
