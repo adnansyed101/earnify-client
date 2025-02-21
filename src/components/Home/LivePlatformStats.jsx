@@ -17,7 +17,7 @@ const LivePlatformStats = () => {
   return (
     <section className="py-12 text-center">
       <div className="container mx-auto px-6">
-        <h2 className="text-4xl font-bold text-primary mb-6">
+        <h2 className="text-4xl font-bold mb-6">
           Live Platform Stats
         </h2>
         <p className="mb-8">See how our platform is growing every day.</p>

@@ -9,7 +9,7 @@ const Pricing = () => {
   ];
 
   return (
-    <section className="py-10 ">
+    <section className="py-10 bg-base-200">
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-3xl font-bold mb-6">Buy Coins</h2>
         <p className="mb-8">
@@ -17,7 +17,7 @@ const Pricing = () => {
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {pricingPlans.map((plan) => (
-            <div key={plan.id} className="card shadow-lg p-6 rounded-lg">
+            <div key={plan.id} className="card shadow-lg p-6 rounded-lg bg-base-100">
               <h3 className="text-2xl font-bold text-primary">
                 {plan.coins} Coins
               </h3>

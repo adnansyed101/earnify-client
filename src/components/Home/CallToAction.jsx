@@ -9,7 +9,7 @@ const CallToAction = () => {
           Join thousands of freelancers and start completing micro-tasks for
           real earnings.
         </p>
-        <Link to={"/signup"} className="btn btn-accent px-6 py-3 text-lg">
+        <Link to={"/signup"} className="btn btn-primary px-6 py-3 text-lg">
           Get Started Now
         </Link>
       </div>
