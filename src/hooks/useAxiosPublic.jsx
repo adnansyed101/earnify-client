@@ -3,7 +3,7 @@ import axios from "axios";
 // Server Link -- https://earnify-snowy.vercel.app
 
 const axiosPublic = axios.create({
-  baseURL: "https://earnify-snowy.vercel.app",
+  baseURL: "http://localhost:5000",
 });
 
 const useAxiosPublic = () => {

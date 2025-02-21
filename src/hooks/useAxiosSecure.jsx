@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 // Server Link -- https://earnify-snowy.vercel.app
 
 const axiosSecure = axios.create({
-  baseURL: "https://earnify-snowy.vercel.app",
+  baseURL: "http://localhost:5000",
   withCredentials: true,
 });
 
