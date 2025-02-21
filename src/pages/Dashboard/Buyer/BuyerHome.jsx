@@ -6,6 +6,27 @@ import { useState } from "react";
 import Modal from "../../../components/Modal";
 import { toast } from "react-toastify";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const BuyerHome = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -75,6 +96,21 @@ const BuyerHome = () => {
     }
   };
 
+  const lineChartData = {
+    labels: ["Tasks", "Pending", "Payments"],
+    datasets: [
+      {
+        label: "Amount",
+        data: [
+          submissions.data?.overview[0]?.countOfTasks,
+          submissions.data?.overview[0]?.totalRequiredWorkers,
+          submissions.data?.totalPayments[0]?.totalPaid,
+        ],
+        borderColor: "rgb(75, 192, 192)",
+      },
+    ],
+  };
+
   if (isLoading) {
     return <Loading />;
   }
@@ -90,6 +126,9 @@ const BuyerHome = () => {
           }
           totalPayments={submissions.data?.totalPayments[0]?.totalPaid || 0}
         />
+      </div>
+      <div className="relative md:w-1/2 mx-auto">
+        <Line data={lineChartData} />
       </div>
       <div>
         <h2 className="text-3xl font-bold text-center mb-8">Tasks to Review</h2>

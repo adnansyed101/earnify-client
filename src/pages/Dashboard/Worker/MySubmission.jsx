@@ -54,7 +54,7 @@ const MySubmissions = () => {
 
   return (
     <section>
-      <h2 className="text-lg md:text-3xl font-bold text-center">
+      <h2 className="text-lg md:text-3xl font-bold text-center mb-2">
         My Submissions
       </h2>
       {submissions.data.length > 0 ? (
