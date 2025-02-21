@@ -106,7 +106,7 @@ const TaskDetails = () => {
         </div>
 
         {/* Buyer Information */}
-        <div className="bg-base-100 p-4 rounded-lg shadow-md flex items-center space-x-4">
+        <div className="bg-base-100 p-4 rounded-lg shadow-md flex items-center space-x-4 border">
           <img
             src={task.data.buyer.image}
             alt={task.data.buyer.name}
