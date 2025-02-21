@@ -41,7 +41,7 @@ const HowItWorks = () => {
         <h2 className="text-3xl font-bold text-center mb-8">How It Works</h2>
         <div className="grid lg:grid-cols-2 gap-8">
           {/* For Workers */}
-          <div className="card shadow-md p-6">
+          <div className="card shadow-md p-6 border">
             <h3 className="text-2xl font-bold mb-4 text-primary">
               For Workers
             </h3>
@@ -61,7 +61,7 @@ const HowItWorks = () => {
           </div>
 
           {/* For Buyers */}
-          <div className="card shadow-md p-6">
+          <div className="card shadow-md p-6 border">
             <h3 className="text-2xl font-bold mb-4 text-primary">For Buyers</h3>
             <ul>
               {stepsForBuyers.map((step, index) => (
