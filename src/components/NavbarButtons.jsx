@@ -29,6 +29,11 @@ const NavbarButtons = () => {
           <li className="text-center mb-2">
             {user?.displayName} ({userDB?.role})
           </li>
+          <li className="text-center mb-2">
+            <Link to={"/profile"} className="btn btn-secondary btn-sm">
+              Profile
+            </Link>
+          </li>
           <li className="mb-2">
             <button onClick={toggleTheme} className="btn btn-primary btn-sm">
               {theme === "light" ? "light" : "dark"}
