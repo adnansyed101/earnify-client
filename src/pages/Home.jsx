@@ -8,6 +8,7 @@ import BenefitsOfJoining from "../components/Home/BenefitsOfJoining";
 import Pricing from "../components/Home/Pricing";
 import CallToAction from "../components/Home/CallToAction";
 import SuccessStories from "../components/Home/SuccessStories";
+import LivePlatformStats from "../components/Home/LivePlatformStats";
 
 const Home = () => {
   useEffect(() => {
@@ -23,6 +24,7 @@ const Home = () => {
       <BenefitsOfJoining />
       <CallToAction />
       <SuccessStories />
+      <LivePlatformStats />
       <Pricing />
       <TestimonialSection />
       <Newsletter />
