@@ -4,9 +4,10 @@ const Slide = ({ content }) => {
   const { imgURL, heading, subheading } = content;
   return (
     <div
-      className="hero text-white min-h-[calc(100vh-100px)]"
+      className="hero min-h-[calc(100vh-50px)] text-white"
       style={{
         backgroundImage: `url(${imgURL})`,
+        backgroundPosition: "top",
       }}
     >
       <div className="hero-overlay bg-opacity-50"></div>
