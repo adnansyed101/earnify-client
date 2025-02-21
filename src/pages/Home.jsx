@@ -5,6 +5,7 @@ import Newsletter from "../components/Home/Newsletter";
 import TestimonialSection from "../components/Home/TestimonialSection";
 import HowItWorks from "../components/Home/HowItWorks";
 import BenefitsOfJoining from "../components/Home/BenefitsOfJoining";
+import Pricing from "../components/Home/Pricing";
 
 const Home = () => {
   useEffect(() => {
@@ -18,6 +19,7 @@ const Home = () => {
       <HowItWorks />
       <BestWorkerSection />
       <BenefitsOfJoining />
+      <Pricing />
       <TestimonialSection />
       <Newsletter />
     </>
