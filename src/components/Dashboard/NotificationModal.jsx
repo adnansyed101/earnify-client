@@ -16,7 +16,7 @@ const NotificationModal = ({ isOpen, setIsOpen, notifications }) => {
     >
       <DialogBackdrop className="fixed inset-0 bg-black/30" />
       <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
-        <DialogPanel className="max-w-2xl space-y-4 border bg-white p-12">
+        <DialogPanel className="max-w-2xl space-y-4 border p-12">
           <DialogTitle className="text-3xl font-bold text-center mb-8">
             Notification
           </DialogTitle>

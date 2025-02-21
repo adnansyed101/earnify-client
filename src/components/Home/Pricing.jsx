@@ -17,7 +17,7 @@ const Pricing = () => {
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {pricingPlans.map((plan) => (
-            <div key={plan.id} className="card shadow-lg p-6 rounded-lg bg-base-100">
+            <div key={plan.id} className="card shadow-lg p-6 rounded-lg bg-base-100 border">
               <h3 className="text-2xl font-bold text-primary">
                 {plan.coins} Coins
               </h3>

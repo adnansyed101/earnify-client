@@ -18,11 +18,11 @@ const Dashboard = () => {
 
   return (
     <>
-      <DashNavbar />
       {/* Dashboard Content */}
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content min-h-screen p-2 md:p-6 bg-base-200">
+          <DashNavbar />
           {/* Page content here */}
           <Outlet />
         </div>
@@ -32,7 +32,7 @@ const Dashboard = () => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu bg-accent text-base-content min-h-full w-60 md:w-72 p-4 gap-2">
+          <ul className="menu min-h-full w-60 md:w-72 p-4 gap-2">
             {/* Sidebar content here */}
             {role === "Buyer" && <BuyerMenu />}
             {role === "Worker" && <WorkerMenu />}

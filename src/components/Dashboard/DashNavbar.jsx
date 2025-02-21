@@ -36,7 +36,7 @@ const DashNavbar = () => {
   }
 
   return (
-    <header className="bg-secondary">
+    <header className="bg-base-100 rounded-lg mb-4">
       <div className="navbar justify-between w-11/12 mx-auto">
         <div className="navbar-start">
           <Link to="/" className="font-semibold text-lg">

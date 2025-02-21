@@ -31,11 +31,11 @@ const NavbarButtons = () => {
           </li>
           <li className="mb-2">
             <button onClick={toggleTheme} className="btn btn-primary btn-sm">
-              {theme === "acid" ? "light" : "dark"}
+              {theme === "light" ? "light" : "dark"}
             </button>
           </li>
           <li>
-            <button onClick={logOut} className="btn btn-warning btn-sm">
+            <button onClick={logOut} className="btn btn-secondary btn-sm">
               Logout
             </button>
           </li>
