@@ -6,6 +6,7 @@ import TestimonialSection from "../components/Home/TestimonialSection";
 import HowItWorks from "../components/Home/HowItWorks";
 import BenefitsOfJoining from "../components/Home/BenefitsOfJoining";
 import Pricing from "../components/Home/Pricing";
+import CallToAction from "../components/Home/CallToAction";
 
 const Home = () => {
   useEffect(() => {
@@ -19,6 +20,7 @@ const Home = () => {
       <HowItWorks />
       <BestWorkerSection />
       <BenefitsOfJoining />
+      <CallToAction />
       <Pricing />
       <TestimonialSection />
       <Newsletter />
