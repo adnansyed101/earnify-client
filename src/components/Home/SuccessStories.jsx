@@ -22,26 +22,26 @@ const successStories = [
     id: 3,
     name: "Sophia Lee",
     earnings: "$750+ earned",
-    message: "Fast payments and easy tasks! Highly recommended.",
+    message: "Fast payments and easy tasks! Highly recommended it to everyone.",
     image: "https://randomuser.me/api/portraits/women/2.jpg",
   },
   {
     id: 4,
     name: "James Carter",
     earnings: "$300+ earned",
-    message: "I love the flexibility and variety of tasks available!",
+    message: "I love the flexibility and variety of tasks available! So, everyone can join this platform.",
     image: "https://randomuser.me/api/portraits/men/2.jpg",
   },
 ];
 
 const SuccessStories = () => {
   return (
-    <section className="py-12 bg-gray-100 text-center">
+    <section className="py-10 text-center bg-base-200">
       <div className="container mx-auto px-6">
         <h2 className="text-4xl font-bold text-primary mb-6">
           Success Stories
         </h2>
-        <p className="text-gray-600 mb-8">
+        <p className="mb-8">
           See how our users are earning and thriving with us.
         </p>
 
@@ -60,17 +60,17 @@ const SuccessStories = () => {
         >
           {successStories.map((story) => (
             <SwiperSlide key={story.id}>
-              <div className="card bg-white shadow-lg p-6 rounded-lg text-center">
+              <div className="card shadow-lg p-6 rounded-lg text-center bg-base-100 border">
                 <img
                   src={story.image}
                   alt={story.name}
                   className="w-20 h-20 mx-auto rounded-full mb-4 border-4 border-primary"
                 />
-                <h3 className="text-xl font-semibold text-gray-800">
+                <h3 className="text-xl font-semibold">
                   {story.name}
                 </h3>
                 <p className="text-primary font-bold">{story.earnings}</p>
-                <p className="text-gray-600 mt-2">
+                <p className="mt-2">
                   &quot;{story.message}&quot;
                 </p>
               </div>
