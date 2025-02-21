@@ -23,6 +23,7 @@ import WorkerRoute from "./WorkerRoute";
 import ManageTasks from "../pages/Dashboard/Admin/ManageTasks";
 import AboutUs from "../pages/AboutUs";
 import AllTasks from "../pages/AllTasks";
+import UserProfile from "../pages/UserProfile";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "/alltasks",
         element: <AllTasks />,
+      },
+      {
+        path: "/profile",
+        element: <UserProfile />,
       },
     ],
   },
