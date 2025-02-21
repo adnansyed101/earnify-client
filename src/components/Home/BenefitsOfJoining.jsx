@@ -45,7 +45,7 @@ const BenefitsOfJoining = () => {
         </h2>
         <div className="grid lg:grid-cols-2 gap-8">
           {/* For Workers */}
-          <div className="shadow-md p-6 rounded-lg">
+          <div className="shadow-md p-6 rounded-lg border">
             <h3 className="text-2xl font-bold text-primary mb-4">
               For Workers
             </h3>
@@ -65,7 +65,7 @@ const BenefitsOfJoining = () => {
           </div>
 
           {/* For Buyers */}
-          <div className="shadow-md p-6 rounded-lg">
+          <div className="shadow-md p-6 rounded-lg border">
             <h3 className="text-2xl font-bold text-primary mb-4">For Buyers</h3>
             <ul>
               {buyerBenefits.map((benefit, index) => (

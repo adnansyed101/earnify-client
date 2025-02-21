@@ -29,7 +29,7 @@ const BestWorkerSection = () => {
               {bestWorkers.data.map((worker) => (
                 <div
                   key={worker._id}
-                  className="card bg-white shadow-lg p-6 rounded-lg flex flex-col items-center"
+                  className="card shadow-lg p-6 rounded-lg flex flex-col items-center bg-base-100 border"
                 >
                   <div className="avatar">
                     <div className="w-24 h-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
