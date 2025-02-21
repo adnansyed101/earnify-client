@@ -33,7 +33,7 @@ const Navbar = () => {
   );
 
   return (
-    <header className="fixed top-0 z-50 w-full bg-primary">
+    <header className="fixed top-0 z-50 w-full bg-base-100 border-b-2">
       <div className="navbar justify-between mx-auto w-11/12">
         <div className="navbar-start">
           <div className="dropdown">
