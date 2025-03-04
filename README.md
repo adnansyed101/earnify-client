@@ -1,6 +1,19 @@
 # Earnify
 
-The Micro Tasking and Earning Platform is designed to provide users with opportunities to complete small tasks and earn money. The project uses role based authorization. There are three roles; worker, buyer and admin.
+The Micro Task and Earning Platform is designed to provide users with opportunities to complete small tasks and earn money. Clients who signup can either be buyer or worker. Buyers can buy coins and assign tasks. Workers can complete tasks to earn coins and withdraw them againt dollar. Also there are admin priveleges. Admin's can delete users and tasks.
+
+
+## Installation
+
+Install Earnify with npm
+
+```bash
+  cd earnify-client
+```
+
+```bash
+  npm install
+```
 
 ## [Live Link](https://earnify-e4e0e.web.app/).
 
