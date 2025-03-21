@@ -86,9 +86,6 @@ const SignIn = () => {
     <section className="flex items-center justify-center min-h-screen py-20 px-4 md:px-0 bg-gradient-to-r from-primary to-accent">
       <div className="bg-base-200  p-8 rounded-lg shadow-md md:flex gap-4">
         <div className="text-center">
-          <p>
-            {loginData.email} {loginData.password}
-          </p>
           <h2 className="text-2xl font-semibold">Earnify</h2>
           <p>The Micro task earning platform for you.</p>
           <figure>
