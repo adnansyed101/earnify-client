@@ -52,8 +52,11 @@ const DashNavbar = () => {
             <BsCoin />
           </button>
           <NavbarButtons />
-          <button className="btn btn-ghost btn-circle">
-            <div className="indicator" onClick={() => setOpen(true)}>
+          <button
+            className="btn btn-ghost btn-circle"
+            onClick={() => setOpen(true)}
+          >
+            <div className="indicator">
               <FaBell className="h-5 w-5" />
               <span className="badge badge-xs badge-primary indicator-item">
                 {userNotifications?.data?.length}
