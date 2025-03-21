@@ -3,27 +3,6 @@ import useAuth from "../../../hooks/useAuth";
 import Loading from "../../../components/Loading";
 import Stats from "./WorkerStats";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { Line } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
 
 const WorkerHome = () => {
   const axiosSecure = useAxiosSecure();
@@ -39,21 +18,6 @@ const WorkerHome = () => {
     },
   });
 
-  const lineChartData = {
-    labels: ["Submission", "Pending", "Earning"],
-    datasets: [
-      {
-        label: "Amount",
-        data: [
-          submissions.data?.pendingSubmissionsCount,
-          submissions.data?.pendingSubmissionsCount,
-          submissions.data?.totalEarning?.totalPayableAmount,
-        ],
-        borderColor: "rgb(75, 192, 192)",
-      },
-    ],
-  };
-
   if (isLoading) {
     return <Loading />;
   }
@@ -68,9 +32,7 @@ const WorkerHome = () => {
           totalEarning={submissions.data?.totalEarning?.totalPayableAmount || 0}
         />
       </div>
-      <div className="relative md:w-1/2 mx-auto">
-        <Line data={lineChartData} />
-      </div>
+
       <div>
         <h2 className="text-3xl font-bold text-center mb-4">
           Approved Submissions
