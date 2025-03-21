@@ -16,7 +16,7 @@ const NotificationModal = ({ isOpen, setIsOpen, notifications }) => {
     >
       <DialogBackdrop className="fixed inset-0 bg-black/30" />
       <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
-        <DialogPanel className="max-w-2xl space-y-4 border p-12">
+        <DialogPanel className="max-w-2xl space-y-4 border p-12 bg-base-100">
           <DialogTitle className="text-3xl font-bold text-center mb-8">
             Notification
           </DialogTitle>
@@ -45,7 +45,7 @@ const NotificationModal = ({ isOpen, setIsOpen, notifications }) => {
 NotificationModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   setIsOpen: PropTypes.func.isRequired,
-  notifications: PropTypes.array.isRequired
+  notifications: PropTypes.array.isRequired,
 };
 
 export default NotificationModal;
