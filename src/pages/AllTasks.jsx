@@ -8,11 +8,11 @@ import { format } from "date-fns";
 const AllTasks = () => {
   const [sort, setSort] = useState("");
 
-  const axiosSecure = useAxiosPublic();
+  const axiosPublic = useAxiosPublic();
   const { data: tasks, isLoading } = useQuery({
     queryKey: ["allTasks", sort],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(`/task?sort=${sort}`);
+      const { data } = await axiosPublic.get(`/task?sort=${sort}`);
       return data;
     },
   });
